@@ -21765,25 +21765,13 @@ Commonly used for small ceramic capacitors. Like our 0.1uF (http://www.sparkfun.
 </device>
 </devices>
 </deviceset>
-<deviceset name="15PF" prefix="C">
-<description>&lt;h3&gt;15pF ceramic capacitors&lt;/h3&gt;
+<deviceset name="12PF" prefix="C" uservalue="yes">
+<description>&lt;h3&gt;12pF ceramic capacitors&lt;/h3&gt;
 &lt;p&gt;A capacitor is a passive two-terminal electrical component used to store electrical energy temporarily in an electric field.&lt;/p&gt;</description>
 <gates>
 <gate name="G$1" symbol="CAP" x="0" y="0"/>
 </gates>
 <devices>
-<device name="-0402-50V-5%" package="0402">
-<connects>
-<connect gate="G$1" pin="1" pad="1"/>
-<connect gate="G$1" pin="2" pad="2"/>
-</connects>
-<technologies>
-<technology name="">
-<attribute name="PROD_ID" value="CAP-13063"/>
-<attribute name="VALUE" value="15pF"/>
-</technology>
-</technologies>
-</device>
 <device name="-0603-50V-5%" package="0603">
 <connects>
 <connect gate="G$1" pin="1" pad="1"/>
@@ -21791,8 +21779,20 @@ Commonly used for small ceramic capacitors. Like our 0.1uF (http://www.sparkfun.
 </connects>
 <technologies>
 <technology name="">
-<attribute name="PROD_ID" value="CAP-07881"/>
-<attribute name="VALUE" value="15pF"/>
+<attribute name="PROD_ID" value="CAP-09137" constant="no"/>
+<attribute name="VALUE" value="12pF" constant="no"/>
+</technology>
+</technologies>
+</device>
+<device name="-0402-50V-5%" package="0402">
+<connects>
+<connect gate="G$1" pin="1" pad="1"/>
+<connect gate="G$1" pin="2" pad="2"/>
+</connects>
+<technologies>
+<technology name="">
+<attribute name="PROD_ID" value="CAP-14665" constant="no"/>
+<attribute name="VALUE" value="12pF" constant="no"/>
 </technology>
 </technologies>
 </device>
@@ -21803,8 +21803,8 @@ Commonly used for small ceramic capacitors. Like our 0.1uF (http://www.sparkfun.
 </connects>
 <technologies>
 <technology name="">
-<attribute name="PROD_ID" value="CAP-13063" constant="no"/>
-<attribute name="VALUE" value="15pF" constant="no"/>
+<attribute name="PROD_ID" value="CAP-14665" constant="no"/>
+<attribute name="VALUE" value="12pF" constant="no"/>
 </technology>
 </technologies>
 </device>
@@ -22286,39 +22286,6 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <technology name="">
 <attribute name="PROD_ID" value="RES-13495" constant="no"/>
 <attribute name="VALUE" value="100k" constant="no"/>
-</technology>
-</technologies>
-</device>
-</devices>
-</deviceset>
-<deviceset name="4.7KOHM" prefix="R">
-<description>&lt;h3&gt;4.7kΩ resistor&lt;/h3&gt;
-&lt;p&gt;A resistor is a passive two-terminal electrical component that implements electrical resistance as a circuit element. Resistors act to reduce current flow, and, at the same time, act to lower voltage levels within circuits. - Wikipedia&lt;/p&gt;</description>
-<gates>
-<gate name="G$1" symbol="RESISTOR" x="0" y="0"/>
-</gates>
-<devices>
-<device name="-0603-1/10W-1%" package="0603">
-<connects>
-<connect gate="G$1" pin="1" pad="1"/>
-<connect gate="G$1" pin="2" pad="2"/>
-</connects>
-<technologies>
-<technology name="">
-<attribute name="PROD_ID" value="RES-07857"/>
-<attribute name="VALUE" value="4.7k"/>
-</technology>
-</technologies>
-</device>
-<device name="-0402T-1/16W-1%" package="0402-TIGHT">
-<connects>
-<connect gate="G$1" pin="1" pad="1"/>
-<connect gate="G$1" pin="2" pad="2"/>
-</connects>
-<technologies>
-<technology name="">
-<attribute name="PROD_ID" value="RES-15343" constant="no"/>
-<attribute name="VALUE" value="4.7k" constant="no"/>
 </technology>
 </technologies>
 </device>
@@ -26613,7 +26580,7 @@ features two input/output terminals (nY and nZ) and an active HIGH enable input 
 <part name="GND10" library="SparkFun-PowerSymbols" deviceset="GND" device=""/>
 <part name="J3" library="SparkFun-Connectors" deviceset="AVR_SPI_PROG_3X2" device="TESTPOINTS"/>
 <part name="GND11" library="SparkFun-PowerSymbols" deviceset="GND" device=""/>
-<part name="R4" library="SparkFun-Resistors" deviceset="4.7KOHM" device="-0402T-1/16W-1%" value="4.7k"/>
+<part name="R4" library="SparkFun-Resistors" deviceset="10KOHM" device="-0402T-1/16W-1%" value="10k"/>
 <part name="R2" library="SparkFun-Resistors" deviceset="10KOHM" device="-0402T-1/16W-1%" value="10k"/>
 <part name="R3" library="SparkFun-Resistors" deviceset="10KOHM" device="-0402T-1/16W-1%" value="10k"/>
 <part name="GND12" library="SparkFun-PowerSymbols" deviceset="GND" device=""/>
@@ -26693,8 +26660,8 @@ features two input/output terminals (nY and nZ) and an active HIGH enable input 
 <part name="SUPPLY26" library="SparkFun-PowerSymbols" deviceset="VCC" device=""/>
 <part name="Y1" library="SparkFun-Clocks" deviceset="CRYSTAL-24MHZ" device="-SMD-2.0X1.6MM" value="24MHz"/>
 <part name="R12" library="SparkFun-Resistors" deviceset="1MOHM" device="-0402T-1/16W-5%" value="1M"/>
-<part name="C12" library="SparkFun-Capacitors" deviceset="15PF" device="-0402T-50V-5%" value="15pF"/>
-<part name="C17" library="SparkFun-Capacitors" deviceset="15PF" device="-0402T-50V-5%" value="15pF"/>
+<part name="C12" library="SparkFun-Capacitors" deviceset="12PF" device="-0402T-50V-5%" value="12pF"/>
+<part name="C17" library="SparkFun-Capacitors" deviceset="12PF" device="-0402T-50V-5%" value="12pF"/>
 <part name="GND26" library="SparkFun-PowerSymbols" deviceset="GND" device=""/>
 <part name="GND32" library="SparkFun-PowerSymbols" deviceset="GND" device=""/>
 <part name="GPIO2" library="SparkFun-Connectors" deviceset="TEST-POINT" device="3"/>
@@ -26703,8 +26670,8 @@ features two input/output terminals (nY and nZ) and an active HIGH enable input 
 <part name="SDIO_VDD" library="SparkFun-Connectors" deviceset="TEST-POINT" device="3"/>
 <part name="GND" library="SparkFun-Connectors" deviceset="TEST-POINT" device="3"/>
 <part name="SD_WP" library="SparkFun-Connectors" deviceset="TEST-POINT" device="3"/>
-<part name="TX" library="SparkFun-Jumpers" deviceset="JUMPER-SMT_2_NO" device="_SILK" package3d_urn="urn:adsk.eagle:package:39279/1"/>
-<part name="RX" library="SparkFun-Jumpers" deviceset="JUMPER-SMT_2_NO" device="_SILK" package3d_urn="urn:adsk.eagle:package:39279/1"/>
+<part name="RXD" library="SparkFun-Jumpers" deviceset="JUMPER-SMT_2_NO" device="_SILK" package3d_urn="urn:adsk.eagle:package:39279/1"/>
+<part name="TXD" library="SparkFun-Jumpers" deviceset="JUMPER-SMT_2_NO" device="_SILK" package3d_urn="urn:adsk.eagle:package:39279/1"/>
 <part name="C18" library="SparkFun-Capacitors" deviceset="2.2UF" device="-0402_TIGHT-10V-10%-X5R" value="2.2uF"/>
 <part name="GND33" library="SparkFun-PowerSymbols" deviceset="GND" device=""/>
 <part name="SUPPLY27" library="SparkFun-PowerSymbols" deviceset="VCC" device=""/>
@@ -26725,7 +26692,7 @@ features two input/output terminals (nY and nZ) and an active HIGH enable input 
 <part name="SUPPLY31" library="SparkFun-PowerSymbols" deviceset="VCC" device=""/>
 <part name="SUPPLY32" library="SparkFun-PowerSymbols" deviceset="3.3V" device=""/>
 <part name="LOGO4" library="SparkFun-Aesthetics" deviceset="SFE_LOGO_FLAME" device=".2_INCH"/>
-<part name="LOGO5" library="SparkFun-Aesthetics" deviceset="SFE_LOGO_NAME_FLAME" device=".2_INCH"/>
+<part name="LOGO5" library="SparkFun-Aesthetics" deviceset="SFE_LOGO_NAME_FLAME" device=".1_INCH" value="SFE_LOGO_NAME_FLAME.1_INCH"/>
 <part name="SDIO_!RESET!" library="SparkFun-Connectors" deviceset="TEST-POINT" device="3"/>
 </parts>
 <sheets>
@@ -27228,10 +27195,10 @@ Iq: 55uA</text>
 <instance part="SD_WP" gate="G$1" x="266.7" y="193.04" smashed="yes">
 <attribute name="NAME" x="271.78" y="193.04" size="1.778" layer="95" font="vector"/>
 </instance>
-<instance part="TX" gate="G$1" x="68.58" y="48.26" smashed="yes">
+<instance part="RXD" gate="G$1" x="68.58" y="48.26" smashed="yes">
 <attribute name="NAME" x="72.39" y="49.784" size="1.778" layer="95" font="vector" align="center"/>
 </instance>
-<instance part="RX" gate="G$1" x="68.58" y="45.72" smashed="yes">
+<instance part="TXD" gate="G$1" x="68.58" y="45.72" smashed="yes">
 <attribute name="NAME" x="72.39" y="47.244" size="1.778" layer="95" font="vector" align="center"/>
 </instance>
 <instance part="C18" gate="G$1" x="416.56" y="208.28" smashed="yes">
@@ -28442,7 +28409,7 @@ Iq: 55uA</text>
 <label x="180.34" y="86.36" size="1.27" layer="95" font="vector" xref="yes"/>
 </segment>
 <segment>
-<pinref part="TX" gate="G$1" pin="2"/>
+<pinref part="RXD" gate="G$1" pin="2"/>
 <wire x1="73.66" y1="48.26" x2="76.2" y2="48.26" width="0.1524" layer="91"/>
 <label x="76.2" y="48.26" size="1.27" layer="95" font="vector" xref="yes"/>
 </segment>
@@ -28454,7 +28421,7 @@ Iq: 55uA</text>
 <label x="180.34" y="83.82" size="1.27" layer="95" font="vector" xref="yes"/>
 </segment>
 <segment>
-<pinref part="RX" gate="G$1" pin="2"/>
+<pinref part="TXD" gate="G$1" pin="2"/>
 <wire x1="73.66" y1="45.72" x2="76.2" y2="45.72" width="0.1524" layer="91"/>
 <label x="76.2" y="45.72" size="1.27" layer="95" font="vector" xref="yes"/>
 </segment>
@@ -28462,14 +28429,14 @@ Iq: 55uA</text>
 <net name="N$25" class="0">
 <segment>
 <pinref part="J4" gate="G$1" pin="TX"/>
-<pinref part="TX" gate="G$1" pin="1"/>
+<pinref part="RXD" gate="G$1" pin="1"/>
 <wire x1="55.88" y1="48.26" x2="63.5" y2="48.26" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$26" class="0">
 <segment>
 <pinref part="J4" gate="G$1" pin="RX"/>
-<pinref part="RX" gate="G$1" pin="1"/>
+<pinref part="TXD" gate="G$1" pin="1"/>
 <wire x1="55.88" y1="45.72" x2="63.5" y2="45.72" width="0.1524" layer="91"/>
 </segment>
 </net>
@@ -28535,7 +28502,7 @@ Iq: 55uA</text>
 <errors>
 <approved hash="104,1,228.6,177.8,IC1,VSS,GND,,,"/>
 <approved hash="104,1,228.6,238.76,IC1,VDD,SDIO_VDD,,,"/>
-<approved hash="113,1,372.703,100.404,J1,,,,,"/>
+<approved hash="113,1,372.703,100.385,J1,,,,,"/>
 <approved hash="113,1,348.797,233.68,Q5,,,,,"/>
 <approved hash="113,1,381.817,233.68,Q7,,,,,"/>
 </errors>

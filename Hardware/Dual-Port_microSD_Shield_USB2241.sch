@@ -6,7 +6,7 @@
 <setting alwaysvectorfont="yes"/>
 <setting verticaltext="up"/>
 </settings>
-<grid distance="0.1" unitdist="inch" unit="inch" style="lines" multiple="1" display="no" altdistance="0.05" altunitdist="inch" altunit="inch"/>
+<grid distance="0.05" unitdist="inch" unit="inch" style="lines" multiple="1" display="yes" altdistance="0.005" altunitdist="inch" altunit="inch"/>
 <layers>
 <layer number="1" name="Top" color="4" fill="1" visible="no" active="no"/>
 <layer number="2" name="Route2" color="1" fill="3" visible="no" active="no"/>
@@ -26439,7 +26439,7 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <smd name="10" x="1.1" y="-0.5" dx="0.6" dy="0.25" layer="1" roundness="20" rot="R180"/>
 <smd name="11" x="1.1" y="0" dx="0.6" dy="0.25" layer="1" roundness="20" rot="R180"/>
 <smd name="12" x="1.1" y="0.5" dx="0.6" dy="0.25" layer="1" roundness="20" rot="R180"/>
-<smd name="13" x="1.05" y="1" dx="0.6" dy="0.25" layer="1" roundness="20" rot="R180"/>
+<smd name="13" x="1.1" y="1" dx="0.6" dy="0.25" layer="1" roundness="20" rot="R180"/>
 <smd name="14" x="0.25" y="1.35" dx="0.6" dy="0.25" layer="1" roundness="20" rot="R90"/>
 <rectangle x1="-0.4" y1="0.2" x2="0.4" y2="0.6" layer="31"/>
 <rectangle x1="-0.4" y1="-0.6" x2="0.4" y2="-0.2" layer="31"/>
@@ -27472,6 +27472,14 @@ Iq: 55uA</text>
 <wire x1="38.1" y1="193.04" x2="35.56" y2="193.04" width="0.1524" layer="91"/>
 <pinref part="GND1" gate="1" pin="GND"/>
 <wire x1="35.56" y1="193.04" x2="35.56" y2="190.5" width="0.1524" layer="91"/>
+<pinref part="U2" gate="G$1" pin="3E"/>
+<wire x1="38.1" y1="200.66" x2="35.56" y2="200.66" width="0.1524" layer="91"/>
+<wire x1="35.56" y1="200.66" x2="35.56" y2="195.58" width="0.1524" layer="91"/>
+<junction x="35.56" y="193.04"/>
+<pinref part="U2" gate="G$1" pin="4E"/>
+<wire x1="35.56" y1="195.58" x2="35.56" y2="193.04" width="0.1524" layer="91"/>
+<wire x1="38.1" y1="195.58" x2="35.56" y2="195.58" width="0.1524" layer="91"/>
+<junction x="35.56" y="195.58"/>
 </segment>
 <segment>
 <pinref part="C11" gate="G$1" pin="2"/>
@@ -28201,7 +28209,7 @@ Iq: 55uA</text>
 <junction x="149.86" y="223.52"/>
 </segment>
 </net>
-<net name="N$6" class="0">
+<net name="SDIO_!RESET!" class="0">
 <segment>
 <pinref part="IC1" gate="G$1" pin="!RESET!"/>
 <wire x1="228.6" y1="228.6" x2="210.82" y2="228.6" width="0.1524" layer="91"/>
@@ -28374,28 +28382,28 @@ Iq: 55uA</text>
 <junction x="213.36" y="215.9"/>
 </segment>
 </net>
-<net name="N$8" class="0">
+<net name="GPIO2" class="0">
 <segment>
 <pinref part="IC1" gate="G$1" pin="GPIO2"/>
 <pinref part="GPIO2" gate="G$1" pin="1"/>
 <wire x1="264.16" y1="236.22" x2="266.7" y2="236.22" width="0.1524" layer="91"/>
 </segment>
 </net>
-<net name="N$20" class="0">
+<net name="GPIO4" class="0">
 <segment>
 <pinref part="IC1" gate="G$1" pin="GPIO4"/>
 <pinref part="GPIO4" gate="G$1" pin="1"/>
 <wire x1="264.16" y1="233.68" x2="266.7" y2="233.68" width="0.1524" layer="91"/>
 </segment>
 </net>
-<net name="N$21" class="0">
+<net name="GPIO7" class="0">
 <segment>
 <pinref part="IC1" gate="G$1" pin="GPIO7"/>
 <pinref part="GPIO7" gate="G$1" pin="1"/>
 <wire x1="264.16" y1="231.14" x2="266.7" y2="231.14" width="0.1524" layer="91"/>
 </segment>
 </net>
-<net name="N$24" class="0">
+<net name="SD_WP" class="0">
 <segment>
 <pinref part="SD_WP" gate="G$1" pin="1"/>
 <pinref part="IC1" gate="G$1" pin="SD_WP"/>
@@ -28502,7 +28510,7 @@ Iq: 55uA</text>
 <errors>
 <approved hash="104,1,228.6,177.8,IC1,VSS,GND,,,"/>
 <approved hash="104,1,228.6,238.76,IC1,VDD,SDIO_VDD,,,"/>
-<approved hash="113,1,372.703,100.385,J1,,,,,"/>
+<approved hash="113,1,372.703,100.404,J1,,,,,"/>
 <approved hash="113,1,348.797,233.68,Q5,,,,,"/>
 <approved hash="113,1,381.817,233.68,Q7,,,,,"/>
 </errors>

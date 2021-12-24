@@ -27,7 +27,6 @@ void receiveEvent(int numberOfBytesReceived)
 // ================
 void requestEvent()
 {
-  byte buff[2];
   switch (receiveEventData.receiveEventRegister)
   {
     case SFE_DUAL_SD_REGISTER_I2C_ADDRESS: // Does the user want to read the I2C address?

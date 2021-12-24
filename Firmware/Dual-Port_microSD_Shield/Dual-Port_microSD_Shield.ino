@@ -13,8 +13,8 @@
   http://drazzy.com/package_drazzy.com_index.json
   and then use the Boards Manager to add support for the ATtiny: http://boardsmanager/All#ATTinyCore
 
-  The shield's default I2C address is always 0x51. The address is stored in eeprom and can be changed.
-  See the Arduino Library Example for more details.
+  The shield's default I2C address is 0x51. The address is stored in eeprom and can be changed.
+  See the code example for more details.
 
   Set Board to ATtiny441/841 (No bootloader)
   Set Chip to ATtiny841
@@ -46,7 +46,7 @@
   D9:  Physical Pin 12 (PB1 / A10/INT0)    : microSD SCK (Interrupt 0)
   D10: Physical Pin 11 (PB0 / A11)         : SPI Buffer Enable
 
-  There is a huge amount we could do with this firmware, but we have decided to KISS!
+  There is a huge amount we could do with this firmware, but we have decided to Keep It Simple!
 
   When the ATtimy comes out of reset, it will:
   Delay for one second
@@ -54,7 +54,7 @@
   Measure the USB 5V rail
   If USB power is present and 3V3 is not, the ATtiny will power on the USB2241 and go into "memory stick" (SDIO) mode
   If 3V3 power is present and USB power is not, the ATtiny will go into Thing Plus / Arduino (SPI) mode
-  If both power rails are present, the ATtiny will go into whichever mode is defined by EEPROM defaultMode
+  If both power rails are present, the ATtiny will go into whichever mode is defined by defaultMode in EEPROM
 
   The user can command the ATtiny to power off the microSD card and go into deep sleep by sending command 0x03
 
@@ -63,15 +63,15 @@
   The microSD card will be powered on again
   The ATtiny will go into defaultMode
 
-  To KISS:
+  To Keep It Simple:
   The Serial TXD and RXD pins are not used. (These could be used in the future to offer serial communication instead of I2C)
   The microSD SCK interrupt (INT0) is not used. (This could be used in the future to monitor microSD card activity in either mode)
 
-  Supported I2C commands are:
+  Supported I2C commands / registers are:
   0x00 : Set / Get the I2C Address
   0x01 : Get the Firmware Version
   0x02 : Set / Get the defaultMode: 0x00 = Thing Plus / Arduino (SPI) mode; 0x01 = "memory stick" (SDIO) mode
-  0x03 : Go into deep sleep
+  0x03 : Go into deep sleep (power down the microSD card too)
   0x04 : Wake from deep sleep and go into defaultMode
 
 */
@@ -100,12 +100,12 @@ const byte V_USB_DIV_2 = 8; // A8
 const byte V_3V3_DIV_2 = 7; // A7
 
 //Define the ON and OFF states for each pin
-#define SPI_EN__ON   HIGH // SPI Enable: pull high to enable SPI buffer, pull low to disable
-#define SPI_EN__OFF  LOW  // SPI Enable: pull high to enable SPI buffer, pull low to disable
-#define SDIO_EN__ON   HIGH // SDIO Enable: pull high to enable the USB2241 and its buffers, pull low to disable
-#define SDIO_EN__OFF  LOW  // SDIO Enable: pull high to enable the USB2241 and its buffers, pull low to disable
-#define MICROSD_PWR_EN__ON   LOW  // microSD Power Enable: pull low to enable power for the microSD card, pull high or leave floating to disable
-#define MICROSD_PWR_EN__OFF  HIGH // microSD Power Enable: pull low to enable power for the microSD card, pull high or leave floating to disable
+#define SPI_EN__ON   HIGH // SPI Enable: pull high to enable SPI buffer
+#define SPI_EN__OFF  LOW  // SPI Enable: pull low to disable
+#define SDIO_EN__ON   HIGH // SDIO Enable: pull high to enable the USB2241 and its buffers
+#define SDIO_EN__OFF  LOW  // SDIO Enable: pull low to disable
+#define MICROSD_PWR_EN__ON   LOW  // microSD Power Enable: pull low to enable power for the microSD card
+#define MICROSD_PWR_EN__OFF  HIGH // microSD Power Enable: pull high or leave floating to disable
 
 //Global variables
 #define TINY_BUFFER_LENGTH 16
@@ -128,19 +128,24 @@ void setup()
   digitalWrite(SPI_EN, SPI_EN__OFF);
   pinMode(SPI_EN, OUTPUT);
   digitalWrite(SPI_EN, SPI_EN__OFF);
+  
   digitalWrite(SDIO_EN, SDIO_EN__OFF);
   pinMode(SDIO_EN, OUTPUT);
   digitalWrite(SDIO_EN, SDIO_EN__OFF);
+  
   digitalWrite(MICROSD_PWR_EN, MICROSD_PWR_EN__OFF);
   pinMode(MICROSD_PWR_EN, OUTPUT);
   digitalWrite(MICROSD_PWR_EN, MICROSD_PWR_EN__OFF);
 
-  disableWDT(); // Make sure the WDT is disabled
+  disableWDT(); // Make sure the WatchDog Timer is disabled
 
   if (!loadEepromSettings()) // Load the settings from eeprom
   {
     initializeEepromSettings(); // Initialize them if required
   }
+
+  //Delay for 1 second to let the voltage rails stabilize
+  delay(1000);
 
   //Read the USB and 3V3 voltages and decide which mode to go into
   float voltageUSB = readUSBvoltage();
@@ -176,24 +181,26 @@ void loop()
   {
     switch (receiveEventData.receiveEventRegister)
     {
+      case SFE_DUAL_SD_REGISTER_I2C_ADDRESS: // Does the user want to change the I2C address?
+        // receiveEventLength will be 1 if the user just wants to read the address
+        if (receiveEventData.receiveEventLength == 2) // Data should be: register; new address
+        {
+          eeprom_settings.i2cAddress = receiveEventData.receiveEventBuffer[0] & 0x7F; // Update the I2C address in eeprom. Limit to 7 bits
+          saveEepromSettings(); // Update the address in eeprom
+          startI2C(false); // Restart I2C comms
+        }
+        break;
       case SFE_DUAL_SD_REGISTER_FIRMWARE_VERSION: // Does the user want to read the firmware version?
         if (receiveEventData.receiveEventLength == 1) // Read request should be a single byte
         {
           // Nothing to do here
         }
         break;
-      case SFE_DUAL_SD_REGISTER_I2C_ADDRESS: // Does the user want to change the I2C address?
-        if (receiveEventData.receiveEventLength == 2) // Data should be: register; new address
-        {
-          eeprom_settings.i2cAddress = receiveEventData.receiveEventBuffer[0]; // Update the I2C address in eeprom
-          saveEepromSettings(); // Update the address in eeprom
-          startI2C(false); // Restart I2C comms
-        }
-        break;
       case SFE_DUAL_SD_REGISTER_DEFAULT_MODE: // Does the user want to change the defaultMode?
+        // receiveEventLength will be 1 if the user just wants to read the default mode
         if (receiveEventData.receiveEventLength == 2) // Data should be: register; new address
         {
-          eeprom_settings.defaultMode = receiveEventData.receiveEventBuffer[0]; // Update the defaultMode in eeprom
+          eeprom_settings.defaultMode = receiveEventData.receiveEventBuffer[0] & 0x01; // Update the defaultMode in eeprom. Limit to 1 bit
           saveEepromSettings(); // Update the defaultMode in eeprom
         }
         break;

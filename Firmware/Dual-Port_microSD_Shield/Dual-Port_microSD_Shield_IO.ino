@@ -18,7 +18,7 @@ void receiveEvent(int numberOfBytesReceived)
       i--;
       receiveEventData.receiveEventBuffer[i] = 0; // NULL-terminate the data
     }
-
+    
     receiveEventData.receiveEventLength = (volatile byte)numberOfBytesReceived;
   }
 }

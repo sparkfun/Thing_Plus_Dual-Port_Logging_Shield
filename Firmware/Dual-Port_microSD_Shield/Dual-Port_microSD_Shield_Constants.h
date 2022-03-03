@@ -8,7 +8,7 @@
 
 //Define the modes
 #define SFE_DUAL_SD_MODE_SPI                    0x00 // Thing Plus / Arduino (SPI) mode
-#define SFE_DUAL_SD_MODE_SDIO                   0x01 // "memory stick" (SDIO) mode
+#define SFE_DUAL_SD_MODE_SDIO                   0x01 // "thumb drive" (SDIO) mode
 
 //Define the firmware register addresses:
 #define SFE_DUAL_SD_REGISTER_I2C_ADDRESS        0x00 // byte     Read/Write: Stored in EEPROM

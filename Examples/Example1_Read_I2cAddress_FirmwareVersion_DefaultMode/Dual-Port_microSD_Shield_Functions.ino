@@ -10,7 +10,7 @@
   Supported I2C commands / registers are:
   0x00 : Set / Get the I2C Address
   0x01 : Get the Firmware Version
-  0x02 : Set / Get the defaultMode: 0x00 = Thing Plus / Arduino (SPI) mode; 0x01 = "memory stick" (SDIO) mode
+  0x02 : Set / Get the defaultMode: 0x00 = Thing Plus / Arduino (SPI) mode; 0x01 = "thumb drive" (SDIO) mode
   0x03 : Go into deep sleep (powewr down the microSD card too)
   0x04 : Wake from deep sleep and go into defaultMode
 
@@ -39,7 +39,9 @@ uint8_t dualPortMicroSDShield_getI2cAddress(uint8_t i2cAddress, TwoWire &wirePor
 {
   wirePort.beginTransmission(i2cAddress);
   wirePort.write(SFE_DUAL_SD_REGISTER_I2C_ADDRESS);
-  wirePort.endTransmission(false); // Send repeated start
+  wirePort.endTransmission();
+
+  delay(1);
 
   uint32_t bytesReceived = wirePort.requestFrom(i2cAddress, (uint8_t)1);  // Read one byte from the ATtiny841
 
@@ -74,7 +76,9 @@ uint8_t dualPortMicroSDShield_getFirmwareVersion(uint8_t i2cAddress, TwoWire &wi
 {
   wirePort.beginTransmission(i2cAddress);
   wirePort.write(SFE_DUAL_SD_REGISTER_FIRMWARE_VERSION);
-  wirePort.endTransmission(false); // Send repeated start
+  wirePort.endTransmission();
+
+  delay(1);
 
   uint32_t bytesReceived = wirePort.requestFrom(i2cAddress, (uint8_t)1);  // Read one byte from the ATtiny841
 
@@ -94,7 +98,9 @@ uint8_t dualPortMicroSDShield_getDefaultMode(uint8_t i2cAddress, TwoWire &wirePo
 {
   wirePort.beginTransmission(i2cAddress);
   wirePort.write(SFE_DUAL_SD_REGISTER_DEFAULT_MODE);
-  wirePort.endTransmission(false); // Send repeated start
+  wirePort.endTransmission();
+
+  delay(1);
 
   uint32_t bytesReceived = wirePort.requestFrom(i2cAddress, (uint8_t)1);  // Read one byte from the ATtiny841
 

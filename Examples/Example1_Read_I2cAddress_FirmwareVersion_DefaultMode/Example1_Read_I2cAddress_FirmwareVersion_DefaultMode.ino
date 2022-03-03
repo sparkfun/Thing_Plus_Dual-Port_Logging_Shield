@@ -13,14 +13,14 @@
   Supported I2C commands / registers are:
   0x00 : Set / Get the I2C Address
   0x01 : Get the Firmware Version
-  0x02 : Set / Get the defaultMode: 0x00 = Thing Plus / Arduino (SPI) mode; 0x01 = USB "memory stick" (SDIO) mode
+  0x02 : Set / Get the defaultMode: 0x00 = Thing Plus / Arduino (SPI) mode; 0x01 = USB "thumb drive" (SDIO) mode
   0x03 : Go into deep sleep (powewr down the microSD card too)
   0x04 : Wake from deep sleep and go into defaultMode
 
 */
 
 #define SFE_DUAL_SD_MODE_SPI  0x00 // Thing Plus / Arduino (SPI) mode
-#define SFE_DUAL_SD_MODE_SDIO 0x01 // USB "memory stick" (SDIO) mode
+#define SFE_DUAL_SD_MODE_SDIO 0x01 // USB "thumb drive" (SDIO) mode
 
 #include <Wire.h>
 
@@ -29,6 +29,8 @@ void setup()
   
   Serial.begin(115200); // Start the Serial port
   Serial.println(F("Dual-Port microSD Shield Code Example"));
+
+  delay(1000); // Let the shield start up - it takes a full second
 
   Wire.begin(); // Start I2C
 
@@ -65,9 +67,9 @@ void setup()
   else
   {
     Serial.print(F("The Shield's Firmware Version is v"));
-    Serial.print(i2cAddress >> 4);
+    Serial.print(firmwareVersion >> 4);
     Serial.print(F("."));
-    Serial.println(i2cAddress & 0x0F);
+    Serial.println(firmwareVersion & 0x0F);
   }
   
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
@@ -76,7 +78,7 @@ void setup()
   //
   // Returns 255 (0xFF) if the read failed
   // 0x00 = Thing Plus / Arduino (SPI) mode
-  // 0x01 = USB "memory stick" (SDIO) mode
+  // 0x01 = USB "thumb drive" (SDIO) mode
 
   uint8_t defaultMode = dualPortMicroSDShield_getDefaultMode(0x51, Wire);
 
@@ -88,7 +90,7 @@ void setup()
     if (defaultMode == SFE_DUAL_SD_MODE_SPI)
       Serial.println(F("SPI (Thing Plus / Arduino mode)"));
     else if (defaultMode == SFE_DUAL_SD_MODE_SDIO)
-      Serial.println(F("SDIO (USB \"memory stick\" mode)"));
+      Serial.println(F("SDIO (USB \"thumb drive\" mode)"));
     else
       Serial.println(F("unknown! An error has occurred!"));      
   }

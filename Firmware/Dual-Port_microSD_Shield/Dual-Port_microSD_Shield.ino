@@ -52,7 +52,7 @@
   Delay for one second
   Measure the Thing Plus 3V3 rail
   Measure the USB 5V rail
-  If USB power is present and 3V3 is not, the ATtiny will power on the USB2241 and go into "memory stick" (SDIO) mode
+  If USB power is present and 3V3 is not, the ATtiny will power on the USB2241 and go into "thumb drive" (SDIO) mode
   If 3V3 power is present and USB power is not, the ATtiny will go into Thing Plus / Arduino (SPI) mode
   If both power rails are present, the ATtiny will go into whichever mode is defined by defaultMode in EEPROM
 
@@ -70,7 +70,7 @@
   Supported I2C commands / registers are:
   0x00 : Set / Get the I2C Address
   0x01 : Get the Firmware Version
-  0x02 : Set / Get the defaultMode: 0x00 = Thing Plus / Arduino (SPI) mode; 0x01 = "memory stick" (SDIO) mode
+  0x02 : Set / Get the defaultMode: 0x00 = Thing Plus / Arduino (SPI) mode; 0x01 = "thumb drive" (SDIO) mode
   0x03 : Go into deep sleep (power down the microSD card too)
   0x04 : Wake from deep sleep and go into defaultMode
 
@@ -86,6 +86,9 @@
 
 #include "Dual-Port_microSD_Shield_Constants.h"
 #include "Dual-Port_microSD_Shield_EEPROM.h"
+
+//Diagnostics
+#define SERIAL_DIAGNOSTICS // Uncomment this line to enable diagnostics on serial at 9600 baud
 
 //Digital pins
 const byte SPI_EN = 10; // SPI Enable: pull high to enable SPI buffer, pull low to disable
@@ -124,6 +127,10 @@ void setup()
   CLKPR = 1; //Set clock prescaler CLKPS bits to 1 == divide by 2
   sei(); // Enable interrupts
 
+  // Make sure MICROSD_CLK (D9 / INT0 / XTAL2) is an input.
+  // This seems critical!? Without this, badness happens when the USB2241 starts up in SDIO mode.
+  pinMode(MICROSD_CLK, INPUT);
+
   // Disable the buffers, microSD card and the USB2241
   digitalWrite(SPI_EN, SPI_EN__OFF);
   pinMode(SPI_EN, OUTPUT);
@@ -144,14 +151,37 @@ void setup()
     initializeEepromSettings(); // Initialize them if required
   }
 
-  //Delay for 1 second to let the voltage rails stabilize
-  delay(1000);
+#ifdef SERIAL_DIAGNOSTICS
+  // Send diagnostics over serial
+  Serial.begin(9600);
+  Serial.println(F("Dual-Port microSD Shield"));
+  Serial.print(F("EEPROM checksum is "));
+  if (!checkEepromSettingsCRC())
+    Serial.print(F("NOT "));
+  Serial.println(F("valid"));
+  Serial.print(F("I2C Address 0x"));
+  Serial.println(eeprom_settings.i2cAddress, HEX);
+  Serial.print(F("Default Mode "));
+  if (eeprom_settings.defaultMode == SFE_DUAL_SD_MODE_SPI)
+    Serial.println(F("SPI"));
+  else
+    Serial.println(F("SDIO"));
+#endif
+
+  //Delay for 500ms to let the voltage rails stabilize
+  delay(500);
 
   //Read the USB and 3V3 voltages and decide which mode to go into
   float voltageUSB = readUSBvoltage();
   float voltage3V3 = read3V3voltage();
 
-  //If USB power is present and 3V3 is not, the ATtiny will power on the USB2241 and go into "memory stick" (SDIO) mode
+#ifdef SERIAL_DIAGNOSTICS
+  Serial.print(voltageUSB);
+  Serial.print(F(","));
+  Serial.println(voltage3V3);
+#endif  
+
+  //If USB power is present and 3V3 is not, the ATtiny will power on the USB2241 and go into "thumb drive" (SDIO) mode
   if ((voltageUSB > 4.0) && (voltage3V3 < 2.7))
   {
     sdioMode();
@@ -267,7 +297,7 @@ void loop()
     ACSR1A = acsr1a; // Restore ACSR1A    
     ACSR0A = acsr0a; // Restore ACSR0A    
     ADCSRA = adcsra; //Restore ADCSRA
-    
+
     sleepNow = false; // Clear sleepNow
   }
 }
@@ -337,22 +367,22 @@ float read3V3voltage()
 void spiMode()
 {
   digitalWrite(MICROSD_PWR_EN, MICROSD_PWR_EN__ON); // Enable power for the microSD card
-  delay(500);
+  delay(250);
   digitalWrite(SDIO_EN, SDIO_EN__OFF); // Disable the USB2241 and the SDIO buffers
-  delay(250);
+  delay(100);
   digitalWrite(SPI_EN, SPI_EN__ON); // Enable the SPI buffer
-  delay(250);
+  delay(100);
 }
 
-//Configure the pins for "memory stick" (SDIO) mode
+//Configure the pins for "thumb drive" (SDIO) mode
 void sdioMode()
 {
   digitalWrite(MICROSD_PWR_EN, MICROSD_PWR_EN__ON); // Enable power for the microSD card
-  delay(500);
+  delay(250);
   digitalWrite(SPI_EN, SPI_EN__OFF); // Disable the SPI buffer
-  delay(250);
+  delay(100);
   digitalWrite(SDIO_EN, SDIO_EN__ON); // Enable the USB2241 and the SDIO buffers
-  delay(250);
+  delay(100);
 }
 
 // Disable the WDT

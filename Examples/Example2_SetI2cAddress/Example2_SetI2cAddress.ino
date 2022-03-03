@@ -13,14 +13,14 @@
   Supported I2C commands / registers are:
   0x00 : Set / Get the I2C Address
   0x01 : Get the Firmware Version
-  0x02 : Set / Get the defaultMode: 0x00 = Thing Plus / Arduino (SPI) mode; 0x01 = USB "memory stick" (SDIO) mode
+  0x02 : Set / Get the defaultMode: 0x00 = Thing Plus / Arduino (SPI) mode; 0x01 = USB "thumb drive" (SDIO) mode
   0x03 : Go into deep sleep (powewr down the microSD card too)
   0x04 : Wake from deep sleep and go into defaultMode
 
 */
 
 #define SFE_DUAL_SD_MODE_SPI  0x00 // Thing Plus / Arduino (SPI) mode
-#define SFE_DUAL_SD_MODE_SDIO 0x01 // USB "memory stick" (SDIO) mode
+#define SFE_DUAL_SD_MODE_SDIO 0x01 // USB "thumb drive" (SDIO) mode
 
 #include <Wire.h>
 
@@ -29,6 +29,8 @@ void setup()
   
   Serial.begin(115200); // Start the Serial port
   Serial.println(F("Dual-Port microSD Shield Code Example"));
+
+  delay(1000); // Let the shield start up - it takes a full second
 
   Wire.begin(); // Start I2C
 
@@ -76,6 +78,8 @@ void setup()
     Serial.println(F("The Shield's I2C Address has been changed"));
   }
 
+  delay(1000); // Allow time for the shield to restart its I2C interface
+
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
   // Get (read) the I2C Address
@@ -112,6 +116,8 @@ void setup()
   {
     Serial.println(F("The Shield's I2C Address has been changed"));
   }
+
+  delay(1000); // Allow time for the shield to restart its I2C interface
 
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 

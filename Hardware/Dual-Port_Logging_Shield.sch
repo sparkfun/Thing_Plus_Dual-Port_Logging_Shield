@@ -22694,39 +22694,6 @@ It has a reduced top mask to make it harder to install upside-down.</description
 </device>
 </devices>
 </deviceset>
-<deviceset name="47KOHM" prefix="R">
-<description>&lt;h3&gt;47kΩ resistor&lt;/h3&gt;
-&lt;p&gt;A resistor is a passive two-terminal electrical component that implements electrical resistance as a circuit element. Resistors act to reduce current flow, and, at the same time, act to lower voltage levels within circuits. - Wikipedia&lt;/p&gt;</description>
-<gates>
-<gate name="G$1" symbol="RESISTOR" x="0" y="0"/>
-</gates>
-<devices>
-<device name="-0603-1/10W-1%" package="0603">
-<connects>
-<connect gate="G$1" pin="1" pad="1"/>
-<connect gate="G$1" pin="2" pad="2"/>
-</connects>
-<technologies>
-<technology name="">
-<attribute name="PROD_ID" value="RES-07871"/>
-<attribute name="VALUE" value="47k"/>
-</technology>
-</technologies>
-</device>
-<device name="-0402-1/10W-1%" package="0402-TIGHT">
-<connects>
-<connect gate="G$1" pin="1" pad="1"/>
-<connect gate="G$1" pin="2" pad="2"/>
-</connects>
-<technologies>
-<technology name="">
-<attribute name="PROD_ID" value="RES-15011" constant="no"/>
-<attribute name="VALUE" value="47k" constant="no"/>
-</technology>
-</technologies>
-</device>
-</devices>
-</deviceset>
 <deviceset name="10KOHM" prefix="R">
 <description>&lt;h3&gt;10kΩ resistor&lt;/h3&gt;
 &lt;p&gt;A resistor is a passive two-terminal electrical component that implements electrical resistance as a circuit element. Resistors act to reduce current flow, and, at the same time, act to lower voltage levels within circuits. - Wikipedia&lt;/p&gt;</description>
@@ -25533,14 +25500,14 @@ Switches electronic signals</description>
 <library name="Thing_Plus">
 <packages>
 <package name="THING_PLUS">
-<wire x1="2.54" y1="58.42" x2="20.32" y2="58.42" width="0.127" layer="20"/>
-<wire x1="20.32" y1="58.42" x2="22.86" y2="55.88" width="0.127" layer="20" curve="-90"/>
-<wire x1="22.86" y1="55.88" x2="22.86" y2="2.54" width="0.127" layer="20"/>
-<wire x1="22.86" y1="2.54" x2="20.32" y2="0" width="0.127" layer="20" curve="-90"/>
-<wire x1="20.32" y1="0" x2="2.54" y2="0" width="0.127" layer="20"/>
-<wire x1="2.54" y1="0" x2="0" y2="2.54" width="0.127" layer="20" curve="-90"/>
-<wire x1="0" y1="2.54" x2="0" y2="55.88" width="0.127" layer="20"/>
-<wire x1="0" y1="55.88" x2="2.54" y2="58.42" width="0.127" layer="20" curve="-90"/>
+<wire x1="2.54" y1="58.42" x2="20.32" y2="58.42" width="0.127" layer="51"/>
+<wire x1="20.32" y1="58.42" x2="22.86" y2="55.88" width="0.127" layer="51" curve="-90"/>
+<wire x1="22.86" y1="55.88" x2="22.86" y2="2.54" width="0.127" layer="51"/>
+<wire x1="22.86" y1="2.54" x2="20.32" y2="0" width="0.127" layer="51" curve="-90"/>
+<wire x1="20.32" y1="0" x2="2.54" y2="0" width="0.127" layer="51"/>
+<wire x1="2.54" y1="0" x2="0" y2="2.54" width="0.127" layer="51" curve="-90"/>
+<wire x1="0" y1="2.54" x2="0" y2="55.88" width="0.127" layer="51"/>
+<wire x1="0" y1="55.88" x2="2.54" y2="58.42" width="0.127" layer="51" curve="-90"/>
 <pad name="13" x="21.59" y="52.07" drill="1.016" diameter="1.8796"/>
 <pad name="14" x="21.59" y="49.53" drill="1.016" diameter="1.8796"/>
 <pad name="15" x="21.59" y="46.99" drill="1.016" diameter="1.8796"/>
@@ -26308,7 +26275,397 @@ Used in manufacturing several products at SparkFun.
 </deviceset>
 </devicesets>
 </library>
-<library name="USB224x">
+<library name="SparkFun-Clocks">
+<description>&lt;h3&gt;SparkFun Clocks, Oscillators and Resonators&lt;/h3&gt;
+This library contains the real-time clocks, oscillators, resonators, and crystals we use. 
+&lt;br&gt;
+&lt;br&gt;
+We've spent an enormous amount of time creating and checking these footprints and parts, but it is &lt;b&gt; the end user's responsibility&lt;/b&gt; to ensure correctness and suitablity for a given componet or application. 
+&lt;br&gt;
+&lt;br&gt;If you enjoy using this library, please buy one of our products at &lt;a href=" www.sparkfun.com"&gt;SparkFun.com&lt;/a&gt;.
+&lt;br&gt;
+&lt;br&gt;
+&lt;b&gt;Licensing:&lt;/b&gt; Creative Commons ShareAlike 4.0 International - https://creativecommons.org/licenses/by-sa/4.0/ 
+&lt;br&gt;
+&lt;br&gt;
+You are welcome to use this library for commercial purposes. For attribution, we ask that when you begin to sell your device using our footprint, you email us with a link to the product being sold. We want bragging rights that we helped (in a very small part) to create your 8th world wonder. We would like the opportunity to feature your device on our homepage.</description>
+<packages>
+<package name="CRYSTAL-SMD-5X3.2-4PAD">
+<description>&lt;h3&gt;5x3.2mm SMD Crystal&lt;/h3&gt;
+&lt;p&gt;Example: &lt;a href="https://www.sparkfun.com/products/94"&gt;16MHz SMD Crystal&lt;/a&gt; (&lt;a href="https://www.sparkfun.com/datasheets/Components/SPK-5032-16MHZ.pdf"&gt;Datasheet&lt;/a&gt;)&lt;/p&gt;</description>
+<wire x1="-0.6" y1="1.7" x2="0.6" y2="1.7" width="0.2032" layer="21"/>
+<wire x1="2.6" y1="0.3" x2="2.6" y2="-0.3" width="0.2032" layer="21"/>
+<wire x1="0.6" y1="-1.7" x2="-0.6" y2="-1.7" width="0.2032" layer="21"/>
+<wire x1="-2.6" y1="0.3" x2="-2.6" y2="-0.3" width="0.2032" layer="21"/>
+<smd name="1" x="-1.85" y="-1.15" dx="1.9" dy="1.1" layer="1"/>
+<smd name="3" x="1.85" y="1.15" dx="1.9" dy="1.1" layer="1"/>
+<smd name="4" x="-1.85" y="1.15" dx="1.9" dy="1.1" layer="1"/>
+<smd name="2" x="1.85" y="-1.15" dx="1.9" dy="1.1" layer="1"/>
+<text x="0" y="1.905" size="0.6096" layer="25" font="vector" ratio="20" align="bottom-center">&gt;NAME</text>
+<text x="0" y="-1.905" size="0.6096" layer="27" font="vector" ratio="20" align="top-center">&gt;VALUE</text>
+<wire x1="-2.5" y1="1.6" x2="-2.5" y2="-1.6" width="0.127" layer="51"/>
+<wire x1="-2.5" y1="-1.6" x2="2.5" y2="-1.6" width="0.127" layer="51"/>
+<wire x1="2.5" y1="-1.6" x2="2.5" y2="1.6" width="0.127" layer="51"/>
+<wire x1="2.5" y1="1.6" x2="-2.5" y2="1.6" width="0.127" layer="51"/>
+<polygon width="0.127" layer="51">
+<vertex x="-2.5" y="1.6"/>
+<vertex x="-2.5" y="0.8"/>
+<vertex x="-1.3" y="0.8"/>
+<vertex x="-1.3" y="1.6"/>
+</polygon>
+<polygon width="0.127" layer="51">
+<vertex x="2.5" y="-1.6"/>
+<vertex x="2.5" y="-0.8"/>
+<vertex x="1.3" y="-0.8"/>
+<vertex x="1.3" y="-1.6"/>
+</polygon>
+<polygon width="0.127" layer="51">
+<vertex x="1.3" y="1.6"/>
+<vertex x="1.3" y="0.8"/>
+<vertex x="2.5" y="0.8"/>
+<vertex x="2.5" y="1.6"/>
+</polygon>
+<polygon width="0.127" layer="51">
+<vertex x="-1.3" y="-1.6"/>
+<vertex x="-1.3" y="-0.8"/>
+<vertex x="-2.5" y="-0.8"/>
+<vertex x="-2.5" y="-1.6"/>
+</polygon>
+</package>
+<package name="CRYSTAL-SMD-2.0X1.6MM">
+<description>&lt;h3&gt;2.0 x 1.6 mm Crystal&lt;/h3&gt;
+&lt;p&gt;&lt;a href="http://www.murata.com/~/media/webrenewal/support/library/catalog/products/timingdevice/crystalu/p79e.ashx"&gt;Example Datasheet&lt;/a&gt; (XRCGB_F_P)&lt;/p&gt;</description>
+<wire x1="-1" y1="0.7" x2="-1" y2="-0.7" width="0.127" layer="51"/>
+<wire x1="-1" y1="-0.7" x2="-0.9" y2="-0.8" width="0.127" layer="51" curve="-90"/>
+<wire x1="-0.9" y1="-0.8" x2="0.9" y2="-0.8" width="0.127" layer="51"/>
+<wire x1="0.9" y1="-0.8" x2="1" y2="-0.7" width="0.127" layer="51" curve="-90"/>
+<wire x1="1" y1="-0.7" x2="1" y2="0.7" width="0.127" layer="51"/>
+<wire x1="1" y1="0.7" x2="0.9" y2="0.8" width="0.127" layer="51" curve="-90"/>
+<wire x1="0.9" y1="0.8" x2="-0.9" y2="0.8" width="0.127" layer="51"/>
+<wire x1="-0.9" y1="0.8" x2="-1" y2="0.7" width="0.127" layer="51" curve="-90"/>
+<polygon width="0" layer="51">
+<vertex x="-0.4" y="0.2"/>
+<vertex x="-0.4" y="0.7"/>
+<vertex x="-0.65" y="0.7"/>
+<vertex x="-0.65" y="0.8"/>
+<vertex x="-0.9" y="0.8" curve="-90"/>
+<vertex x="-1" y="0.7"/>
+<vertex x="-1" y="0.45"/>
+<vertex x="-0.9" y="0.45"/>
+<vertex x="-0.9" y="0.2"/>
+</polygon>
+<polygon width="0" layer="51">
+<vertex x="0.4" y="-0.2"/>
+<vertex x="0.4" y="-0.7"/>
+<vertex x="0.65" y="-0.7"/>
+<vertex x="0.65" y="-0.8"/>
+<vertex x="0.9" y="-0.8" curve="-90"/>
+<vertex x="1" y="-0.7"/>
+<vertex x="1" y="-0.45"/>
+<vertex x="0.9" y="-0.45"/>
+<vertex x="0.9" y="-0.2"/>
+</polygon>
+<polygon width="0" layer="51">
+<vertex x="-0.4" y="-0.2"/>
+<vertex x="-0.4" y="-0.7"/>
+<vertex x="-0.65" y="-0.7"/>
+<vertex x="-0.65" y="-0.8"/>
+<vertex x="-0.9" y="-0.8" curve="90"/>
+<vertex x="-1" y="-0.7"/>
+<vertex x="-1" y="-0.45"/>
+<vertex x="-0.9" y="-0.45"/>
+<vertex x="-0.9" y="-0.2"/>
+</polygon>
+<polygon width="0" layer="51">
+<vertex x="0.4" y="0.2"/>
+<vertex x="0.4" y="0.7"/>
+<vertex x="0.65" y="0.7"/>
+<vertex x="0.65" y="0.8"/>
+<vertex x="0.9" y="0.8" curve="90"/>
+<vertex x="1" y="0.7"/>
+<vertex x="1" y="0.45"/>
+<vertex x="0.9" y="0.45"/>
+<vertex x="0.9" y="0.2"/>
+</polygon>
+<polygon width="0" layer="51">
+<vertex x="0.506065625" y="-0.2"/>
+<vertex x="-0.4" y="0.306065625"/>
+<vertex x="-0.506065625" y="0.2"/>
+<vertex x="0.4" y="-0.306065625"/>
+</polygon>
+<smd name="4" x="-0.675" y="0.5" dx="0.75" dy="0.7" layer="1"/>
+<smd name="3" x="0.675" y="0.5" dx="0.75" dy="0.7" layer="1" rot="R180"/>
+<smd name="2" x="0.675" y="-0.5" dx="0.75" dy="0.7" layer="1" rot="R180"/>
+<smd name="1" x="-0.675" y="-0.5" dx="0.75" dy="0.7" layer="1"/>
+<wire x1="-0.85" y1="0.97" x2="-1.17" y2="0.97" width="0.2032" layer="21"/>
+<wire x1="-1.17" y1="0.65" x2="-1.17" y2="0.97" width="0.2032" layer="21"/>
+<wire x1="0.85" y1="-0.97" x2="1.17" y2="-0.97" width="0.2032" layer="21"/>
+<wire x1="1.17" y1="-0.65" x2="1.17" y2="-0.97" width="0.2032" layer="21"/>
+<wire x1="-1.17" y1="-0.65" x2="-1.17" y2="-0.97" width="0.2032" layer="21"/>
+<wire x1="-0.85" y1="-0.97" x2="-1.17" y2="-0.97" width="0.2032" layer="21"/>
+<wire x1="1.17" y1="0.65" x2="1.17" y2="0.97" width="0.2032" layer="21"/>
+<wire x1="0.85" y1="0.97" x2="1.17" y2="0.97" width="0.2032" layer="21"/>
+<wire x1="-0.19" y1="-0.97" x2="0.19" y2="-0.97" width="0.2032" layer="21"/>
+<wire x1="0.19" y1="0.97" x2="-0.19" y2="0.97" width="0.2032" layer="21"/>
+<text x="0" y="1.1" size="0.6096" layer="25" ratio="20" align="bottom-center">&gt;Name</text>
+<text x="0" y="-1.1" size="0.6096" layer="27" ratio="20" align="top-center">&gt;Value</text>
+</package>
+</packages>
+<symbols>
+<symbol name="CRYSTAL">
+<description>&lt;h3&gt;Crystal (no ground pin)&lt;/h3&gt;</description>
+<wire x1="1.016" y1="0" x2="2.54" y2="0" width="0.1524" layer="94"/>
+<wire x1="-2.54" y1="0" x2="-1.016" y2="0" width="0.1524" layer="94"/>
+<wire x1="-0.381" y1="1.524" x2="-0.381" y2="-1.524" width="0.254" layer="94"/>
+<wire x1="-0.381" y1="-1.524" x2="0.381" y2="-1.524" width="0.254" layer="94"/>
+<wire x1="0.381" y1="-1.524" x2="0.381" y2="1.524" width="0.254" layer="94"/>
+<wire x1="0.381" y1="1.524" x2="-0.381" y2="1.524" width="0.254" layer="94"/>
+<wire x1="1.016" y1="1.778" x2="1.016" y2="-1.778" width="0.254" layer="94"/>
+<wire x1="-1.016" y1="1.778" x2="-1.016" y2="-1.778" width="0.254" layer="94"/>
+<text x="0" y="2.032" size="1.778" layer="95" font="vector" align="bottom-center">&gt;NAME</text>
+<text x="0" y="-2.032" size="1.778" layer="96" font="vector" align="top-center">&gt;VALUE</text>
+<text x="-2.159" y="-1.143" size="0.8636" layer="93">1</text>
+<text x="1.524" y="-1.143" size="0.8636" layer="93">2</text>
+<pin name="2" x="2.54" y="0" visible="off" length="point" direction="pas" swaplevel="1" rot="R180"/>
+<pin name="1" x="-2.54" y="0" visible="off" length="point" direction="pas" swaplevel="1"/>
+</symbol>
+</symbols>
+<devicesets>
+<deviceset name="CRYSTAL-24MHZ" prefix="Y" uservalue="yes">
+<description>&lt;h3&gt;24MHz Crystal&lt;/h3&gt;
+&lt;p&gt;&lt;a href="http://www.sparkfun.com/datasheets/Components/AT-SMD-5x3.pdf"&gt;Datasheet&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;ul&gt;&lt;li&gt;Frequency: 24MHz&lt;/li&gt;
+&lt;li&gt;Frequency Tolerance: &amp;plusmn;20ppm&lt;/li&gt;
+&lt;li&gt;Load Capacitance: 12pF&lt;/li&gt;&lt;/ul&gt;&lt;/p&gt;
+&lt;p&gt;&lt;b&gt;SparkFun Products:&lt;/b&gt;
+&lt;ul&gt;&lt;li&gt;&lt;a href=”https://www.sparkfun.com/products/762”&gt;USB Bit Whacker&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/p&gt;</description>
+<gates>
+<gate name="G$1" symbol="CRYSTAL" x="0" y="0"/>
+</gates>
+<devices>
+<device name="-SMD-5.0X3.2MM" package="CRYSTAL-SMD-5X3.2-4PAD">
+<connects>
+<connect gate="G$1" pin="1" pad="1"/>
+<connect gate="G$1" pin="2" pad="3"/>
+</connects>
+<technologies>
+<technology name="">
+<attribute name="PROD_ID" value="XTAL-08298"/>
+<attribute name="SF_ID" value="COM-08581"/>
+<attribute name="VALUE" value="24MHz"/>
+</technology>
+</technologies>
+</device>
+<device name="-SMD-2.0X1.6MM" package="CRYSTAL-SMD-2.0X1.6MM">
+<connects>
+<connect gate="G$1" pin="1" pad="1"/>
+<connect gate="G$1" pin="2" pad="3"/>
+</connects>
+<technologies>
+<technology name="">
+<attribute name="PROD_ID" value="XTAL-14845" constant="no"/>
+<attribute name="VALUE" value="24MHz" constant="no"/>
+</technology>
+</technologies>
+</device>
+</devices>
+</deviceset>
+</devicesets>
+</library>
+<library name="SparkFun-IC-Memory">
+<description>&lt;h3&gt;SparkFun Memory ICs&lt;/h3&gt;
+This library contains memory ICs.
+&lt;br&gt;
+&lt;br&gt;
+We've spent an enormous amount of time creating and checking these footprints and parts, but it is &lt;b&gt; the end user's responsibility&lt;/b&gt; to ensure correctness and suitablity for a given componet or application. 
+&lt;br&gt;
+&lt;br&gt;If you enjoy using this library, please buy one of our products at &lt;a href=" www.sparkfun.com"&gt;SparkFun.com&lt;/a&gt;.
+&lt;br&gt;
+&lt;br&gt;
+&lt;b&gt;Licensing:&lt;/b&gt; Creative Commons ShareAlike 4.0 International - https://creativecommons.org/licenses/by-sa/4.0/ 
+&lt;br&gt;
+&lt;br&gt;
+You are welcome to use this library for commercial purposes. For attribution, we ask that when you begin to sell your device using our footprint, you email us with a link to the product being sold. We want bragging rights that we helped (in a very small part) to create your 8th world wonder. We would like the opportunity to feature your device on our homepage.</description>
+<packages>
+<package name="SO08">
+<description>SOIC, 0.15 inch width</description>
+<wire x1="2.3368" y1="1.9463" x2="-2.3368" y2="1.9463" width="0.2032" layer="21"/>
+<wire x1="2.4368" y1="-1.9463" x2="2.7178" y2="-1.5653" width="0.2032" layer="21" curve="90"/>
+<wire x1="-2.7178" y1="1.4653" x2="-2.3368" y2="1.9463" width="0.2032" layer="21" curve="-90.023829"/>
+<wire x1="2.3368" y1="1.9463" x2="2.7178" y2="1.5653" width="0.2032" layer="21" curve="-90.030084"/>
+<wire x1="-2.7178" y1="-1.6653" x2="-2.3368" y2="-1.9463" width="0.2032" layer="21" curve="90.060185"/>
+<wire x1="-2.3368" y1="-1.9463" x2="2.4368" y2="-1.9463" width="0.2032" layer="21"/>
+<wire x1="2.7178" y1="-1.5653" x2="2.7178" y2="1.5653" width="0.2032" layer="21"/>
+<wire x1="-2.667" y1="0.6096" x2="-2.667" y2="-0.6604" width="0.2032" layer="21" curve="-180"/>
+<wire x1="-2.7178" y1="1.4526" x2="-2.7178" y2="0.6096" width="0.2032" layer="21"/>
+<wire x1="-2.7178" y1="-1.6653" x2="-2.7178" y2="-0.6604" width="0.2032" layer="21"/>
+<rectangle x1="-2.159" y1="-3.302" x2="-1.651" y2="-2.2733" layer="51"/>
+<rectangle x1="-0.889" y1="-3.302" x2="-0.381" y2="-2.2733" layer="51"/>
+<rectangle x1="0.381" y1="-3.302" x2="0.889" y2="-2.2733" layer="51"/>
+<rectangle x1="1.651" y1="-3.302" x2="2.159" y2="-2.2733" layer="51"/>
+<rectangle x1="-0.889" y1="2.286" x2="-0.381" y2="3.302" layer="51"/>
+<rectangle x1="0.381" y1="2.286" x2="0.889" y2="3.302" layer="51"/>
+<rectangle x1="1.651" y1="2.286" x2="2.159" y2="3.302" layer="51"/>
+<smd name="1" x="-1.905" y="-2.8" dx="0.6" dy="1.2" layer="1"/>
+<smd name="2" x="-0.635" y="-2.8" dx="0.6" dy="1.2" layer="1"/>
+<smd name="3" x="0.635" y="-2.8" dx="0.6" dy="1.2" layer="1"/>
+<smd name="4" x="1.905" y="-2.8" dx="0.6" dy="1.2" layer="1"/>
+<smd name="5" x="1.905" y="2.8" dx="0.6" dy="1.2" layer="1"/>
+<smd name="6" x="0.635" y="2.8" dx="0.6" dy="1.2" layer="1"/>
+<smd name="7" x="-0.635" y="2.8" dx="0.6" dy="1.2" layer="1"/>
+<smd name="8" x="-1.905" y="2.8" dx="0.6" dy="1.2" layer="1"/>
+<text x="-3.175" y="0" size="0.6096" layer="25" font="vector" ratio="20" rot="R90" align="bottom-center">&gt;NAME</text>
+<text x="3.81" y="0" size="0.6096" layer="27" font="vector" ratio="20" rot="R90" align="bottom-center">&gt;VALUE</text>
+<rectangle x1="-2.159" y1="2.286" x2="-1.651" y2="3.302" layer="51"/>
+<polygon width="0.002540625" layer="21">
+<vertex x="-2.69875" y="-2.38125" curve="90"/>
+<vertex x="-3.01625" y="-2.06375" curve="90"/>
+<vertex x="-3.33375" y="-2.38125" curve="90"/>
+<vertex x="-3.01625" y="-2.69875" curve="90"/>
+</polygon>
+</package>
+<package name="SO08-EIAJ">
+<description>Fits EIAJ packages (wide version of the SOIC-8).</description>
+<wire x1="-2.362" y1="-2.565" x2="2.362" y2="-2.565" width="0.1524" layer="51"/>
+<wire x1="2.362" y1="-2.565" x2="2.362" y2="2.5396" width="0.2032" layer="21"/>
+<wire x1="2.362" y1="2.5396" x2="-2.362" y2="2.5396" width="0.1524" layer="51"/>
+<wire x1="-2.362" y1="2.5396" x2="-2.362" y2="-2.565" width="0.2032" layer="21"/>
+<smd name="1" x="-1.905" y="-3.3782" dx="0.6096" dy="2.2098" layer="1"/>
+<smd name="2" x="-0.635" y="-3.3782" dx="0.6096" dy="2.2098" layer="1"/>
+<smd name="3" x="0.635" y="-3.3782" dx="0.6096" dy="2.2098" layer="1"/>
+<smd name="4" x="1.905" y="-3.3782" dx="0.6096" dy="2.2098" layer="1"/>
+<smd name="5" x="1.905" y="3.3528" dx="0.6096" dy="2.2098" layer="1"/>
+<smd name="6" x="0.635" y="3.3528" dx="0.6096" dy="2.2098" layer="1"/>
+<smd name="7" x="-0.635" y="3.3528" dx="0.6096" dy="2.2098" layer="1"/>
+<smd name="8" x="-1.905" y="3.3528" dx="0.6096" dy="2.2098" layer="1"/>
+<rectangle x1="-2.0828" y1="-3.6322" x2="-1.7272" y2="-2.6162" layer="51"/>
+<rectangle x1="-0.8128" y1="-3.6322" x2="-0.4572" y2="-2.6162" layer="51"/>
+<rectangle x1="0.4572" y1="-3.6322" x2="0.8128" y2="-2.6162" layer="51"/>
+<rectangle x1="1.7272" y1="-3.6322" x2="2.0828" y2="-2.6162" layer="51"/>
+<rectangle x1="-2.0828" y1="2.5908" x2="-1.7272" y2="3.6068" layer="51"/>
+<rectangle x1="-0.8128" y1="2.5908" x2="-0.4572" y2="3.6068" layer="51"/>
+<rectangle x1="0.4572" y1="2.5908" x2="0.8128" y2="3.6068" layer="51"/>
+<rectangle x1="1.7272" y1="2.5908" x2="2.0828" y2="3.6068" layer="51"/>
+<text x="-2.8575" y="0" size="0.6096" layer="25" font="vector" ratio="20" rot="R90" align="bottom-center">&gt;NAME</text>
+<text x="3.4925" y="0" size="0.6096" layer="27" font="vector" ratio="20" rot="R90" align="bottom-center">&gt;VALUE</text>
+<polygon width="0.002540625" layer="21">
+<vertex x="-2.69875" y="-3.01625" curve="90"/>
+<vertex x="-3.01625" y="-2.69875" curve="90"/>
+<vertex x="-3.33375" y="-3.01625" curve="90"/>
+<vertex x="-3.01625" y="-3.33375" curve="90"/>
+</polygon>
+</package>
+</packages>
+<symbols>
+<symbol name="EEPROM-I2C">
+<wire x1="7.62" y1="-5.08" x2="-7.62" y2="-5.08" width="0.254" layer="94"/>
+<wire x1="-7.62" y1="-5.08" x2="-7.62" y2="7.62" width="0.254" layer="94"/>
+<wire x1="-7.62" y1="7.62" x2="7.62" y2="7.62" width="0.254" layer="94"/>
+<wire x1="7.62" y1="7.62" x2="7.62" y2="-5.08" width="0.254" layer="94"/>
+<text x="-7.62" y="8.382" size="1.778" layer="95">&gt;NAME</text>
+<text x="-7.62" y="-7.62" size="1.778" layer="96">&gt;VALUE</text>
+<pin name="GND" x="-10.16" y="-2.54" length="short" direction="pwr"/>
+<pin name="WP" x="10.16" y="2.54" length="short" rot="R180"/>
+<pin name="VCC" x="10.16" y="5.08" length="short" direction="pwr" rot="R180"/>
+<pin name="SCL" x="10.16" y="0" length="short" rot="R180"/>
+<pin name="SDA" x="10.16" y="-2.54" length="short" rot="R180"/>
+<pin name="A2" x="-10.16" y="0" length="short"/>
+<pin name="A0" x="-10.16" y="5.08" length="short"/>
+<pin name="A1" x="-10.16" y="2.54" length="short"/>
+</symbol>
+</symbols>
+<devicesets>
+<deviceset name="EEPROM-I2C" prefix="U">
+<description>&lt;h3&gt;I2C EEPROMs, 24LC256 and others&lt;/h3&gt;
+&lt;p&gt;24LC256 Series 256 kb I2C 2 Wire (32 k x 8 Bit) 2.5 V Serial EEPROM SMD - SOIC-8
+&lt;/p&gt;
+&lt;p&gt;&lt;a href=""&gt;Datasheet&lt;/a&gt;&lt;/p&gt;
+&lt;h4&gt;SparkFun Products&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://www.sparkfun.com/products/11703"&gt;SparkFun UDB5 - PIC UAV Development Board&lt;/a&gt; (GPS-11703)&lt;/li&gt;
+&lt;/ul&gt;</description>
+<gates>
+<gate name="G$1" symbol="EEPROM-I2C" x="0" y="0"/>
+</gates>
+<devices>
+<device name="256K" package="SO08">
+<connects>
+<connect gate="G$1" pin="A0" pad="1"/>
+<connect gate="G$1" pin="A1" pad="2"/>
+<connect gate="G$1" pin="A2" pad="3"/>
+<connect gate="G$1" pin="GND" pad="4"/>
+<connect gate="G$1" pin="SCL" pad="6"/>
+<connect gate="G$1" pin="SDA" pad="5"/>
+<connect gate="G$1" pin="VCC" pad="8"/>
+<connect gate="G$1" pin="WP" pad="7"/>
+</connects>
+<technologies>
+<technology name="">
+<attribute name="PROD_ID" value="IC-09714" constant="no"/>
+<attribute name="VALUE" value="24LC256" constant="no"/>
+</technology>
+</technologies>
+</device>
+<device name="EIAJ" package="SO08-EIAJ">
+<connects>
+<connect gate="G$1" pin="A0" pad="1"/>
+<connect gate="G$1" pin="A1" pad="2"/>
+<connect gate="G$1" pin="A2" pad="3"/>
+<connect gate="G$1" pin="GND" pad="4"/>
+<connect gate="G$1" pin="SCL" pad="6"/>
+<connect gate="G$1" pin="SDA" pad="5"/>
+<connect gate="G$1" pin="VCC" pad="8"/>
+<connect gate="G$1" pin="WP" pad="7"/>
+</connects>
+<technologies>
+<technology name="">
+<attribute name="PROD_ID" value="NA-XXXXX" constant="no"/>
+<attribute name="VALUE" value="I2C EEPROM" constant="no"/>
+</technology>
+</technologies>
+</device>
+<device name="512K" package="SO08">
+<connects>
+<connect gate="G$1" pin="A0" pad="1"/>
+<connect gate="G$1" pin="A1" pad="2"/>
+<connect gate="G$1" pin="A2" pad="3"/>
+<connect gate="G$1" pin="GND" pad="4"/>
+<connect gate="G$1" pin="SCL" pad="6"/>
+<connect gate="G$1" pin="SDA" pad="5"/>
+<connect gate="G$1" pin="VCC" pad="8"/>
+<connect gate="G$1" pin="WP" pad="7"/>
+</connects>
+<technologies>
+<technology name="">
+<attribute name="PROD_ID" value="IC-14645" constant="no"/>
+</technology>
+</technologies>
+</device>
+</devices>
+</deviceset>
+</devicesets>
+</library>
+<library name="SparkFun-IC-Special-Function">
+<description>&lt;h3&gt;SparkFun Special Function ICs&lt;/h3&gt;
+This library contains ICs that do not really fit into the other, more generic categories.  Basically, anything that serves some function but has a bunch of brains or special bias circuitry that prevents it from being used as a general part qualifies for this category.
+&lt;p&gt;Contents:
+&lt;ul&gt;&lt;li&gt;555 timers&lt;/li&gt;
+&lt;li&gt;LED drivers&lt;/li&gt;
+&lt;li&gt;H-Bridge drivers&lt;/li&gt;
+&lt;li&gt;Motor drivers&lt;/li&gt;
+&lt;li&gt;Waveform generators&lt;/li&gt;
+&lt;li&gt;Crypto&lt;/li&gt;
+&lt;/ul&gt;&lt;/p&gt;&lt;br&gt;
+We've spent an enormous amount of time creating and checking these footprints and parts, but it is &lt;b&gt; the end user's responsibility&lt;/b&gt; to ensure correctness and suitablity for a given componet or application. 
+&lt;br&gt;
+&lt;br&gt;If you enjoy using this library, please buy one of our products at &lt;a href=" www.sparkfun.com"&gt;SparkFun.com&lt;/a&gt;.
+&lt;br&gt;
+&lt;br&gt;
+&lt;b&gt;Licensing:&lt;/b&gt; Creative Commons ShareAlike 4.0 International - https://creativecommons.org/licenses/by-sa/4.0/ 
+&lt;br&gt;
+&lt;br&gt;
+You are welcome to use this library for commercial purposes. For attribution, we ask that when you begin to sell your device using our footprint, you email us with a link to the product being sold. We want bragging rights that we helped (in a very small part) to create your 8th world wonder. We would like the opportunity to feature your device on our homepage.</description>
 <packages>
 <package name="36-QFN">
 <description>&lt;b&gt;36-QFN&lt;/b&gt;&lt;br&gt;</description>
@@ -26795,7 +27152,7 @@ Source: &lt;a href="https://ww1.microchip.com/downloads/en/DeviceDoc/00001979A.p
 <gate name="G$1" symbol="USB224X" x="0" y="0"/>
 </gates>
 <devices>
-<device name="_2241" package="36-QFN">
+<device name="_2241_V04" package="36-QFN">
 <connects>
 <connect gate="G$1" pin="!RESET!" pad="18"/>
 <connect gate="G$1" pin="!SM_CE!" pad="15"/>
@@ -26834,7 +27191,7 @@ Source: &lt;a href="https://ww1.microchip.com/downloads/en/DeviceDoc/00001979A.p
 </connects>
 <technologies>
 <technology name="">
-<attribute name="PROD_ID" value="" constant="no"/>
+<attribute name="PROD_ID" value="IC-16527" constant="no"/>
 </technology>
 </technologies>
 </device>
@@ -26842,9 +27199,10 @@ Source: &lt;a href="https://ww1.microchip.com/downloads/en/DeviceDoc/00001979A.p
 </deviceset>
 </devicesets>
 </library>
-<library name="SparkFun-Clocks">
-<description>&lt;h3&gt;SparkFun Clocks, Oscillators and Resonators&lt;/h3&gt;
-This library contains the real-time clocks, oscillators, resonators, and crystals we use. 
+<library name="SparkFun-IC-Logic">
+<description>&lt;h3&gt;SparkFun Logic ICs&lt;/h3&gt;
+This library contains parts which fit into the standard logic IC families.&lt;br&gt;&lt;br&gt;
+This library is special as the devices are most generalized, with manufacturer specific variants stemming from the generalized numbers.  It also uses individual gates for common parts with a power consort.  Place the gates in a schematic such that they are easy to see in the circuit, and apply power to the power symbol for multigate packages. 
 &lt;br&gt;
 &lt;br&gt;
 We've spent an enormous amount of time creating and checking these footprints and parts, but it is &lt;b&gt; the end user's responsibility&lt;/b&gt; to ensure correctness and suitablity for a given componet or application. 
@@ -26856,191 +27214,6 @@ We've spent an enormous amount of time creating and checking these footprints an
 &lt;br&gt;
 &lt;br&gt;
 You are welcome to use this library for commercial purposes. For attribution, we ask that when you begin to sell your device using our footprint, you email us with a link to the product being sold. We want bragging rights that we helped (in a very small part) to create your 8th world wonder. We would like the opportunity to feature your device on our homepage.</description>
-<packages>
-<package name="CRYSTAL-SMD-5X3.2-4PAD">
-<description>&lt;h3&gt;5x3.2mm SMD Crystal&lt;/h3&gt;
-&lt;p&gt;Example: &lt;a href="https://www.sparkfun.com/products/94"&gt;16MHz SMD Crystal&lt;/a&gt; (&lt;a href="https://www.sparkfun.com/datasheets/Components/SPK-5032-16MHZ.pdf"&gt;Datasheet&lt;/a&gt;)&lt;/p&gt;</description>
-<wire x1="-0.6" y1="1.7" x2="0.6" y2="1.7" width="0.2032" layer="21"/>
-<wire x1="2.6" y1="0.3" x2="2.6" y2="-0.3" width="0.2032" layer="21"/>
-<wire x1="0.6" y1="-1.7" x2="-0.6" y2="-1.7" width="0.2032" layer="21"/>
-<wire x1="-2.6" y1="0.3" x2="-2.6" y2="-0.3" width="0.2032" layer="21"/>
-<smd name="1" x="-1.85" y="-1.15" dx="1.9" dy="1.1" layer="1"/>
-<smd name="3" x="1.85" y="1.15" dx="1.9" dy="1.1" layer="1"/>
-<smd name="4" x="-1.85" y="1.15" dx="1.9" dy="1.1" layer="1"/>
-<smd name="2" x="1.85" y="-1.15" dx="1.9" dy="1.1" layer="1"/>
-<text x="0" y="1.905" size="0.6096" layer="25" font="vector" ratio="20" align="bottom-center">&gt;NAME</text>
-<text x="0" y="-1.905" size="0.6096" layer="27" font="vector" ratio="20" align="top-center">&gt;VALUE</text>
-<wire x1="-2.5" y1="1.6" x2="-2.5" y2="-1.6" width="0.127" layer="51"/>
-<wire x1="-2.5" y1="-1.6" x2="2.5" y2="-1.6" width="0.127" layer="51"/>
-<wire x1="2.5" y1="-1.6" x2="2.5" y2="1.6" width="0.127" layer="51"/>
-<wire x1="2.5" y1="1.6" x2="-2.5" y2="1.6" width="0.127" layer="51"/>
-<polygon width="0.127" layer="51">
-<vertex x="-2.5" y="1.6"/>
-<vertex x="-2.5" y="0.8"/>
-<vertex x="-1.3" y="0.8"/>
-<vertex x="-1.3" y="1.6"/>
-</polygon>
-<polygon width="0.127" layer="51">
-<vertex x="2.5" y="-1.6"/>
-<vertex x="2.5" y="-0.8"/>
-<vertex x="1.3" y="-0.8"/>
-<vertex x="1.3" y="-1.6"/>
-</polygon>
-<polygon width="0.127" layer="51">
-<vertex x="1.3" y="1.6"/>
-<vertex x="1.3" y="0.8"/>
-<vertex x="2.5" y="0.8"/>
-<vertex x="2.5" y="1.6"/>
-</polygon>
-<polygon width="0.127" layer="51">
-<vertex x="-1.3" y="-1.6"/>
-<vertex x="-1.3" y="-0.8"/>
-<vertex x="-2.5" y="-0.8"/>
-<vertex x="-2.5" y="-1.6"/>
-</polygon>
-</package>
-<package name="CRYSTAL-SMD-2.0X1.6MM">
-<description>&lt;h3&gt;2.0 x 1.6 mm Crystal&lt;/h3&gt;
-&lt;p&gt;&lt;a href="http://www.murata.com/~/media/webrenewal/support/library/catalog/products/timingdevice/crystalu/p79e.ashx"&gt;Example Datasheet&lt;/a&gt; (XRCGB_F_P)&lt;/p&gt;</description>
-<wire x1="-1" y1="0.7" x2="-1" y2="-0.7" width="0.127" layer="51"/>
-<wire x1="-1" y1="-0.7" x2="-0.9" y2="-0.8" width="0.127" layer="51" curve="-90"/>
-<wire x1="-0.9" y1="-0.8" x2="0.9" y2="-0.8" width="0.127" layer="51"/>
-<wire x1="0.9" y1="-0.8" x2="1" y2="-0.7" width="0.127" layer="51" curve="-90"/>
-<wire x1="1" y1="-0.7" x2="1" y2="0.7" width="0.127" layer="51"/>
-<wire x1="1" y1="0.7" x2="0.9" y2="0.8" width="0.127" layer="51" curve="-90"/>
-<wire x1="0.9" y1="0.8" x2="-0.9" y2="0.8" width="0.127" layer="51"/>
-<wire x1="-0.9" y1="0.8" x2="-1" y2="0.7" width="0.127" layer="51" curve="-90"/>
-<polygon width="0" layer="51">
-<vertex x="-0.4" y="0.2"/>
-<vertex x="-0.4" y="0.7"/>
-<vertex x="-0.65" y="0.7"/>
-<vertex x="-0.65" y="0.8"/>
-<vertex x="-0.9" y="0.8" curve="-90"/>
-<vertex x="-1" y="0.7"/>
-<vertex x="-1" y="0.45"/>
-<vertex x="-0.9" y="0.45"/>
-<vertex x="-0.9" y="0.2"/>
-</polygon>
-<polygon width="0" layer="51">
-<vertex x="0.4" y="-0.2"/>
-<vertex x="0.4" y="-0.7"/>
-<vertex x="0.65" y="-0.7"/>
-<vertex x="0.65" y="-0.8"/>
-<vertex x="0.9" y="-0.8" curve="-90"/>
-<vertex x="1" y="-0.7"/>
-<vertex x="1" y="-0.45"/>
-<vertex x="0.9" y="-0.45"/>
-<vertex x="0.9" y="-0.2"/>
-</polygon>
-<polygon width="0" layer="51">
-<vertex x="-0.4" y="-0.2"/>
-<vertex x="-0.4" y="-0.7"/>
-<vertex x="-0.65" y="-0.7"/>
-<vertex x="-0.65" y="-0.8"/>
-<vertex x="-0.9" y="-0.8" curve="90"/>
-<vertex x="-1" y="-0.7"/>
-<vertex x="-1" y="-0.45"/>
-<vertex x="-0.9" y="-0.45"/>
-<vertex x="-0.9" y="-0.2"/>
-</polygon>
-<polygon width="0" layer="51">
-<vertex x="0.4" y="0.2"/>
-<vertex x="0.4" y="0.7"/>
-<vertex x="0.65" y="0.7"/>
-<vertex x="0.65" y="0.8"/>
-<vertex x="0.9" y="0.8" curve="90"/>
-<vertex x="1" y="0.7"/>
-<vertex x="1" y="0.45"/>
-<vertex x="0.9" y="0.45"/>
-<vertex x="0.9" y="0.2"/>
-</polygon>
-<polygon width="0" layer="51">
-<vertex x="0.506065625" y="-0.2"/>
-<vertex x="-0.4" y="0.306065625"/>
-<vertex x="-0.506065625" y="0.2"/>
-<vertex x="0.4" y="-0.306065625"/>
-</polygon>
-<smd name="4" x="-0.675" y="0.5" dx="0.75" dy="0.7" layer="1"/>
-<smd name="3" x="0.675" y="0.5" dx="0.75" dy="0.7" layer="1" rot="R180"/>
-<smd name="2" x="0.675" y="-0.5" dx="0.75" dy="0.7" layer="1" rot="R180"/>
-<smd name="1" x="-0.675" y="-0.5" dx="0.75" dy="0.7" layer="1"/>
-<wire x1="-0.85" y1="0.97" x2="-1.17" y2="0.97" width="0.2032" layer="21"/>
-<wire x1="-1.17" y1="0.65" x2="-1.17" y2="0.97" width="0.2032" layer="21"/>
-<wire x1="0.85" y1="-0.97" x2="1.17" y2="-0.97" width="0.2032" layer="21"/>
-<wire x1="1.17" y1="-0.65" x2="1.17" y2="-0.97" width="0.2032" layer="21"/>
-<wire x1="-1.17" y1="-0.65" x2="-1.17" y2="-0.97" width="0.2032" layer="21"/>
-<wire x1="-0.85" y1="-0.97" x2="-1.17" y2="-0.97" width="0.2032" layer="21"/>
-<wire x1="1.17" y1="0.65" x2="1.17" y2="0.97" width="0.2032" layer="21"/>
-<wire x1="0.85" y1="0.97" x2="1.17" y2="0.97" width="0.2032" layer="21"/>
-<wire x1="-0.19" y1="-0.97" x2="0.19" y2="-0.97" width="0.2032" layer="21"/>
-<wire x1="0.19" y1="0.97" x2="-0.19" y2="0.97" width="0.2032" layer="21"/>
-<text x="0" y="1.1" size="0.6096" layer="25" ratio="20" align="bottom-center">&gt;Name</text>
-<text x="0" y="-1.1" size="0.6096" layer="27" ratio="20" align="top-center">&gt;Value</text>
-</package>
-</packages>
-<symbols>
-<symbol name="CRYSTAL">
-<description>&lt;h3&gt;Crystal (no ground pin)&lt;/h3&gt;</description>
-<wire x1="1.016" y1="0" x2="2.54" y2="0" width="0.1524" layer="94"/>
-<wire x1="-2.54" y1="0" x2="-1.016" y2="0" width="0.1524" layer="94"/>
-<wire x1="-0.381" y1="1.524" x2="-0.381" y2="-1.524" width="0.254" layer="94"/>
-<wire x1="-0.381" y1="-1.524" x2="0.381" y2="-1.524" width="0.254" layer="94"/>
-<wire x1="0.381" y1="-1.524" x2="0.381" y2="1.524" width="0.254" layer="94"/>
-<wire x1="0.381" y1="1.524" x2="-0.381" y2="1.524" width="0.254" layer="94"/>
-<wire x1="1.016" y1="1.778" x2="1.016" y2="-1.778" width="0.254" layer="94"/>
-<wire x1="-1.016" y1="1.778" x2="-1.016" y2="-1.778" width="0.254" layer="94"/>
-<text x="0" y="2.032" size="1.778" layer="95" font="vector" align="bottom-center">&gt;NAME</text>
-<text x="0" y="-2.032" size="1.778" layer="96" font="vector" align="top-center">&gt;VALUE</text>
-<text x="-2.159" y="-1.143" size="0.8636" layer="93">1</text>
-<text x="1.524" y="-1.143" size="0.8636" layer="93">2</text>
-<pin name="2" x="2.54" y="0" visible="off" length="point" direction="pas" swaplevel="1" rot="R180"/>
-<pin name="1" x="-2.54" y="0" visible="off" length="point" direction="pas" swaplevel="1"/>
-</symbol>
-</symbols>
-<devicesets>
-<deviceset name="CRYSTAL-24MHZ" prefix="Y" uservalue="yes">
-<description>&lt;h3&gt;24MHz Crystal&lt;/h3&gt;
-&lt;p&gt;&lt;a href="http://www.sparkfun.com/datasheets/Components/AT-SMD-5x3.pdf"&gt;Datasheet&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;ul&gt;&lt;li&gt;Frequency: 24MHz&lt;/li&gt;
-&lt;li&gt;Frequency Tolerance: &amp;plusmn;20ppm&lt;/li&gt;
-&lt;li&gt;Load Capacitance: 12pF&lt;/li&gt;&lt;/ul&gt;&lt;/p&gt;
-&lt;p&gt;&lt;b&gt;SparkFun Products:&lt;/b&gt;
-&lt;ul&gt;&lt;li&gt;&lt;a href=”https://www.sparkfun.com/products/762”&gt;USB Bit Whacker&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/p&gt;</description>
-<gates>
-<gate name="G$1" symbol="CRYSTAL" x="0" y="0"/>
-</gates>
-<devices>
-<device name="-SMD-5.0X3.2MM" package="CRYSTAL-SMD-5X3.2-4PAD">
-<connects>
-<connect gate="G$1" pin="1" pad="1"/>
-<connect gate="G$1" pin="2" pad="3"/>
-</connects>
-<technologies>
-<technology name="">
-<attribute name="PROD_ID" value="XTAL-08298"/>
-<attribute name="SF_ID" value="COM-08581"/>
-<attribute name="VALUE" value="24MHz"/>
-</technology>
-</technologies>
-</device>
-<device name="-SMD-2.0X1.6MM" package="CRYSTAL-SMD-2.0X1.6MM">
-<connects>
-<connect gate="G$1" pin="1" pad="1"/>
-<connect gate="G$1" pin="2" pad="3"/>
-</connects>
-<technologies>
-<technology name="">
-<attribute name="PROD_ID" value="XTAL-14845" constant="no"/>
-<attribute name="VALUE" value="24MHz" constant="no"/>
-</technology>
-</technologies>
-</device>
-</devices>
-</deviceset>
-</devicesets>
-</library>
-<library name="74HC4066">
 <packages>
 <package name="14-QFN">
 <description>&lt;b&gt;36-QFN&lt;/b&gt;&lt;br&gt;</description>
@@ -27291,179 +27464,8 @@ features two input/output terminals (nY and nZ) and an active HIGH enable input 
 <connect gate="G$1" pin="VCC" pad="14"/>
 </connects>
 <technologies>
-<technology name=""/>
-</technologies>
-</device>
-</devices>
-</deviceset>
-</devicesets>
-</library>
-<library name="SparkFun-IC-Memory">
-<description>&lt;h3&gt;SparkFun Memory ICs&lt;/h3&gt;
-This library contains memory ICs.
-&lt;br&gt;
-&lt;br&gt;
-We've spent an enormous amount of time creating and checking these footprints and parts, but it is &lt;b&gt; the end user's responsibility&lt;/b&gt; to ensure correctness and suitablity for a given componet or application. 
-&lt;br&gt;
-&lt;br&gt;If you enjoy using this library, please buy one of our products at &lt;a href=" www.sparkfun.com"&gt;SparkFun.com&lt;/a&gt;.
-&lt;br&gt;
-&lt;br&gt;
-&lt;b&gt;Licensing:&lt;/b&gt; Creative Commons ShareAlike 4.0 International - https://creativecommons.org/licenses/by-sa/4.0/ 
-&lt;br&gt;
-&lt;br&gt;
-You are welcome to use this library for commercial purposes. For attribution, we ask that when you begin to sell your device using our footprint, you email us with a link to the product being sold. We want bragging rights that we helped (in a very small part) to create your 8th world wonder. We would like the opportunity to feature your device on our homepage.</description>
-<packages>
-<package name="SO08">
-<description>SOIC, 0.15 inch width</description>
-<wire x1="2.3368" y1="1.9463" x2="-2.3368" y2="1.9463" width="0.2032" layer="21"/>
-<wire x1="2.4368" y1="-1.9463" x2="2.7178" y2="-1.5653" width="0.2032" layer="21" curve="90"/>
-<wire x1="-2.7178" y1="1.4653" x2="-2.3368" y2="1.9463" width="0.2032" layer="21" curve="-90.023829"/>
-<wire x1="2.3368" y1="1.9463" x2="2.7178" y2="1.5653" width="0.2032" layer="21" curve="-90.030084"/>
-<wire x1="-2.7178" y1="-1.6653" x2="-2.3368" y2="-1.9463" width="0.2032" layer="21" curve="90.060185"/>
-<wire x1="-2.3368" y1="-1.9463" x2="2.4368" y2="-1.9463" width="0.2032" layer="21"/>
-<wire x1="2.7178" y1="-1.5653" x2="2.7178" y2="1.5653" width="0.2032" layer="21"/>
-<wire x1="-2.667" y1="0.6096" x2="-2.667" y2="-0.6604" width="0.2032" layer="21" curve="-180"/>
-<wire x1="-2.7178" y1="1.4526" x2="-2.7178" y2="0.6096" width="0.2032" layer="21"/>
-<wire x1="-2.7178" y1="-1.6653" x2="-2.7178" y2="-0.6604" width="0.2032" layer="21"/>
-<rectangle x1="-2.159" y1="-3.302" x2="-1.651" y2="-2.2733" layer="51"/>
-<rectangle x1="-0.889" y1="-3.302" x2="-0.381" y2="-2.2733" layer="51"/>
-<rectangle x1="0.381" y1="-3.302" x2="0.889" y2="-2.2733" layer="51"/>
-<rectangle x1="1.651" y1="-3.302" x2="2.159" y2="-2.2733" layer="51"/>
-<rectangle x1="-0.889" y1="2.286" x2="-0.381" y2="3.302" layer="51"/>
-<rectangle x1="0.381" y1="2.286" x2="0.889" y2="3.302" layer="51"/>
-<rectangle x1="1.651" y1="2.286" x2="2.159" y2="3.302" layer="51"/>
-<smd name="1" x="-1.905" y="-2.8" dx="0.6" dy="1.2" layer="1"/>
-<smd name="2" x="-0.635" y="-2.8" dx="0.6" dy="1.2" layer="1"/>
-<smd name="3" x="0.635" y="-2.8" dx="0.6" dy="1.2" layer="1"/>
-<smd name="4" x="1.905" y="-2.8" dx="0.6" dy="1.2" layer="1"/>
-<smd name="5" x="1.905" y="2.8" dx="0.6" dy="1.2" layer="1"/>
-<smd name="6" x="0.635" y="2.8" dx="0.6" dy="1.2" layer="1"/>
-<smd name="7" x="-0.635" y="2.8" dx="0.6" dy="1.2" layer="1"/>
-<smd name="8" x="-1.905" y="2.8" dx="0.6" dy="1.2" layer="1"/>
-<text x="-3.175" y="0" size="0.6096" layer="25" font="vector" ratio="20" rot="R90" align="bottom-center">&gt;NAME</text>
-<text x="3.81" y="0" size="0.6096" layer="27" font="vector" ratio="20" rot="R90" align="bottom-center">&gt;VALUE</text>
-<rectangle x1="-2.159" y1="2.286" x2="-1.651" y2="3.302" layer="51"/>
-<polygon width="0.002540625" layer="21">
-<vertex x="-2.69875" y="-2.38125" curve="90"/>
-<vertex x="-3.01625" y="-2.06375" curve="90"/>
-<vertex x="-3.33375" y="-2.38125" curve="90"/>
-<vertex x="-3.01625" y="-2.69875" curve="90"/>
-</polygon>
-</package>
-<package name="SO08-EIAJ">
-<description>Fits EIAJ packages (wide version of the SOIC-8).</description>
-<wire x1="-2.362" y1="-2.565" x2="2.362" y2="-2.565" width="0.1524" layer="51"/>
-<wire x1="2.362" y1="-2.565" x2="2.362" y2="2.5396" width="0.2032" layer="21"/>
-<wire x1="2.362" y1="2.5396" x2="-2.362" y2="2.5396" width="0.1524" layer="51"/>
-<wire x1="-2.362" y1="2.5396" x2="-2.362" y2="-2.565" width="0.2032" layer="21"/>
-<smd name="1" x="-1.905" y="-3.3782" dx="0.6096" dy="2.2098" layer="1"/>
-<smd name="2" x="-0.635" y="-3.3782" dx="0.6096" dy="2.2098" layer="1"/>
-<smd name="3" x="0.635" y="-3.3782" dx="0.6096" dy="2.2098" layer="1"/>
-<smd name="4" x="1.905" y="-3.3782" dx="0.6096" dy="2.2098" layer="1"/>
-<smd name="5" x="1.905" y="3.3528" dx="0.6096" dy="2.2098" layer="1"/>
-<smd name="6" x="0.635" y="3.3528" dx="0.6096" dy="2.2098" layer="1"/>
-<smd name="7" x="-0.635" y="3.3528" dx="0.6096" dy="2.2098" layer="1"/>
-<smd name="8" x="-1.905" y="3.3528" dx="0.6096" dy="2.2098" layer="1"/>
-<rectangle x1="-2.0828" y1="-3.6322" x2="-1.7272" y2="-2.6162" layer="51"/>
-<rectangle x1="-0.8128" y1="-3.6322" x2="-0.4572" y2="-2.6162" layer="51"/>
-<rectangle x1="0.4572" y1="-3.6322" x2="0.8128" y2="-2.6162" layer="51"/>
-<rectangle x1="1.7272" y1="-3.6322" x2="2.0828" y2="-2.6162" layer="51"/>
-<rectangle x1="-2.0828" y1="2.5908" x2="-1.7272" y2="3.6068" layer="51"/>
-<rectangle x1="-0.8128" y1="2.5908" x2="-0.4572" y2="3.6068" layer="51"/>
-<rectangle x1="0.4572" y1="2.5908" x2="0.8128" y2="3.6068" layer="51"/>
-<rectangle x1="1.7272" y1="2.5908" x2="2.0828" y2="3.6068" layer="51"/>
-<text x="-2.8575" y="0" size="0.6096" layer="25" font="vector" ratio="20" rot="R90" align="bottom-center">&gt;NAME</text>
-<text x="3.4925" y="0" size="0.6096" layer="27" font="vector" ratio="20" rot="R90" align="bottom-center">&gt;VALUE</text>
-<polygon width="0.002540625" layer="21">
-<vertex x="-2.69875" y="-3.01625" curve="90"/>
-<vertex x="-3.01625" y="-2.69875" curve="90"/>
-<vertex x="-3.33375" y="-3.01625" curve="90"/>
-<vertex x="-3.01625" y="-3.33375" curve="90"/>
-</polygon>
-</package>
-</packages>
-<symbols>
-<symbol name="EEPROM-I2C">
-<wire x1="7.62" y1="-5.08" x2="-7.62" y2="-5.08" width="0.254" layer="94"/>
-<wire x1="-7.62" y1="-5.08" x2="-7.62" y2="7.62" width="0.254" layer="94"/>
-<wire x1="-7.62" y1="7.62" x2="7.62" y2="7.62" width="0.254" layer="94"/>
-<wire x1="7.62" y1="7.62" x2="7.62" y2="-5.08" width="0.254" layer="94"/>
-<text x="-7.62" y="8.382" size="1.778" layer="95">&gt;NAME</text>
-<text x="-7.62" y="-7.62" size="1.778" layer="96">&gt;VALUE</text>
-<pin name="GND" x="-10.16" y="-2.54" length="short" direction="pwr"/>
-<pin name="WP" x="10.16" y="2.54" length="short" rot="R180"/>
-<pin name="VCC" x="10.16" y="5.08" length="short" direction="pwr" rot="R180"/>
-<pin name="SCL" x="10.16" y="0" length="short" rot="R180"/>
-<pin name="SDA" x="10.16" y="-2.54" length="short" rot="R180"/>
-<pin name="A2" x="-10.16" y="0" length="short"/>
-<pin name="A0" x="-10.16" y="5.08" length="short"/>
-<pin name="A1" x="-10.16" y="2.54" length="short"/>
-</symbol>
-</symbols>
-<devicesets>
-<deviceset name="EEPROM-I2C" prefix="U">
-<description>&lt;h3&gt;I2C EEPROMs, 24LC256 and others&lt;/h3&gt;
-&lt;p&gt;24LC256 Series 256 kb I2C 2 Wire (32 k x 8 Bit) 2.5 V Serial EEPROM SMD - SOIC-8
-&lt;/p&gt;
-&lt;p&gt;&lt;a href=""&gt;Datasheet&lt;/a&gt;&lt;/p&gt;
-&lt;h4&gt;SparkFun Products&lt;/h4&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://www.sparkfun.com/products/11703"&gt;SparkFun UDB5 - PIC UAV Development Board&lt;/a&gt; (GPS-11703)&lt;/li&gt;
-&lt;/ul&gt;</description>
-<gates>
-<gate name="G$1" symbol="EEPROM-I2C" x="0" y="0"/>
-</gates>
-<devices>
-<device name="256K" package="SO08">
-<connects>
-<connect gate="G$1" pin="A0" pad="1"/>
-<connect gate="G$1" pin="A1" pad="2"/>
-<connect gate="G$1" pin="A2" pad="3"/>
-<connect gate="G$1" pin="GND" pad="4"/>
-<connect gate="G$1" pin="SCL" pad="6"/>
-<connect gate="G$1" pin="SDA" pad="5"/>
-<connect gate="G$1" pin="VCC" pad="8"/>
-<connect gate="G$1" pin="WP" pad="7"/>
-</connects>
-<technologies>
 <technology name="">
-<attribute name="PROD_ID" value="IC-09714" constant="no"/>
-<attribute name="VALUE" value="24LC256" constant="no"/>
-</technology>
-</technologies>
-</device>
-<device name="EIAJ" package="SO08-EIAJ">
-<connects>
-<connect gate="G$1" pin="A0" pad="1"/>
-<connect gate="G$1" pin="A1" pad="2"/>
-<connect gate="G$1" pin="A2" pad="3"/>
-<connect gate="G$1" pin="GND" pad="4"/>
-<connect gate="G$1" pin="SCL" pad="6"/>
-<connect gate="G$1" pin="SDA" pad="5"/>
-<connect gate="G$1" pin="VCC" pad="8"/>
-<connect gate="G$1" pin="WP" pad="7"/>
-</connects>
-<technologies>
-<technology name="">
-<attribute name="PROD_ID" value="NA-XXXXX" constant="no"/>
-<attribute name="VALUE" value="I2C EEPROM" constant="no"/>
-</technology>
-</technologies>
-</device>
-<device name="512K" package="SO08">
-<connects>
-<connect gate="G$1" pin="A0" pad="1"/>
-<connect gate="G$1" pin="A1" pad="2"/>
-<connect gate="G$1" pin="A2" pad="3"/>
-<connect gate="G$1" pin="GND" pad="4"/>
-<connect gate="G$1" pin="SCL" pad="6"/>
-<connect gate="G$1" pin="SDA" pad="5"/>
-<connect gate="G$1" pin="VCC" pad="8"/>
-<connect gate="G$1" pin="WP" pad="7"/>
-</connects>
-<technologies>
-<technology name="">
-<attribute name="PROD_ID" value="IC-14645" constant="no"/>
+<attribute name="PROD_ID" value="IC-16528" constant="no"/>
 </technology>
 </technologies>
 </device>
@@ -27509,8 +27511,8 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <part name="GND81" library="SparkFun-PowerSymbols" deviceset="GND" device=""/>
 <part name="J2" library="SparkFun-Connectors" deviceset="MICRO-SD" device="-PUSH-PUSH-EXT-PIN" value="MICRO-SD-PUSH-PUSH-EXT-PIN"/>
 <part name="U3" library="SparkFun-IC-Microcontroller" deviceset="ATTINY841-ARDUINO" device="_QFN20M1"/>
-<part name="U4" library="74HC4066" deviceset="74HC4066_QUAD_BILATERAL_SWITCH" device="_QFN"/>
-<part name="U5" library="74HC4066" deviceset="74HC4066_QUAD_BILATERAL_SWITCH" device="_QFN"/>
+<part name="U4" library="SparkFun-IC-Logic" deviceset="74HC4066_QUAD_BILATERAL_SWITCH" device="_QFN"/>
+<part name="U5" library="SparkFun-IC-Logic" deviceset="74HC4066_QUAD_BILATERAL_SWITCH" device="_QFN"/>
 <part name="GND2" library="SparkFun-PowerSymbols" deviceset="GND" device=""/>
 <part name="GND3" library="SparkFun-PowerSymbols" deviceset="GND" device=""/>
 <part name="GND4" library="SparkFun-PowerSymbols" deviceset="GND" device=""/>
@@ -27586,7 +27588,7 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <part name="I2C" library="SparkFun-Jumpers" deviceset="JUMPER-SMT_3_NO" device="_SILK" package3d_urn="urn:adsk.eagle:package:39285/1"/>
 <part name="R18" library="SparkFun-Resistors" deviceset="2.2KOHM" device="-0402T-1/16W-1%" value="2.2k"/>
 <part name="R19" library="SparkFun-Resistors" deviceset="2.2KOHM" device="-0402T-1/16W-1%" value="2.2k"/>
-<part name="IC1" library="USB224x" deviceset="USB224X" device="_2241"/>
+<part name="IC1" library="SparkFun-IC-Special-Function" deviceset="USB224X" device="_2241_V04"/>
 <part name="GND16" library="SparkFun-PowerSymbols" deviceset="GND" device=""/>
 <part name="C16" library="SparkFun-Capacitors" deviceset="0.1UF" device="-0402T-6.3V-10%-X7R" value="0.1uF"/>
 <part name="GND28" library="SparkFun-PowerSymbols" deviceset="GND" device=""/>
@@ -27597,7 +27599,7 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <part name="GND30" library="SparkFun-PowerSymbols" deviceset="GND" device=""/>
 <part name="R16" library="SparkFun-Resistors" deviceset="12KOHM" device="-0603-1/10W-1%" value="12k"/>
 <part name="GND31" library="SparkFun-PowerSymbols" deviceset="GND" device=""/>
-<part name="U2" library="74HC4066" deviceset="74HC4066_QUAD_BILATERAL_SWITCH" device="_QFN"/>
+<part name="U2" library="SparkFun-IC-Logic" deviceset="74HC4066_QUAD_BILATERAL_SWITCH" device="_QFN"/>
 <part name="GND1" library="SparkFun-PowerSymbols" deviceset="GND" device=""/>
 <part name="C11" library="SparkFun-Capacitors" deviceset="0.1UF" device="-0402T-6.3V-10%-X7R" value="0.1uF"/>
 <part name="GND5" library="SparkFun-PowerSymbols" deviceset="GND" device=""/>
@@ -27610,8 +27612,7 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <part name="GND26" library="SparkFun-PowerSymbols" deviceset="GND" device=""/>
 <part name="GND32" library="SparkFun-PowerSymbols" deviceset="GND" device=""/>
 <part name="SDIO_VDD" library="SparkFun-Connectors" deviceset="TEST-POINT" device="3"/>
-<part name="GND" library="SparkFun-Connectors" deviceset="TEST-POINT" device="3"/>
-<part name="SD_WP" library="SparkFun-Connectors" deviceset="TEST-POINT" device="3"/>
+<part name="GND" library="SparkFun-Connectors" deviceset="TEST-POINT" device="3X5" value="TEST-POINT3X5"/>
 <part name="RXD" library="SparkFun-Jumpers" deviceset="JUMPER-SMT_2_NO" device="_SILK" package3d_urn="urn:adsk.eagle:package:39279/1"/>
 <part name="TXD" library="SparkFun-Jumpers" deviceset="JUMPER-SMT_2_NO" device="_SILK" package3d_urn="urn:adsk.eagle:package:39279/1"/>
 <part name="C18" library="SparkFun-Capacitors" deviceset="2.2UF" device="-0402_TIGHT-10V-10%-X5R" value="2.2uF"/>
@@ -27620,15 +27621,15 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <part name="Q4" library="SparkFun-DiscreteSemi" deviceset="MOSFET_PCH" device="-DMG2305UX-7" value="20V/4.2A/52mΩ/1.4W"/>
 <part name="Q5" library="SparkFun-DiscreteSemi" deviceset="TRANS_PNP_DUAL" device="SOT-363" package3d_urn="urn:adsk.eagle:package:29757/2"/>
 <part name="SUPPLY28" library="SparkFun-PowerSymbols" deviceset="VCC_1" device=""/>
-<part name="R21" library="SparkFun-Resistors" deviceset="10KOHM" device="-0402T-1/16W-1%" value="10k"/>
-<part name="R22" library="SparkFun-Resistors" deviceset="47KOHM" device="-0402-1/10W-1%" value="47k"/>
+<part name="R21" library="SparkFun-Resistors" deviceset="100KOHM" device="-0402T-1/16W-1%" value="100k"/>
+<part name="R22" library="SparkFun-Resistors" deviceset="1MOHM" device="-0402T-1/16W-5%" value="1M"/>
 <part name="GND34" library="SparkFun-PowerSymbols" deviceset="GND" device=""/>
 <part name="GND35" library="SparkFun-PowerSymbols" deviceset="GND" device=""/>
 <part name="SUPPLY29" library="SparkFun-PowerSymbols" deviceset="VCC" device=""/>
 <part name="Q6" library="SparkFun-DiscreteSemi" deviceset="MOSFET_PCH" device="-DMG2305UX-7" value="20V/4.2A/52mΩ/1.4W"/>
 <part name="Q7" library="SparkFun-DiscreteSemi" deviceset="TRANS_PNP_DUAL" device="SOT-363" package3d_urn="urn:adsk.eagle:package:29757/2"/>
-<part name="R23" library="SparkFun-Resistors" deviceset="10KOHM" device="-0402T-1/16W-1%" value="10k"/>
-<part name="R24" library="SparkFun-Resistors" deviceset="47KOHM" device="-0402-1/10W-1%" value="47k"/>
+<part name="R23" library="SparkFun-Resistors" deviceset="100KOHM" device="-0402T-1/16W-1%" value="100k"/>
+<part name="R24" library="SparkFun-Resistors" deviceset="1MOHM" device="-0402T-1/16W-5%" value="1M"/>
 <part name="GND36" library="SparkFun-PowerSymbols" deviceset="GND" device=""/>
 <part name="GND37" library="SparkFun-PowerSymbols" deviceset="GND" device=""/>
 <part name="SUPPLY31" library="SparkFun-PowerSymbols" deviceset="VCC" device=""/>
@@ -27646,9 +27647,9 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <part name="R25" library="SparkFun-Resistors" deviceset="10KOHM" device="-0402T-1/16W-1%" value="10k"/>
 <part name="GND38" library="SparkFun-PowerSymbols" deviceset="GND" device=""/>
 <part name="GPIO10" library="SparkFun-Connectors" deviceset="TEST-POINT" device="3"/>
-<part name="D+" library="SparkFun-Connectors" deviceset="TEST-POINT" device="3"/>
-<part name="D-" library="SparkFun-Connectors" deviceset="TEST-POINT" device="3"/>
-<part name="V_USB" library="SparkFun-Connectors" deviceset="TEST-POINT" device="3"/>
+<part name="D+" library="SparkFun-Connectors" deviceset="TEST-POINT" device="3X5" value="TEST-POINT3X5"/>
+<part name="D-" library="SparkFun-Connectors" deviceset="TEST-POINT" device="3X5" value="TEST-POINT3X5"/>
+<part name="V_USB" library="SparkFun-Connectors" deviceset="TEST-POINT" device="3X5" value="TEST-POINT3X5"/>
 <part name="SUPPLY9" library="SparkFun-PowerSymbols" deviceset="V_USB" device=""/>
 <part name="MICROSD_VCC" library="SparkFun-Connectors" deviceset="TEST-POINT" device="3"/>
 <part name="GND39" library="SparkFun-PowerSymbols" deviceset="GND" device=""/>
@@ -27658,12 +27659,18 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <part name="R26" library="SparkFun-Resistors" deviceset="100OHM" device="-0402-TIGHT-1/16W-1%" value="100"/>
 <part name="R27" library="SparkFun-Resistors" deviceset="100OHM" device="-0402-TIGHT-1/16W-1%" value="100"/>
 <part name="R28" library="SparkFun-Resistors" deviceset="100OHM" device="-0402-TIGHT-1/16W-1%" value="100"/>
+<part name="SH" library="SparkFun-Jumpers" deviceset="JUMPER-SMT_2_NC_TRACE" device="_SILK" package3d_urn="urn:adsk.eagle:package:39281/1"/>
+<part name="GND41" library="SparkFun-PowerSymbols" deviceset="GND" device=""/>
+<part name="R29" library="SparkFun-Resistors" deviceset="10KOHM" device="-0402T-1/16W-1%" value="10k"/>
+<part name="GND42" library="SparkFun-PowerSymbols" deviceset="GND" device=""/>
+<part name="R30" library="SparkFun-Resistors" deviceset="10KOHM" device="-0402T-1/16W-1%" value="10k"/>
+<part name="SUPPLY18" library="SparkFun-PowerSymbols" deviceset="3.3V" device=""/>
 </parts>
 <sheets>
 <sheet>
 <plain>
 <text x="351.536" y="9.906" size="2.54" layer="94" font="vector">Paul Clark</text>
-<text x="422.656" y="7.366" size="2.54" layer="94" font="vector">v01</text>
+<text x="422.656" y="7.366" size="2.54" layer="94" font="vector">v10</text>
 <text x="5.08" y="61.722" size="2.54" layer="94" font="vector">Thing Plus Footprint</text>
 <text x="335.28" y="182.88" size="2.54" layer="94" font="vector">Voltage Sensing</text>
 <text x="106.68" y="271.78" size="2.54" layer="94" font="vector">USB to SDIO Interface (USB2241)</text>
@@ -27780,19 +27787,19 @@ https://saturnpcb.com/saturn-pcb-toolkit/</text>
 <instance part="J1" gate="J1" x="226.06" y="50.8" smashed="yes">
 <attribute name="NAME" x="223.52" y="61.214" size="1.778" layer="95" font="vector"/>
 </instance>
-<instance part="R11" gate="R1" x="254" y="40.64" smashed="yes" rot="R90">
-<attribute name="NAME" x="252.476" y="40.64" size="1.778" layer="95" font="vector" rot="R90" align="bottom-center"/>
-<attribute name="VALUE" x="255.524" y="40.64" size="1.778" layer="96" font="vector" rot="R90" align="top-center"/>
+<instance part="R11" gate="R1" x="261.62" y="38.1" smashed="yes" rot="R90">
+<attribute name="NAME" x="260.096" y="38.1" size="1.778" layer="95" font="vector" rot="R90" align="bottom-center"/>
+<attribute name="VALUE" x="263.144" y="38.1" size="1.778" layer="96" font="vector" rot="R90" align="top-center"/>
 </instance>
-<instance part="R10" gate="R1" x="246.38" y="40.64" smashed="yes" rot="R90">
-<attribute name="NAME" x="244.856" y="40.64" size="1.778" layer="95" font="vector" rot="R90" align="bottom-center"/>
-<attribute name="VALUE" x="247.904" y="40.64" size="1.778" layer="96" font="vector" rot="R90" align="top-center"/>
+<instance part="R10" gate="R1" x="254" y="38.1" smashed="yes" rot="R90">
+<attribute name="NAME" x="252.476" y="38.1" size="1.778" layer="95" font="vector" rot="R90" align="bottom-center"/>
+<attribute name="VALUE" x="255.524" y="38.1" size="1.778" layer="96" font="vector" rot="R90" align="top-center"/>
 </instance>
-<instance part="GND74" gate="1" x="254" y="30.48" smashed="yes">
-<attribute name="VALUE" x="254" y="30.226" size="1.778" layer="96" align="top-center"/>
+<instance part="GND74" gate="1" x="261.62" y="27.94" smashed="yes">
+<attribute name="VALUE" x="261.62" y="27.686" size="1.778" layer="96" align="top-center"/>
 </instance>
-<instance part="GND75" gate="1" x="246.38" y="30.48" smashed="yes">
-<attribute name="VALUE" x="246.38" y="30.226" size="1.778" layer="96" align="top-center"/>
+<instance part="GND75" gate="1" x="254" y="27.94" smashed="yes">
+<attribute name="VALUE" x="254" y="27.686" size="1.778" layer="96" align="top-center"/>
 </instance>
 <instance part="GND76" gate="1" x="241.3" y="38.1" smashed="yes">
 <attribute name="VALUE" x="241.3" y="37.846" size="1.778" layer="96" align="top-center"/>
@@ -27938,24 +27945,24 @@ https://saturnpcb.com/saturn-pcb-toolkit/</text>
 <attribute name="NAME" x="23.876" y="93.98" size="1.778" layer="95" font="vector" rot="R90" align="bottom-center"/>
 <attribute name="VALUE" x="26.924" y="93.98" size="1.778" layer="96" font="vector" rot="R90" align="top-center"/>
 </instance>
-<instance part="J4" gate="G$1" x="43.18" y="40.64" smashed="yes">
-<attribute name="NAME" x="33.02" y="7.62" size="1.778" layer="95" font="vector"/>
-<attribute name="VALUE" x="33.02" y="53.848" size="1.778" layer="96" font="vector"/>
+<instance part="J4" gate="G$1" x="35.56" y="40.64" smashed="yes">
+<attribute name="NAME" x="25.4" y="7.62" size="1.778" layer="95" font="vector"/>
+<attribute name="VALUE" x="25.4" y="53.848" size="1.778" layer="96" font="vector"/>
 </instance>
-<instance part="GND17" gate="1" x="58.42" y="7.62" smashed="yes">
-<attribute name="VALUE" x="58.42" y="7.366" size="1.778" layer="96" align="top-center"/>
+<instance part="GND17" gate="1" x="50.8" y="7.62" smashed="yes">
+<attribute name="VALUE" x="50.8" y="7.366" size="1.778" layer="96" align="top-center"/>
 </instance>
-<instance part="SUPPLY2" gate="G$1" x="60.96" y="20.32" smashed="yes">
-<attribute name="VALUE" x="60.96" y="23.114" size="1.778" layer="96" align="bottom-center"/>
+<instance part="SUPPLY2" gate="G$1" x="53.34" y="20.32" smashed="yes">
+<attribute name="VALUE" x="53.34" y="23.114" size="1.778" layer="96" align="bottom-center"/>
 </instance>
-<instance part="JP1" gate="G$1" x="68.58" y="35.56" smashed="yes">
-<attribute name="NAME" x="72.39" y="37.338" size="1.778" layer="95" font="vector" align="center"/>
+<instance part="JP1" gate="G$1" x="60.96" y="35.56" smashed="yes">
+<attribute name="NAME" x="64.77" y="37.338" size="1.778" layer="95" font="vector" align="center"/>
 </instance>
-<instance part="JP2" gate="G$1" x="68.58" y="33.02" smashed="yes">
-<attribute name="NAME" x="72.39" y="34.544" size="1.778" layer="95" font="vector" align="center"/>
+<instance part="JP2" gate="G$1" x="60.96" y="33.02" smashed="yes">
+<attribute name="NAME" x="64.77" y="34.544" size="1.778" layer="95" font="vector" align="center"/>
 </instance>
-<instance part="JP3" gate="G$1" x="68.58" y="30.48" smashed="yes">
-<attribute name="NAME" x="72.39" y="32.004" size="1.778" layer="95" font="vector" align="center"/>
+<instance part="JP3" gate="G$1" x="60.96" y="30.48" smashed="yes">
+<attribute name="NAME" x="64.77" y="32.004" size="1.778" layer="95" font="vector" align="center"/>
 </instance>
 <instance part="U1" gate="G$1" x="375.92" y="93.98" smashed="yes">
 <attribute name="NAME" x="368.3" y="101.854" size="1.778" layer="95" font="vector"/>
@@ -27992,15 +27999,15 @@ https://saturnpcb.com/saturn-pcb-toolkit/</text>
 <instance part="SUPPLY11" gate="G$1" x="416.56" y="241.3" smashed="yes">
 <attribute name="VALUE" x="416.56" y="244.094" size="1.778" layer="96" align="bottom-center"/>
 </instance>
-<instance part="C10" gate="G$1" x="71.12" y="15.24" smashed="yes" rot="MR0">
-<attribute name="NAME" x="69.596" y="18.161" size="1.778" layer="95" font="vector" rot="MR0"/>
-<attribute name="VALUE" x="69.596" y="13.081" size="1.778" layer="96" font="vector" rot="MR0"/>
+<instance part="C10" gate="G$1" x="63.5" y="15.24" smashed="yes" rot="MR0">
+<attribute name="NAME" x="61.976" y="18.161" size="1.778" layer="95" font="vector" rot="MR0"/>
+<attribute name="VALUE" x="61.976" y="13.081" size="1.778" layer="96" font="vector" rot="MR0"/>
 </instance>
-<instance part="GND23" gate="1" x="71.12" y="7.62" smashed="yes">
-<attribute name="VALUE" x="71.12" y="7.366" size="1.778" layer="96" font="vector" align="top-center"/>
+<instance part="GND23" gate="1" x="63.5" y="7.62" smashed="yes">
+<attribute name="VALUE" x="63.5" y="7.366" size="1.778" layer="96" font="vector" align="top-center"/>
 </instance>
-<instance part="SUPPLY12" gate="G$1" x="71.12" y="22.86" smashed="yes">
-<attribute name="VALUE" x="71.12" y="25.654" size="1.778" layer="96" align="bottom-center"/>
+<instance part="SUPPLY12" gate="G$1" x="63.5" y="22.86" smashed="yes">
+<attribute name="VALUE" x="63.5" y="25.654" size="1.778" layer="96" align="bottom-center"/>
 </instance>
 <instance part="GND24" gate="1" x="43.18" y="86.36" smashed="yes" rot="MR0">
 <attribute name="VALUE" x="43.18" y="86.106" size="1.778" layer="96" rot="MR0" align="top-center"/>
@@ -28163,14 +28170,11 @@ https://saturnpcb.com/saturn-pcb-toolkit/</text>
 <instance part="GND" gate="G$1" x="297.18" y="15.24" smashed="yes">
 <attribute name="NAME" x="302.26" y="13.97" size="1.778" layer="95" font="vector"/>
 </instance>
-<instance part="SD_WP" gate="G$1" x="248.92" y="172.72" smashed="yes">
-<attribute name="NAME" x="254" y="172.72" size="1.778" layer="95" font="vector"/>
+<instance part="RXD" gate="G$1" x="60.96" y="48.26" smashed="yes">
+<attribute name="NAME" x="64.77" y="49.784" size="1.778" layer="95" font="vector" align="center"/>
 </instance>
-<instance part="RXD" gate="G$1" x="68.58" y="48.26" smashed="yes">
-<attribute name="NAME" x="72.39" y="49.784" size="1.778" layer="95" font="vector" align="center"/>
-</instance>
-<instance part="TXD" gate="G$1" x="68.58" y="45.72" smashed="yes">
-<attribute name="NAME" x="72.39" y="47.244" size="1.778" layer="95" font="vector" align="center"/>
+<instance part="TXD" gate="G$1" x="60.96" y="45.72" smashed="yes">
+<attribute name="NAME" x="64.77" y="47.244" size="1.778" layer="95" font="vector" align="center"/>
 </instance>
 <instance part="C18" gate="G$1" x="416.56" y="208.28" smashed="yes">
 <attribute name="NAME" x="418.084" y="211.201" size="1.778" layer="95" font="vector"/>
@@ -28322,6 +28326,26 @@ https://saturnpcb.com/saturn-pcb-toolkit/</text>
 <attribute name="NAME" x="130.556" y="195.58" size="1.778" layer="95" font="vector" rot="R90" align="bottom-center"/>
 <attribute name="VALUE" x="133.604" y="195.58" size="1.778" layer="96" font="vector" rot="R90" align="top-center"/>
 </instance>
+<instance part="SH" gate="G$1" x="246.38" y="38.1" smashed="yes" rot="R270">
+<attribute name="NAME" x="249.428" y="38.1" size="1.778" layer="95" font="vector" rot="R270" align="center"/>
+</instance>
+<instance part="GND41" gate="1" x="246.38" y="27.94" smashed="yes">
+<attribute name="VALUE" x="246.38" y="27.686" size="1.778" layer="96" align="top-center"/>
+</instance>
+<instance part="R29" gate="G$1" x="261.62" y="172.72" smashed="yes">
+<attribute name="NAME" x="261.62" y="174.244" size="1.778" layer="95" font="vector" align="bottom-center"/>
+<attribute name="VALUE" x="261.62" y="171.196" size="1.778" layer="96" font="vector" align="top-center"/>
+</instance>
+<instance part="GND42" gate="1" x="269.24" y="167.64" smashed="yes" rot="MR0">
+<attribute name="VALUE" x="269.24" y="167.386" size="1.778" layer="96" rot="MR0" align="top-center"/>
+</instance>
+<instance part="R30" gate="G$1" x="73.66" y="15.24" smashed="yes" rot="R270">
+<attribute name="NAME" x="75.184" y="15.24" size="1.778" layer="95" font="vector" rot="R270" align="bottom-center"/>
+<attribute name="VALUE" x="72.136" y="15.24" size="1.778" layer="96" font="vector" rot="R270" align="top-center"/>
+</instance>
+<instance part="SUPPLY18" gate="G$1" x="73.66" y="22.86" smashed="yes">
+<attribute name="VALUE" x="73.66" y="25.654" size="1.778" layer="96" align="bottom-center"/>
+</instance>
 </instances>
 <busses>
 </busses>
@@ -28340,12 +28364,12 @@ https://saturnpcb.com/saturn-pcb-toolkit/</text>
 <segment>
 <pinref part="R11" gate="R1" pin="1"/>
 <pinref part="GND74" gate="1" pin="GND"/>
-<wire x1="254" y1="33.02" x2="254" y2="35.56" width="0.1524" layer="91"/>
+<wire x1="261.62" y1="30.48" x2="261.62" y2="33.02" width="0.1524" layer="91"/>
 </segment>
 <segment>
 <pinref part="R10" gate="R1" pin="1"/>
 <pinref part="GND75" gate="1" pin="GND"/>
-<wire x1="246.38" y1="33.02" x2="246.38" y2="35.56" width="0.1524" layer="91"/>
+<wire x1="254" y1="30.48" x2="254" y2="33.02" width="0.1524" layer="91"/>
 </segment>
 <segment>
 <pinref part="J1" gate="J1" pin="GND"/>
@@ -28429,8 +28453,8 @@ https://saturnpcb.com/saturn-pcb-toolkit/</text>
 <segment>
 <pinref part="J4" gate="G$1" pin="GND"/>
 <pinref part="GND17" gate="1" pin="GND"/>
-<wire x1="55.88" y1="20.32" x2="58.42" y2="20.32" width="0.1524" layer="91"/>
-<wire x1="58.42" y1="20.32" x2="58.42" y2="10.16" width="0.1524" layer="91"/>
+<wire x1="48.26" y1="20.32" x2="50.8" y2="20.32" width="0.1524" layer="91"/>
+<wire x1="50.8" y1="20.32" x2="50.8" y2="10.16" width="0.1524" layer="91"/>
 </segment>
 <segment>
 <pinref part="U1" gate="G$1" pin="GND"/>
@@ -28456,7 +28480,7 @@ https://saturnpcb.com/saturn-pcb-toolkit/</text>
 <segment>
 <pinref part="C10" gate="G$1" pin="2"/>
 <pinref part="GND23" gate="1" pin="GND"/>
-<wire x1="71.12" y1="12.7" x2="71.12" y2="10.16" width="0.1524" layer="91"/>
+<wire x1="63.5" y1="12.7" x2="63.5" y2="10.16" width="0.1524" layer="91"/>
 </segment>
 <segment>
 <pinref part="J2" gate="J1" pin="GND"/>
@@ -28610,12 +28634,23 @@ https://saturnpcb.com/saturn-pcb-toolkit/</text>
 <pinref part="GND40" gate="1" pin="GND"/>
 <wire x1="307.34" y1="50.8" x2="307.34" y2="43.18" width="0.1524" layer="91"/>
 </segment>
+<segment>
+<pinref part="SH" gate="G$1" pin="2"/>
+<pinref part="GND41" gate="1" pin="GND"/>
+<wire x1="246.38" y1="33.02" x2="246.38" y2="30.48" width="0.1524" layer="91"/>
+</segment>
+<segment>
+<pinref part="GND42" gate="1" pin="GND"/>
+<pinref part="R29" gate="G$1" pin="2"/>
+<wire x1="269.24" y1="170.18" x2="269.24" y2="172.72" width="0.1524" layer="91"/>
+<wire x1="269.24" y1="172.72" x2="266.7" y2="172.72" width="0.1524" layer="91"/>
+</segment>
 </net>
 <net name="SCLK" class="0">
 <segment>
 <pinref part="J4" gate="G$1" pin="SCK"/>
-<wire x1="55.88" y1="38.1" x2="58.42" y2="38.1" width="0.1524" layer="91"/>
-<label x="58.42" y="38.1" size="1.27" layer="95" font="vector" xref="yes"/>
+<wire x1="48.26" y1="38.1" x2="50.8" y2="38.1" width="0.1524" layer="91"/>
+<label x="50.8" y="38.1" size="1.27" layer="95" font="vector" xref="yes"/>
 </segment>
 <segment>
 <pinref part="U4" gate="G$1" pin="4Y"/>
@@ -28626,8 +28661,8 @@ https://saturnpcb.com/saturn-pcb-toolkit/</text>
 <net name="PICO" class="0">
 <segment>
 <pinref part="J4" gate="G$1" pin="PICO"/>
-<wire x1="55.88" y1="40.64" x2="58.42" y2="40.64" width="0.1524" layer="91"/>
-<label x="58.42" y="40.64" size="1.27" layer="95" font="vector" xref="yes"/>
+<wire x1="48.26" y1="40.64" x2="50.8" y2="40.64" width="0.1524" layer="91"/>
+<label x="50.8" y="40.64" size="1.27" layer="95" font="vector" xref="yes"/>
 </segment>
 <segment>
 <pinref part="U4" gate="G$1" pin="3Y"/>
@@ -28638,13 +28673,19 @@ https://saturnpcb.com/saturn-pcb-toolkit/</text>
 <net name="POCI" class="0">
 <segment>
 <pinref part="J4" gate="G$1" pin="POCI"/>
-<wire x1="55.88" y1="43.18" x2="58.42" y2="43.18" width="0.1524" layer="91"/>
-<label x="58.42" y="43.18" size="1.27" layer="95" font="vector" xref="yes"/>
+<wire x1="48.26" y1="43.18" x2="50.8" y2="43.18" width="0.1524" layer="91"/>
+<label x="50.8" y="43.18" size="1.27" layer="95" font="vector" xref="yes"/>
 </segment>
 <segment>
 <pinref part="U4" gate="G$1" pin="1Y"/>
 <wire x1="40.64" y1="157.48" x2="35.56" y2="157.48" width="0.1524" layer="91"/>
 <label x="35.56" y="157.48" size="1.27" layer="95" font="vector" rot="R180" xref="yes"/>
+</segment>
+<segment>
+<wire x1="73.66" y1="7.62" x2="76.2" y2="7.62" width="0.1524" layer="91"/>
+<label x="76.2" y="7.62" size="1.27" layer="95" font="vector" xref="yes"/>
+<pinref part="R30" gate="G$1" pin="2"/>
+<wire x1="73.66" y1="10.16" x2="73.66" y2="7.62" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="3.3V" class="0">
@@ -28655,9 +28696,9 @@ https://saturnpcb.com/saturn-pcb-toolkit/</text>
 </segment>
 <segment>
 <pinref part="J4" gate="G$1" pin="3V3"/>
-<wire x1="55.88" y1="15.24" x2="60.96" y2="15.24" width="0.1524" layer="91"/>
+<wire x1="48.26" y1="15.24" x2="53.34" y2="15.24" width="0.1524" layer="91"/>
 <pinref part="SUPPLY2" gate="G$1" pin="3.3V"/>
-<wire x1="60.96" y1="15.24" x2="60.96" y2="20.32" width="0.1524" layer="91"/>
+<wire x1="53.34" y1="15.24" x2="53.34" y2="20.32" width="0.1524" layer="91"/>
 </segment>
 <segment>
 <pinref part="C2" gate="G$1" pin="1"/>
@@ -28667,7 +28708,7 @@ https://saturnpcb.com/saturn-pcb-toolkit/</text>
 <segment>
 <pinref part="C10" gate="G$1" pin="1"/>
 <pinref part="SUPPLY12" gate="G$1" pin="3.3V"/>
-<wire x1="71.12" y1="20.32" x2="71.12" y2="22.86" width="0.1524" layer="91"/>
+<wire x1="63.5" y1="20.32" x2="63.5" y2="22.86" width="0.1524" layer="91"/>
 </segment>
 <segment>
 <pinref part="SUPPLY32" gate="G$1" pin="3.3V"/>
@@ -28677,6 +28718,11 @@ https://saturnpcb.com/saturn-pcb-toolkit/</text>
 <wire x1="381" y1="248.92" x2="381" y2="238.76" width="0.1524" layer="91"/>
 <wire x1="383.54" y1="248.92" x2="381" y2="248.92" width="0.1524" layer="91"/>
 <junction x="381" y="248.92"/>
+</segment>
+<segment>
+<pinref part="R30" gate="G$1" pin="1"/>
+<pinref part="SUPPLY18" gate="G$1" pin="3.3V"/>
+<wire x1="73.66" y1="20.32" x2="73.66" y2="22.86" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="SDA" class="0">
@@ -28692,8 +28738,8 @@ https://saturnpcb.com/saturn-pcb-toolkit/</text>
 </segment>
 <segment>
 <pinref part="J4" gate="G$1" pin="SDA"/>
-<wire x1="30.48" y1="50.8" x2="27.94" y2="50.8" width="0.1524" layer="91"/>
-<label x="27.94" y="50.8" size="1.27" layer="95" font="vector" rot="R180" xref="yes"/>
+<wire x1="22.86" y1="50.8" x2="20.32" y2="50.8" width="0.1524" layer="91"/>
+<label x="20.32" y="50.8" size="1.27" layer="95" font="vector" rot="R180" xref="yes"/>
 </segment>
 <segment>
 <pinref part="R18" gate="G$1" pin="2"/>
@@ -28714,8 +28760,8 @@ https://saturnpcb.com/saturn-pcb-toolkit/</text>
 </segment>
 <segment>
 <pinref part="J4" gate="G$1" pin="SCL"/>
-<wire x1="30.48" y1="48.26" x2="27.94" y2="48.26" width="0.1524" layer="91"/>
-<label x="27.94" y="48.26" size="1.27" layer="95" font="vector" rot="R180" xref="yes"/>
+<wire x1="22.86" y1="48.26" x2="20.32" y2="48.26" width="0.1524" layer="91"/>
+<label x="20.32" y="48.26" size="1.27" layer="95" font="vector" rot="R180" xref="yes"/>
 </segment>
 <segment>
 <pinref part="R19" gate="G$1" pin="1"/>
@@ -28790,17 +28836,17 @@ https://saturnpcb.com/saturn-pcb-toolkit/</text>
 <net name="N$1" class="0">
 <segment>
 <pinref part="J1" gate="J1" pin="CC1"/>
-<wire x1="238.76" y1="50.8" x2="254" y2="50.8" width="0.1524" layer="91"/>
+<wire x1="238.76" y1="50.8" x2="261.62" y2="50.8" width="0.1524" layer="91"/>
 <pinref part="R11" gate="R1" pin="2"/>
-<wire x1="254" y1="50.8" x2="254" y2="45.72" width="0.1524" layer="91"/>
+<wire x1="261.62" y1="50.8" x2="261.62" y2="43.18" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$2" class="0">
 <segment>
 <pinref part="J1" gate="J1" pin="CC2"/>
-<wire x1="238.76" y1="48.26" x2="246.38" y2="48.26" width="0.1524" layer="91"/>
+<wire x1="238.76" y1="48.26" x2="254" y2="48.26" width="0.1524" layer="91"/>
 <pinref part="R10" gate="R1" pin="2"/>
-<wire x1="246.38" y1="48.26" x2="246.38" y2="45.72" width="0.1524" layer="91"/>
+<wire x1="254" y1="48.26" x2="254" y2="43.18" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="MICROSD_VCC" class="0">
@@ -29045,37 +29091,37 @@ https://saturnpcb.com/saturn-pcb-toolkit/</text>
 <segment>
 <pinref part="J4" gate="G$1" pin="A5"/>
 <pinref part="JP1" gate="G$1" pin="1"/>
-<wire x1="55.88" y1="35.56" x2="63.5" y2="35.56" width="0.1524" layer="91"/>
+<wire x1="48.26" y1="35.56" x2="55.88" y2="35.56" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$10" class="0">
 <segment>
 <pinref part="J4" gate="G$1" pin="A4"/>
 <pinref part="JP2" gate="G$1" pin="1"/>
-<wire x1="55.88" y1="33.02" x2="63.5" y2="33.02" width="0.1524" layer="91"/>
+<wire x1="48.26" y1="33.02" x2="55.88" y2="33.02" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$11" class="0">
 <segment>
 <pinref part="J4" gate="G$1" pin="A3"/>
 <pinref part="JP3" gate="G$1" pin="1"/>
-<wire x1="55.88" y1="30.48" x2="63.5" y2="30.48" width="0.1524" layer="91"/>
+<wire x1="48.26" y1="30.48" x2="55.88" y2="30.48" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="!CS!" class="0">
 <segment>
 <pinref part="JP1" gate="G$1" pin="2"/>
-<wire x1="73.66" y1="35.56" x2="76.2" y2="35.56" width="0.1524" layer="91"/>
-<label x="78.74" y="35.56" size="1.27" layer="95" font="vector" xref="yes"/>
+<wire x1="66.04" y1="35.56" x2="68.58" y2="35.56" width="0.1524" layer="91"/>
+<label x="71.12" y="35.56" size="1.27" layer="95" font="vector" xref="yes"/>
 <pinref part="JP2" gate="G$1" pin="2"/>
-<wire x1="76.2" y1="35.56" x2="78.74" y2="35.56" width="0.1524" layer="91"/>
-<wire x1="73.66" y1="33.02" x2="76.2" y2="33.02" width="0.1524" layer="91"/>
-<wire x1="76.2" y1="33.02" x2="76.2" y2="35.56" width="0.1524" layer="91"/>
-<junction x="76.2" y="35.56"/>
+<wire x1="68.58" y1="35.56" x2="71.12" y2="35.56" width="0.1524" layer="91"/>
+<wire x1="66.04" y1="33.02" x2="68.58" y2="33.02" width="0.1524" layer="91"/>
+<wire x1="68.58" y1="33.02" x2="68.58" y2="35.56" width="0.1524" layer="91"/>
+<junction x="68.58" y="35.56"/>
 <pinref part="JP3" gate="G$1" pin="2"/>
-<wire x1="73.66" y1="30.48" x2="76.2" y2="30.48" width="0.1524" layer="91"/>
-<wire x1="76.2" y1="30.48" x2="76.2" y2="33.02" width="0.1524" layer="91"/>
-<junction x="76.2" y="33.02"/>
+<wire x1="66.04" y1="30.48" x2="68.58" y2="30.48" width="0.1524" layer="91"/>
+<wire x1="68.58" y1="30.48" x2="68.58" y2="33.02" width="0.1524" layer="91"/>
+<junction x="68.58" y="33.02"/>
 </segment>
 <segment>
 <pinref part="U4" gate="G$1" pin="2Y"/>
@@ -29537,13 +29583,6 @@ https://saturnpcb.com/saturn-pcb-toolkit/</text>
 <label x="309.88" y="246.38" size="1.27" layer="95" font="vector" xref="yes"/>
 </segment>
 </net>
-<net name="SD_WP" class="0">
-<segment>
-<pinref part="SD_WP" gate="G$1" pin="1"/>
-<pinref part="IC1" gate="G$1" pin="SD_WP"/>
-<wire x1="248.92" y1="172.72" x2="246.38" y2="172.72" width="0.1524" layer="91"/>
-</segment>
-</net>
 <net name="RXD0" class="0">
 <segment>
 <pinref part="U3" gate="U1" pin="(RXD0/A2)2"/>
@@ -29552,8 +29591,8 @@ https://saturnpcb.com/saturn-pcb-toolkit/</text>
 </segment>
 <segment>
 <pinref part="RXD" gate="G$1" pin="2"/>
-<wire x1="73.66" y1="48.26" x2="76.2" y2="48.26" width="0.1524" layer="91"/>
-<label x="76.2" y="48.26" size="1.27" layer="95" font="vector" xref="yes"/>
+<wire x1="66.04" y1="48.26" x2="68.58" y2="48.26" width="0.1524" layer="91"/>
+<label x="68.58" y="48.26" size="1.27" layer="95" font="vector" xref="yes"/>
 </segment>
 </net>
 <net name="TXD0" class="0">
@@ -29564,22 +29603,22 @@ https://saturnpcb.com/saturn-pcb-toolkit/</text>
 </segment>
 <segment>
 <pinref part="TXD" gate="G$1" pin="2"/>
-<wire x1="73.66" y1="45.72" x2="76.2" y2="45.72" width="0.1524" layer="91"/>
-<label x="76.2" y="45.72" size="1.27" layer="95" font="vector" xref="yes"/>
+<wire x1="66.04" y1="45.72" x2="68.58" y2="45.72" width="0.1524" layer="91"/>
+<label x="68.58" y="45.72" size="1.27" layer="95" font="vector" xref="yes"/>
 </segment>
 </net>
 <net name="N$25" class="0">
 <segment>
 <pinref part="J4" gate="G$1" pin="TX"/>
 <pinref part="RXD" gate="G$1" pin="1"/>
-<wire x1="55.88" y1="48.26" x2="63.5" y2="48.26" width="0.1524" layer="91"/>
+<wire x1="48.26" y1="48.26" x2="55.88" y2="48.26" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$26" class="0">
 <segment>
 <pinref part="J4" gate="G$1" pin="RX"/>
 <pinref part="TXD" gate="G$1" pin="1"/>
-<wire x1="55.88" y1="45.72" x2="63.5" y2="45.72" width="0.1524" layer="91"/>
+<wire x1="48.26" y1="45.72" x2="55.88" y2="45.72" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$5" class="0">
@@ -29709,6 +29748,21 @@ https://saturnpcb.com/saturn-pcb-toolkit/</text>
 <pinref part="R28" gate="G$1" pin="1"/>
 <pinref part="Q2" gate="NMOS" pin="D"/>
 <wire x1="132.08" y1="190.5" x2="132.08" y2="187.96" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="N$12" class="0">
+<segment>
+<pinref part="J1" gate="J1" pin="SHLD"/>
+<wire x1="238.76" y1="45.72" x2="246.38" y2="45.72" width="0.1524" layer="91"/>
+<pinref part="SH" gate="G$1" pin="1"/>
+<wire x1="246.38" y1="45.72" x2="246.38" y2="43.18" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="N$20" class="0">
+<segment>
+<pinref part="IC1" gate="G$1" pin="SD_WP"/>
+<pinref part="R29" gate="G$1" pin="1"/>
+<wire x1="246.38" y1="172.72" x2="256.54" y2="172.72" width="0.1524" layer="91"/>
 </segment>
 </net>
 </nets>

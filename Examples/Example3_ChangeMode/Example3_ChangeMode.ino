@@ -108,8 +108,6 @@ void loop()
       ;
   }
 
-  delay(5); // This delay is important. Wait 5ms after changing the mode before sending the sleep command. Otherwise the sleep command can be missed.
-
   // To change modes, we need to put the Shield to sleep and then wake it again
 
   Serial.println(F("Putting the Shield to sleep"));
@@ -164,8 +162,6 @@ void loop()
     while (1)
       ;
   }
-
-  delay(5); // This delay is important. Wait 5ms after changing the mode before sending the sleep command. Otherwise the sleep command can be missed.
 
   // To change modes, we need to put the Shield to sleep and then wake it again
 

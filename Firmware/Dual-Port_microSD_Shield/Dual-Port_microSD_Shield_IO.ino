@@ -30,16 +30,16 @@ void requestEvent()
   switch (receiveEventData.receiveEventRegister)
   {
     case SFE_DUAL_SD_REGISTER_I2C_ADDRESS: // Does the user want to read the I2C address?
-      Wire.write(eeprom_settings.i2cAddress);
       receiveEventData.receiveEventRegister = SFE_DUAL_SD_REGISTER_UNKNOWN; // Clear the event
+      Wire.write(eeprom_settings.i2cAddress);
       break;
     case SFE_DUAL_SD_REGISTER_FIRMWARE_VERSION: // Does the user want to read the firmware version?
-      Wire.write(SFE_DUAL_SD_FIRMWARE_VERSION);
       receiveEventData.receiveEventRegister = SFE_DUAL_SD_REGISTER_UNKNOWN; // Clear the event
+      Wire.write(SFE_DUAL_SD_FIRMWARE_VERSION);
       break;
     case SFE_DUAL_SD_REGISTER_DEFAULT_MODE: // Does the user want to read the defaultMode?
-      Wire.write(eeprom_settings.defaultMode);
       receiveEventData.receiveEventRegister = SFE_DUAL_SD_REGISTER_UNKNOWN; // Clear the event
+      Wire.write(eeprom_settings.defaultMode);
       break;
     case SFE_DUAL_SD_REGISTER_UNKNOWN:
       // Nothing to do here - maybe debug?

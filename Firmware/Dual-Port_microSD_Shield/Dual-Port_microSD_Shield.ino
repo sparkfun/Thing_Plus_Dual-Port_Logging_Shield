@@ -49,7 +49,7 @@
   There is a huge amount we could do with this firmware, but we have decided to Keep It Simple!
 
   When the ATtimy comes out of reset, it will:
-  Delay for one second
+  Delay for 500ms
   Measure the Thing Plus 3V3 rail
   Measure the USB 5V rail
   If USB power is present and 3V3 is not, the ATtiny will power on the USB2241 and go into "thumb drive" (SDIO) mode
@@ -63,8 +63,9 @@
   The microSD card will be powered on again
   The ATtiny will go into defaultMode
 
+  Simple diagnostics are output on the Serial TX pin at power up. (9600 baud)
+
   To Keep It Simple:
-  The Serial TXD and RXD pins are not used. (These could be used in the future to offer serial communication instead of I2C)
   The microSD SCK interrupt (INT0) is not used. (This could be used in the future to monitor microSD card activity in either mode)
 
   Supported I2C commands / registers are:
@@ -209,55 +210,71 @@ void loop()
   //Check if a receive event has taken place
   if (receiveEventData.receiveEventLength > 0)
   {
+    //Clear the event as early as possible so that the next event can arrive while (e.g.) the eeprom settings are being updated
     switch (receiveEventData.receiveEventRegister)
     {
       case SFE_DUAL_SD_REGISTER_I2C_ADDRESS: // Does the user want to change the I2C address?
         // receiveEventLength will be 1 if the user just wants to read the address
         if (receiveEventData.receiveEventLength == 2) // Data should be: register; new address
         {
+          receiveEventData.receiveEventLength = 0; // Clear the event - ready for the next event
           eeprom_settings.i2cAddress = receiveEventData.receiveEventBuffer[0] & 0x7F; // Update the I2C address in eeprom. Limit to 7 bits
           saveEepromSettings(); // Update the address in eeprom
           startI2C(false); // Restart I2C comms
         }
+        else
+        {
+          receiveEventData.receiveEventLength = 0; // Clear the event - ready for the next event
+        }
         break;
       case SFE_DUAL_SD_REGISTER_FIRMWARE_VERSION: // Does the user want to read the firmware version?
-        if (receiveEventData.receiveEventLength == 1) // Read request should be a single byte
-        {
-          // Nothing to do here
-        }
+        receiveEventData.receiveEventLength = 0; // Clear the event - ready for the next event
         break;
       case SFE_DUAL_SD_REGISTER_DEFAULT_MODE: // Does the user want to change the defaultMode?
         // receiveEventLength will be 1 if the user just wants to read the default mode
         if (receiveEventData.receiveEventLength == 2) // Data should be: register; new address
         {
+          receiveEventData.receiveEventLength = 0; // Clear the event - ready for the next event
           eeprom_settings.defaultMode = receiveEventData.receiveEventBuffer[0] & 0x01; // Update the defaultMode in eeprom. Limit to 1 bit
           saveEepromSettings(); // Update the defaultMode in eeprom
         }
+        else
+        {
+          receiveEventData.receiveEventLength = 0; // Clear the event - ready for the next event
+        }
         break;
       case SFE_DUAL_SD_REGISTER_SLEEP: // Does the user want to sleep?
+        receiveEventData.receiveEventRegister = SFE_DUAL_SD_REGISTER_UNKNOWN; // Clear the receive event register - this one is write only
         if (receiveEventData.receiveEventLength == 1) // Should be a single byte
         {
+          receiveEventData.receiveEventLength = 0; // Clear the event - ready for the next event
           sleepNow = true; // Go to sleep
         }
-        receiveEventData.receiveEventRegister = SFE_DUAL_SD_REGISTER_UNKNOWN; // Clear the receive event register - this one is write only
+        else
+        {
+          receiveEventData.receiveEventLength = 0; // Clear the event - ready for the next event
+        }
         break;
       case SFE_DUAL_SD_REGISTER_WAKE: // Does the user want to wake?
+        receiveEventData.receiveEventRegister = SFE_DUAL_SD_REGISTER_UNKNOWN; // Clear the receive event register - this one is write only
         if (receiveEventData.receiveEventLength == 1) // Should be a single byte
         {
+          receiveEventData.receiveEventLength = 0; // Clear the event - ready for the next event
           if (eeprom_settings.defaultMode == SFE_DUAL_SD_MODE_SPI)
             spiMode();
           else
             sdioMode();      
         }
-        receiveEventData.receiveEventRegister = SFE_DUAL_SD_REGISTER_UNKNOWN; // Clear the receive event register - this one is write only
+        else
+        {
+          receiveEventData.receiveEventLength = 0; // Clear the event - ready for the next event
+        }
         break;
       case SFE_DUAL_SD_REGISTER_UNKNOWN:
       default:
-        // Nothing to do here
+        receiveEventData.receiveEventLength = 0; // Clear the event - ready for the next event
         break;
-    }
-    
-    receiveEventData.receiveEventLength = 0; // Clear the event
+    }    
   }
 
   // Sleep

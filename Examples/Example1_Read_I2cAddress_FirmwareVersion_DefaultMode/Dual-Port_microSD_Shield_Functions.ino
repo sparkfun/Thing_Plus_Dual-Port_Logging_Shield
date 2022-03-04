@@ -41,8 +41,6 @@ uint8_t dualPortMicroSDShield_getI2cAddress(uint8_t i2cAddress, TwoWire &wirePor
   wirePort.write(SFE_DUAL_SD_REGISTER_I2C_ADDRESS);
   wirePort.endTransmission();
 
-  delay(1);
-
   uint32_t bytesReceived = wirePort.requestFrom(i2cAddress, (uint8_t)1);  // Read one byte from the ATtiny841
 
   if (bytesReceived != 1) // If we did not receive exactly 1 byte, return an error (255)
@@ -78,8 +76,6 @@ uint8_t dualPortMicroSDShield_getFirmwareVersion(uint8_t i2cAddress, TwoWire &wi
   wirePort.write(SFE_DUAL_SD_REGISTER_FIRMWARE_VERSION);
   wirePort.endTransmission();
 
-  delay(1);
-
   uint32_t bytesReceived = wirePort.requestFrom(i2cAddress, (uint8_t)1);  // Read one byte from the ATtiny841
 
   if (bytesReceived != 1) // If we did not receive exactly 1 byte, return an error (255)
@@ -99,8 +95,6 @@ uint8_t dualPortMicroSDShield_getDefaultMode(uint8_t i2cAddress, TwoWire &wirePo
   wirePort.beginTransmission(i2cAddress);
   wirePort.write(SFE_DUAL_SD_REGISTER_DEFAULT_MODE);
   wirePort.endTransmission();
-
-  delay(1);
 
   uint32_t bytesReceived = wirePort.requestFrom(i2cAddress, (uint8_t)1);  // Read one byte from the ATtiny841
 

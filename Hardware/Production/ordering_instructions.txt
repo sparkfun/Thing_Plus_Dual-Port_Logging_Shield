@@ -1,4 +1,4 @@
-panel size, 132x177mm
+panel size, 131x201mm
 PCB thickness, 1.6mm
 number of layers, 4
 soldermask color, Red
@@ -6,7 +6,7 @@ silkscreen color, White
 oz copper, 1oz
 finish, HASL lead free
 stencils, top
-pcs per panel, 14
+pcs per panel, 15
 min trace width, 0.1524mm / 0.0060in
 min drill size, 0.3000mm / 0.0118in
 filename to layer stackup 1/2/3/4: GTL, GL2, GL3, GBL

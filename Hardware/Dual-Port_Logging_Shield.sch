@@ -3,7 +3,7 @@
 <eagle version="9.6.2">
 <drawing>
 <settings>
-<setting alwaysvectorfont="yes"/>
+<setting alwaysvectorfont="no"/>
 <setting verticaltext="up"/>
 </settings>
 <grid distance="0.1" unitdist="inch" unit="inch" style="lines" multiple="1" display="no" altdistance="0.05" altunitdist="inch" altunit="inch"/>
@@ -23705,8 +23705,8 @@ Puhs-Push type.
 <smd name="11" x="-7.75" y="0.4" dx="1.2" dy="2.2" layer="1"/>
 <smd name="13" x="6.85" y="10" dx="1.6" dy="1.4" layer="1"/>
 <smd name="10" x="-7.75" y="9.9" dx="1.2" dy="1.6" layer="1"/>
-<rectangle x1="-6.1" y1="4.1" x2="2.9" y2="6.1" layer="39"/>
-<rectangle x1="-7.7" y1="4.7" x2="-7" y2="8.7" layer="39"/>
+<rectangle x1="-6.1" y1="4.1" x2="2.9" y2="6.1" layer="41"/>
+<rectangle x1="-7.7" y1="4.7" x2="-7" y2="8.7" layer="41"/>
 <wire x1="7.2" y1="10.5" x2="7.2" y2="-4" width="0.05" layer="51"/>
 <wire x1="7.2" y1="-4" x2="4" y2="-4" width="0.05" layer="51"/>
 <wire x1="4" y1="-4" x2="1" y2="-3.3" width="0.05" layer="51"/>
@@ -24057,6 +24057,12 @@ Used as a test point connection for pogo pins or other debugging tools.
 <text x="-1.27" y="-1.778" size="0.6096" layer="27" font="vector" ratio="20">&gt;VALUE</text>
 <rectangle x1="-0.254" y1="-0.254" x2="0.254" y2="0.254" layer="51"/>
 </package>
+<package name="USB-SOLDER-PADS">
+<smd name="D-" x="0" y="0.889" dx="3" dy="0.9" layer="1" cream="no"/>
+<smd name="VBUS" x="0" y="2.667" dx="3" dy="0.9" layer="1" cream="no"/>
+<smd name="D+" x="0" y="-0.889" dx="3" dy="0.9" layer="1" cream="no"/>
+<smd name="GND" x="0" y="-2.667" dx="3" dy="0.9" layer="1" cream="no"/>
+</package>
 </packages>
 <symbols>
 <symbol name="USB-C-MINIMUM">
@@ -24122,6 +24128,23 @@ Exposes the minimal pins needed to implement a USB 2.x legacy device.</descripti
 <text x="-2.54" y="2.54" size="1.778" layer="95" font="vector">&gt;Name</text>
 <text x="-2.54" y="-2.54" size="1.778" layer="96" font="vector">&gt;Value</text>
 <pin name="1" x="0" y="0" visible="off" length="point" rot="R180"/>
+</symbol>
+<symbol name="CONN_04">
+<description>&lt;h3&gt;4 Pin Connection&lt;/h3&gt;</description>
+<wire x1="1.27" y1="-5.08" x2="-5.08" y2="-5.08" width="0.4064" layer="94"/>
+<wire x1="-1.27" y1="2.54" x2="0" y2="2.54" width="0.6096" layer="94"/>
+<wire x1="-1.27" y1="0" x2="0" y2="0" width="0.6096" layer="94"/>
+<wire x1="-1.27" y1="-2.54" x2="0" y2="-2.54" width="0.6096" layer="94"/>
+<wire x1="-5.08" y1="7.62" x2="-5.08" y2="-5.08" width="0.4064" layer="94"/>
+<wire x1="1.27" y1="-5.08" x2="1.27" y2="7.62" width="0.4064" layer="94"/>
+<wire x1="-5.08" y1="7.62" x2="1.27" y2="7.62" width="0.4064" layer="94"/>
+<wire x1="-1.27" y1="5.08" x2="0" y2="5.08" width="0.6096" layer="94"/>
+<text x="-5.08" y="-7.366" size="1.778" layer="96" font="vector">&gt;VALUE</text>
+<text x="-5.08" y="8.128" size="1.778" layer="95" font="vector">&gt;NAME</text>
+<pin name="1" x="5.08" y="-2.54" visible="pad" length="middle" direction="pas" swaplevel="1" rot="R180"/>
+<pin name="2" x="5.08" y="0" visible="pad" length="middle" direction="pas" swaplevel="1" rot="R180"/>
+<pin name="3" x="5.08" y="2.54" visible="pad" length="middle" direction="pas" swaplevel="1" rot="R180"/>
+<pin name="4" x="5.08" y="5.08" visible="pad" length="middle" direction="pas" swaplevel="1" rot="R180"/>
 </symbol>
 </symbols>
 <devicesets>
@@ -24407,6 +24430,25 @@ If designing 4-layer board, make sure to select the variant &lt;strong&gt;_4-LAY
 <device name="POGO_PTH" package="1X01_NO_SILK">
 <connects>
 <connect gate="G$1" pin="1" pad="1"/>
+</connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
+<deviceset name="USB_SOLDER_PADS" prefix="JP">
+<description>Solder pad access to USB pins. Helpful to expose on PCBs so user can attach external USB connector if necessary.</description>
+<gates>
+<gate name="JP1" symbol="CONN_04" x="0" y="-2.54"/>
+</gates>
+<devices>
+<device name="" package="USB-SOLDER-PADS">
+<connects>
+<connect gate="JP1" pin="1" pad="VBUS"/>
+<connect gate="JP1" pin="2" pad="D-"/>
+<connect gate="JP1" pin="3" pad="D+"/>
+<connect gate="JP1" pin="4" pad="GND"/>
 </connects>
 <technologies>
 <technology name=""/>
@@ -25497,156 +25539,6 @@ Switches electronic signals</description>
 </deviceset>
 </devicesets>
 </library>
-<library name="Thing_Plus">
-<packages>
-<package name="THING_PLUS">
-<wire x1="2.54" y1="58.42" x2="20.32" y2="58.42" width="0.127" layer="51"/>
-<wire x1="20.32" y1="58.42" x2="22.86" y2="55.88" width="0.127" layer="51" curve="-90"/>
-<wire x1="22.86" y1="55.88" x2="22.86" y2="2.54" width="0.127" layer="51"/>
-<wire x1="22.86" y1="2.54" x2="20.32" y2="0" width="0.127" layer="51" curve="-90"/>
-<wire x1="20.32" y1="0" x2="2.54" y2="0" width="0.127" layer="51"/>
-<wire x1="2.54" y1="0" x2="0" y2="2.54" width="0.127" layer="51" curve="-90"/>
-<wire x1="0" y1="2.54" x2="0" y2="55.88" width="0.127" layer="51"/>
-<wire x1="0" y1="55.88" x2="2.54" y2="58.42" width="0.127" layer="51" curve="-90"/>
-<pad name="13" x="21.59" y="52.07" drill="1.016" diameter="1.8796"/>
-<pad name="14" x="21.59" y="49.53" drill="1.016" diameter="1.8796"/>
-<pad name="15" x="21.59" y="46.99" drill="1.016" diameter="1.8796"/>
-<pad name="16" x="21.59" y="44.45" drill="1.016" diameter="1.8796"/>
-<pad name="17" x="21.59" y="41.91" drill="1.016" diameter="1.8796"/>
-<pad name="18" x="21.59" y="39.37" drill="1.016" diameter="1.8796"/>
-<pad name="19" x="21.59" y="36.83" drill="1.016" diameter="1.8796"/>
-<pad name="20" x="21.59" y="34.29" drill="1.016" diameter="1.8796"/>
-<pad name="21" x="21.59" y="31.75" drill="1.016" diameter="1.8796"/>
-<pad name="22" x="21.59" y="29.21" drill="1.016" diameter="1.8796"/>
-<pad name="23" x="21.59" y="26.67" drill="1.016" diameter="1.8796"/>
-<pad name="24" x="21.59" y="24.13" drill="1.016" diameter="1.8796"/>
-<pad name="25" x="21.59" y="21.59" drill="1.016" diameter="1.8796"/>
-<pad name="26" x="21.59" y="19.05" drill="1.016" diameter="1.8796"/>
-<pad name="27" x="21.59" y="16.51" drill="1.016" diameter="1.8796"/>
-<pad name="28" x="21.59" y="13.97" drill="1.016" diameter="1.8796"/>
-<pad name="12" x="1.27" y="24.13" drill="1.016" diameter="1.8796"/>
-<pad name="11" x="1.27" y="26.67" drill="1.016" diameter="1.8796"/>
-<pad name="10" x="1.27" y="29.21" drill="1.016" diameter="1.8796"/>
-<pad name="9" x="1.27" y="31.75" drill="1.016" diameter="1.8796"/>
-<pad name="8" x="1.27" y="34.29" drill="1.016" diameter="1.8796"/>
-<pad name="7" x="1.27" y="36.83" drill="1.016" diameter="1.8796"/>
-<pad name="6" x="1.27" y="39.37" drill="1.016" diameter="1.8796"/>
-<pad name="5" x="1.27" y="41.91" drill="1.016" diameter="1.8796"/>
-<pad name="4" x="1.27" y="44.45" drill="1.016" diameter="1.8796"/>
-<pad name="3" x="1.27" y="46.99" drill="1.016" diameter="1.8796"/>
-<pad name="2" x="1.27" y="49.53" drill="1.016" diameter="1.8796"/>
-<pad name="1" x="1.27" y="52.07" drill="1.016" diameter="1.8796"/>
-<text x="0" y="-2.54" size="1.27" layer="25" font="vector">&gt;Name</text>
-<text x="0" y="59.69" size="1.27" layer="27" font="vector">&gt;Value</text>
-<hole x="2.54" y="2.54" drill="3.048"/>
-<wire x1="2.54" y1="4.3942" x2="2.54" y2="0.6858" width="0.2032" layer="41" curve="180"/>
-<wire x1="2.54" y1="4.3942" x2="2.54" y2="0.6858" width="0.2032" layer="41" curve="-180"/>
-<wire x1="2.54" y1="4.3942" x2="2.54" y2="0.6858" width="0.2032" layer="42" curve="180"/>
-<wire x1="2.54" y1="4.3942" x2="2.54" y2="0.6858" width="0.2032" layer="42" curve="-180"/>
-<circle x="2.54" y="2.54" radius="2.794" width="0.127" layer="39"/>
-<hole x="2.54" y="55.88" drill="3.048"/>
-<wire x1="2.54" y1="57.7342" x2="2.54" y2="54.0258" width="0.2032" layer="41" curve="180"/>
-<wire x1="2.54" y1="57.7342" x2="2.54" y2="54.0258" width="0.2032" layer="41" curve="-180"/>
-<wire x1="2.54" y1="57.7342" x2="2.54" y2="54.0258" width="0.2032" layer="42" curve="180"/>
-<wire x1="2.54" y1="57.7342" x2="2.54" y2="54.0258" width="0.2032" layer="42" curve="-180"/>
-<circle x="2.54" y="55.88" radius="2.794" width="0.127" layer="39"/>
-<hole x="20.32" y="2.54" drill="3.048"/>
-<wire x1="20.32" y1="4.3942" x2="20.32" y2="0.6858" width="0.2032" layer="41" curve="180"/>
-<wire x1="20.32" y1="4.3942" x2="20.32" y2="0.6858" width="0.2032" layer="41" curve="-180"/>
-<wire x1="20.32" y1="4.3942" x2="20.32" y2="0.6858" width="0.2032" layer="42" curve="180"/>
-<wire x1="20.32" y1="4.3942" x2="20.32" y2="0.6858" width="0.2032" layer="42" curve="-180"/>
-<circle x="20.32" y="2.54" radius="2.794" width="0.127" layer="39"/>
-<hole x="20.32" y="55.88" drill="3.048"/>
-<wire x1="20.32" y1="57.7342" x2="20.32" y2="54.0258" width="0.2032" layer="41" curve="180"/>
-<wire x1="20.32" y1="57.7342" x2="20.32" y2="54.0258" width="0.2032" layer="41" curve="-180"/>
-<wire x1="20.32" y1="57.7342" x2="20.32" y2="54.0258" width="0.2032" layer="42" curve="180"/>
-<wire x1="20.32" y1="57.7342" x2="20.32" y2="54.0258" width="0.2032" layer="42" curve="-180"/>
-<circle x="20.32" y="55.88" radius="2.794" width="0.127" layer="39"/>
-</package>
-</packages>
-<symbols>
-<symbol name="THING_PLUS">
-<pin name="SDA" x="-12.7" y="10.16" length="short"/>
-<pin name="SCL" x="-12.7" y="7.62" length="short"/>
-<pin name="GPIO6" x="-12.7" y="5.08" length="short"/>
-<pin name="GPIO5" x="-12.7" y="2.54" length="short"/>
-<pin name="GPIO4" x="-12.7" y="0" length="short"/>
-<pin name="GPIO3" x="-12.7" y="-2.54" length="short"/>
-<pin name="GPIO2" x="-12.7" y="-5.08" length="short"/>
-<pin name="GPIO1" x="-12.7" y="-7.62" length="short"/>
-<pin name="GPIO0" x="-12.7" y="-10.16" length="short"/>
-<pin name="VUSB" x="-12.7" y="-12.7" length="short"/>
-<pin name="!EN" x="-12.7" y="-15.24" length="short"/>
-<pin name="VBAT" x="-12.7" y="-17.78" length="short"/>
-<pin name="FREE" x="12.7" y="10.16" length="short" rot="R180"/>
-<pin name="TX" x="12.7" y="7.62" length="short" rot="R180"/>
-<pin name="RX" x="12.7" y="5.08" length="short" rot="R180"/>
-<pin name="POCI" x="12.7" y="2.54" length="short" rot="R180"/>
-<pin name="PICO" x="12.7" y="0" length="short" rot="R180"/>
-<pin name="SCK" x="12.7" y="-2.54" length="short" rot="R180"/>
-<pin name="A5" x="12.7" y="-5.08" length="short" rot="R180"/>
-<pin name="A4" x="12.7" y="-7.62" length="short" rot="R180"/>
-<pin name="A3" x="12.7" y="-10.16" length="short" rot="R180"/>
-<pin name="A2" x="12.7" y="-12.7" length="short" rot="R180"/>
-<pin name="A1" x="12.7" y="-15.24" length="short" rot="R180"/>
-<pin name="A0" x="12.7" y="-17.78" length="short" rot="R180"/>
-<pin name="GND" x="12.7" y="-20.32" length="short" rot="R180"/>
-<pin name="NC" x="12.7" y="-22.86" length="short" rot="R180"/>
-<pin name="3V3" x="12.7" y="-25.4" length="short" rot="R180"/>
-<pin name="!RESET" x="12.7" y="-27.94" length="short" rot="R180"/>
-<wire x1="10.16" y1="12.7" x2="10.16" y2="-30.48" width="0.254" layer="94"/>
-<wire x1="10.16" y1="-30.48" x2="-10.16" y2="-30.48" width="0.254" layer="94"/>
-<wire x1="-10.16" y1="-30.48" x2="-10.16" y2="12.7" width="0.254" layer="94"/>
-<wire x1="-10.16" y1="12.7" x2="10.16" y2="12.7" width="0.254" layer="94"/>
-<text x="-10.16" y="-33.02" size="1.778" layer="95" font="vector">&gt;NAME</text>
-<text x="-10.16" y="13.208" size="1.778" layer="96" font="vector">&gt;VALUE</text>
-</symbol>
-</symbols>
-<devicesets>
-<deviceset name="THING_PLUS" prefix="J">
-<gates>
-<gate name="G$1" symbol="THING_PLUS" x="0" y="7.62"/>
-</gates>
-<devices>
-<device name="" package="THING_PLUS">
-<connects>
-<connect gate="G$1" pin="!EN" pad="11"/>
-<connect gate="G$1" pin="!RESET" pad="28"/>
-<connect gate="G$1" pin="3V3" pad="27"/>
-<connect gate="G$1" pin="A0" pad="24"/>
-<connect gate="G$1" pin="A1" pad="23"/>
-<connect gate="G$1" pin="A2" pad="22"/>
-<connect gate="G$1" pin="A3" pad="21"/>
-<connect gate="G$1" pin="A4" pad="20"/>
-<connect gate="G$1" pin="A5" pad="19"/>
-<connect gate="G$1" pin="FREE" pad="13"/>
-<connect gate="G$1" pin="GND" pad="25"/>
-<connect gate="G$1" pin="GPIO0" pad="9"/>
-<connect gate="G$1" pin="GPIO1" pad="8"/>
-<connect gate="G$1" pin="GPIO2" pad="7"/>
-<connect gate="G$1" pin="GPIO3" pad="6"/>
-<connect gate="G$1" pin="GPIO4" pad="5"/>
-<connect gate="G$1" pin="GPIO5" pad="4"/>
-<connect gate="G$1" pin="GPIO6" pad="3"/>
-<connect gate="G$1" pin="NC" pad="26"/>
-<connect gate="G$1" pin="PICO" pad="17"/>
-<connect gate="G$1" pin="POCI" pad="16"/>
-<connect gate="G$1" pin="RX" pad="15"/>
-<connect gate="G$1" pin="SCK" pad="18"/>
-<connect gate="G$1" pin="SCL" pad="2"/>
-<connect gate="G$1" pin="SDA" pad="1"/>
-<connect gate="G$1" pin="TX" pad="14"/>
-<connect gate="G$1" pin="VBAT" pad="12"/>
-<connect gate="G$1" pin="VUSB" pad="10"/>
-</connects>
-<technologies>
-<technology name=""/>
-</technologies>
-</device>
-</devices>
-</deviceset>
-</devicesets>
-</library>
 <library name="SparkFun-Jumpers">
 <description>&lt;h3&gt;SparkFun Jumpers&lt;/h3&gt;
 In this library you'll find jumpers, or other semipermanent means of changing current paths. The least permanent form is the solder jumper. These can be changed by adding, removing, or moving solder. In cases that are less likely to be changed we have jumpers that are connected with traces. These can be cut with a razor, or reconnected with solder. Reference designator JP.
@@ -25662,24 +25554,6 @@ We've spent an enormous amount of time creating and checking these footprints an
 &lt;br&gt;
 You are welcome to use this library for commercial purposes. For attribution, we ask that when you begin to sell your device using our footprint, you email us with a link to the product being sold. We want bragging rights that we helped (in a very small part) to create your 8th world wonder. We would like the opportunity to feature your device on our homepage.</description>
 <packages>
-<package name="SMT-JUMPER_2_NC_TRACE_NO-SILK" urn="urn:adsk.eagle:footprint:39257/1" locally_modified="yes">
-<smd name="1" x="-0.5207" y="0" dx="0.6604" dy="1.27" layer="1" cream="no"/>
-<smd name="2" x="0.5207" y="0" dx="0.6604" dy="1.27" layer="1" cream="no"/>
-<text x="0" y="1.143" size="0.6096" layer="25" font="vector" ratio="20" align="bottom-center">&gt;NAME</text>
-<text x="0" y="-1.143" size="0.6096" layer="27" font="vector" ratio="20" align="top-center">&gt;VALUE</text>
-<polygon width="0.127" layer="29">
-<vertex x="-0.1905" y="0.127"/>
-<vertex x="0.1905" y="0.127"/>
-<vertex x="0.1905" y="-0.127"/>
-<vertex x="-0.1905" y="-0.127"/>
-</polygon>
-<polygon width="0.0127" layer="1">
-<vertex x="-0.6985" y="0.127"/>
-<vertex x="0.18415" y="0.127"/>
-<vertex x="0.18415" y="-0.127"/>
-<vertex x="-0.6985" y="-0.127"/>
-</polygon>
-</package>
 <package name="SMT-JUMPER_2_NC_TRACE_SILK" urn="urn:adsk.eagle:footprint:39258/1" locally_modified="yes">
 <wire x1="0.762" y1="-1.016" x2="-0.762" y2="-1.016" width="0.2032" layer="21"/>
 <wire x1="0.762" y1="1.016" x2="1.2192" y2="0.5588" width="0.2032" layer="21" curve="-90"/>
@@ -25701,9 +25575,15 @@ You are welcome to use this library for commercial purposes. For attribution, we
 </polygon>
 <polygon width="0.0127" layer="1">
 <vertex x="-0.6985" y="0.127"/>
-<vertex x="0.18415" y="0.127"/>
-<vertex x="0.18415" y="-0.127"/>
+<vertex x="0.0254" y="0.127"/>
+<vertex x="0.0254" y="-0.127"/>
 <vertex x="-0.6985" y="-0.127"/>
+</polygon>
+<polygon width="0.0127" layer="1">
+<vertex x="-0.0254" y="0.127"/>
+<vertex x="0.6985" y="0.127"/>
+<vertex x="0.6985" y="-0.127"/>
+<vertex x="-0.0254" y="-0.127"/>
 </polygon>
 </package>
 <package name="SMT-JUMPER_2_NO_NO-SILK" urn="urn:adsk.eagle:footprint:39252/1">
@@ -25793,13 +25673,32 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <smd name="2" x="0" y="0" dx="0.635" dy="1.27" layer="1" cream="no"/>
 <smd name="3" x="0.8128" y="0" dx="0.635" dy="1.27" layer="1" cream="no"/>
 </package>
+<package name="SMT-JUMPER_2_NC_TRACE_NO-SILK" urn="urn:adsk.eagle:footprint:39257/1" locally_modified="yes">
+<smd name="1" x="-0.5207" y="0" dx="0.6604" dy="1.27" layer="1" cream="no"/>
+<smd name="2" x="0.5207" y="0" dx="0.6604" dy="1.27" layer="1" cream="no"/>
+<text x="0" y="1.143" size="0.6096" layer="25" font="vector" ratio="20" align="bottom-center">&gt;NAME</text>
+<text x="0" y="-1.143" size="0.6096" layer="27" font="vector" ratio="20" align="top-center">&gt;VALUE</text>
+<polygon width="0.127" layer="29">
+<vertex x="-0.1905" y="0.127"/>
+<vertex x="0.1905" y="0.127"/>
+<vertex x="0.1905" y="-0.127"/>
+<vertex x="-0.1905" y="-0.127"/>
+</polygon>
+<polygon width="0.0127" layer="1">
+<vertex x="-0.6985" y="0.127"/>
+<vertex x="0.0254" y="0.127"/>
+<vertex x="0.0254" y="-0.127"/>
+<vertex x="-0.6985" y="-0.127"/>
+</polygon>
+<polygon width="0.0127" layer="1">
+<vertex x="-0.0254" y="0.127"/>
+<vertex x="0.6985" y="0.127"/>
+<vertex x="0.6985" y="-0.127"/>
+<vertex x="-0.0254" y="-0.127"/>
+</polygon>
+</package>
 </packages>
 <packages3d>
-<package3d name="SMT-JUMPER_2_NC_TRACE_NO-SILK" urn="urn:adsk.eagle:package:39286/1" type="box">
-<packageinstances>
-<packageinstance name="SMT-JUMPER_2_NC_TRACE_NO-SILK"/>
-</packageinstances>
-</package3d>
 <package3d name="SMT-JUMPER_2_NC_TRACE_SILK" urn="urn:adsk.eagle:package:39281/1" type="box">
 <packageinstances>
 <packageinstance name="SMT-JUMPER_2_NC_TRACE_SILK"/>
@@ -25833,6 +25732,11 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <package3d name="SMT-JUMPER_3_NO_NO-SILK" urn="urn:adsk.eagle:package:39284/1" type="box">
 <packageinstances>
 <packageinstance name="SMT-JUMPER_3_NO_NO-SILK"/>
+</packageinstances>
+</package3d>
+<package3d name="SMT-JUMPER_2_NC_TRACE_NO-SILK" urn="urn:adsk.eagle:package:39286/1" type="box">
+<packageinstances>
+<packageinstance name="SMT-JUMPER_2_NC_TRACE_NO-SILK"/>
 </packageinstances>
 </package3d>
 </packages3d>
@@ -27473,6 +27377,233 @@ features two input/output terminals (nY and nZ) and an active HIGH enable input 
 </deviceset>
 </devicesets>
 </library>
+<library name="SparkFun-Boards">
+<description>&lt;h3&gt;SparkFun Electronics' preferred foot prints&lt;/h3&gt;
+This library contains footprints for SparkFun breakout boards, microcontrollers (Arduino, Particle, Teensy, etc.),  breadboards, non-RF modules, etc.
+&lt;br&gt;
+&lt;br&gt;
+We've spent an enormous amount of time creating and checking these footprints and parts, but it is &lt;b&gt; the end user's responsibility&lt;/b&gt; to ensure correctness and suitablity for a given componet or application. 
+&lt;br&gt;
+&lt;br&gt;If you enjoy using this library, please buy one of our products at &lt;a href=" www.sparkfun.com"&gt;SparkFun.com&lt;/a&gt;.
+&lt;br&gt;
+&lt;br&gt;
+&lt;b&gt;Licensing:&lt;/b&gt; Creative Commons ShareAlike 4.0 International - https://creativecommons.org/licenses/by-sa/4.0/ 
+&lt;br&gt;
+&lt;br&gt;
+You are welcome to use this library for commercial purposes. For attribution, we ask that when you begin to sell your device using our footprint, you email us with a link to the product being sold. We want bragging rights that we helped (in a very small part) to create your 8th world wonder. We would like the opportunity to feature your device on our homepage.</description>
+<packages>
+<package name="THING_PLUS">
+<wire x1="0" y1="55.88" x2="2.54" y2="58.42" width="0.127" layer="51" curve="-90"/>
+<wire x1="2.54" y1="58.42" x2="20.32" y2="58.42" width="0.127" layer="51"/>
+<wire x1="20.32" y1="58.42" x2="22.86" y2="55.88" width="0.127" layer="51" curve="-90"/>
+<wire x1="22.86" y1="55.88" x2="22.86" y2="2.54" width="0.127" layer="51"/>
+<wire x1="22.86" y1="2.54" x2="20.32" y2="0" width="0.127" layer="51" curve="-90"/>
+<wire x1="20.32" y1="0" x2="2.54" y2="0" width="0.127" layer="51"/>
+<wire x1="2.54" y1="0" x2="0" y2="2.54" width="0.127" layer="51" curve="-90"/>
+<wire x1="0" y1="2.54" x2="0" y2="55.88" width="0.127" layer="51"/>
+<pad name="13" x="21.59" y="52.07" drill="1.016" diameter="1.8796"/>
+<pad name="14" x="21.59" y="49.53" drill="1.016" diameter="1.8796"/>
+<pad name="15" x="21.59" y="46.99" drill="1.016" diameter="1.8796"/>
+<pad name="16" x="21.59" y="44.45" drill="1.016" diameter="1.8796"/>
+<pad name="17" x="21.59" y="41.91" drill="1.016" diameter="1.8796"/>
+<pad name="18" x="21.59" y="39.37" drill="1.016" diameter="1.8796"/>
+<pad name="19" x="21.59" y="36.83" drill="1.016" diameter="1.8796"/>
+<pad name="20" x="21.59" y="34.29" drill="1.016" diameter="1.8796"/>
+<pad name="21" x="21.59" y="31.75" drill="1.016" diameter="1.8796"/>
+<pad name="22" x="21.59" y="29.21" drill="1.016" diameter="1.8796"/>
+<pad name="23" x="21.59" y="26.67" drill="1.016" diameter="1.8796"/>
+<pad name="24" x="21.59" y="24.13" drill="1.016" diameter="1.8796"/>
+<pad name="25" x="21.59" y="21.59" drill="1.016" diameter="1.8796"/>
+<pad name="26" x="21.59" y="19.05" drill="1.016" diameter="1.8796"/>
+<pad name="27" x="21.59" y="16.51" drill="1.016" diameter="1.8796"/>
+<pad name="28" x="21.59" y="13.97" drill="1.016" diameter="1.8796"/>
+<pad name="12" x="1.27" y="24.13" drill="1.016" diameter="1.8796"/>
+<pad name="11" x="1.27" y="26.67" drill="1.016" diameter="1.8796"/>
+<pad name="10" x="1.27" y="29.21" drill="1.016" diameter="1.8796"/>
+<pad name="9" x="1.27" y="31.75" drill="1.016" diameter="1.8796"/>
+<pad name="8" x="1.27" y="34.29" drill="1.016" diameter="1.8796"/>
+<pad name="7" x="1.27" y="36.83" drill="1.016" diameter="1.8796"/>
+<pad name="6" x="1.27" y="39.37" drill="1.016" diameter="1.8796"/>
+<pad name="5" x="1.27" y="41.91" drill="1.016" diameter="1.8796"/>
+<pad name="4" x="1.27" y="44.45" drill="1.016" diameter="1.8796"/>
+<pad name="3" x="1.27" y="46.99" drill="1.016" diameter="1.8796"/>
+<pad name="2" x="1.27" y="49.53" drill="1.016" diameter="1.8796"/>
+<pad name="1" x="1.27" y="52.07" drill="1.016" diameter="1.8796"/>
+<circle x="2.54" y="55.88" radius="1.651" width="0.127" layer="51"/>
+<circle x="20.32" y="55.88" radius="1.651" width="0.127" layer="51"/>
+<circle x="20.32" y="2.54" radius="1.651" width="0.127" layer="51"/>
+<circle x="2.54" y="2.54" radius="1.651" width="0.127" layer="51"/>
+<text x="0" y="-2.54" size="1.27" layer="25" font="vector">&gt;Name</text>
+<text x="0" y="59.69" size="1.27" layer="27" font="vector">&gt;Value</text>
+</package>
+</packages>
+<symbols>
+<symbol name="THING_PLUS">
+<pin name="SDA" x="-12.7" y="10.16" length="short"/>
+<pin name="SCL" x="-12.7" y="7.62" length="short"/>
+<pin name="GPIO6" x="-12.7" y="5.08" length="short"/>
+<pin name="GPIO5" x="-12.7" y="2.54" length="short"/>
+<pin name="GPIO4" x="-12.7" y="0" length="short"/>
+<pin name="GPIO3" x="-12.7" y="-2.54" length="short"/>
+<pin name="GPIO2" x="-12.7" y="-5.08" length="short"/>
+<pin name="GPIO1" x="-12.7" y="-7.62" length="short"/>
+<pin name="GPIO0" x="-12.7" y="-10.16" length="short"/>
+<pin name="VUSB" x="-12.7" y="-12.7" length="short"/>
+<pin name="!EN" x="-12.7" y="-15.24" length="short"/>
+<pin name="VBAT" x="-12.7" y="-17.78" length="short"/>
+<pin name="FREE" x="12.7" y="10.16" length="short" rot="R180"/>
+<pin name="TX" x="12.7" y="7.62" length="short" rot="R180"/>
+<pin name="RX" x="12.7" y="5.08" length="short" rot="R180"/>
+<pin name="POCI" x="12.7" y="2.54" length="short" rot="R180"/>
+<pin name="PICO" x="12.7" y="0" length="short" rot="R180"/>
+<pin name="SCK" x="12.7" y="-2.54" length="short" rot="R180"/>
+<pin name="A5" x="12.7" y="-5.08" length="short" rot="R180"/>
+<pin name="A4" x="12.7" y="-7.62" length="short" rot="R180"/>
+<pin name="A3" x="12.7" y="-10.16" length="short" rot="R180"/>
+<pin name="A2" x="12.7" y="-12.7" length="short" rot="R180"/>
+<pin name="A1" x="12.7" y="-15.24" length="short" rot="R180"/>
+<pin name="A0" x="12.7" y="-17.78" length="short" rot="R180"/>
+<pin name="GND" x="12.7" y="-20.32" length="short" rot="R180"/>
+<pin name="NC" x="12.7" y="-22.86" length="short" rot="R180"/>
+<pin name="3V3" x="12.7" y="-25.4" length="short" rot="R180"/>
+<pin name="!RESET" x="12.7" y="-27.94" length="short" rot="R180"/>
+<wire x1="10.16" y1="12.7" x2="10.16" y2="-30.48" width="0.254" layer="94"/>
+<wire x1="10.16" y1="-30.48" x2="-10.16" y2="-30.48" width="0.254" layer="94"/>
+<wire x1="-10.16" y1="-30.48" x2="-10.16" y2="12.7" width="0.254" layer="94"/>
+<wire x1="-10.16" y1="12.7" x2="10.16" y2="12.7" width="0.254" layer="94"/>
+<text x="-10.16" y="-33.02" size="1.778" layer="95" font="vector">&gt;NAME</text>
+<text x="-10.16" y="13.208" size="1.778" layer="96" font="vector">&gt;VALUE</text>
+</symbol>
+</symbols>
+<devicesets>
+<deviceset name="THING_PLUS" prefix="J">
+<gates>
+<gate name="G$1" symbol="THING_PLUS" x="0" y="7.62"/>
+</gates>
+<devices>
+<device name="" package="THING_PLUS">
+<connects>
+<connect gate="G$1" pin="!EN" pad="11"/>
+<connect gate="G$1" pin="!RESET" pad="28"/>
+<connect gate="G$1" pin="3V3" pad="27"/>
+<connect gate="G$1" pin="A0" pad="24"/>
+<connect gate="G$1" pin="A1" pad="23"/>
+<connect gate="G$1" pin="A2" pad="22"/>
+<connect gate="G$1" pin="A3" pad="21"/>
+<connect gate="G$1" pin="A4" pad="20"/>
+<connect gate="G$1" pin="A5" pad="19"/>
+<connect gate="G$1" pin="FREE" pad="13"/>
+<connect gate="G$1" pin="GND" pad="25"/>
+<connect gate="G$1" pin="GPIO0" pad="9"/>
+<connect gate="G$1" pin="GPIO1" pad="8"/>
+<connect gate="G$1" pin="GPIO2" pad="7"/>
+<connect gate="G$1" pin="GPIO3" pad="6"/>
+<connect gate="G$1" pin="GPIO4" pad="5"/>
+<connect gate="G$1" pin="GPIO5" pad="4"/>
+<connect gate="G$1" pin="GPIO6" pad="3"/>
+<connect gate="G$1" pin="NC" pad="26"/>
+<connect gate="G$1" pin="PICO" pad="17"/>
+<connect gate="G$1" pin="POCI" pad="16"/>
+<connect gate="G$1" pin="RX" pad="15"/>
+<connect gate="G$1" pin="SCK" pad="18"/>
+<connect gate="G$1" pin="SCL" pad="2"/>
+<connect gate="G$1" pin="SDA" pad="1"/>
+<connect gate="G$1" pin="TX" pad="14"/>
+<connect gate="G$1" pin="VBAT" pad="12"/>
+<connect gate="G$1" pin="VUSB" pad="10"/>
+</connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
+</devicesets>
+</library>
+<library name="SparkFun-Hardware">
+<description>&lt;h3&gt;SparkFun Electronics' preferred foot prints&lt;/h3&gt;
+This library contains board components that are not electrical in nature, such as stand-offs, magnets, and Actobotics. 
+&lt;br&gt;
+&lt;br&gt;
+We've spent an enormous amount of time creating and checking these footprints and parts, but it is &lt;b&gt; the end user's responsibility&lt;/b&gt; to ensure correctness and suitablity for a given componet or application. 
+&lt;br&gt;
+&lt;br&gt;If you enjoy using this library, please buy one of our products at &lt;a href=" www.sparkfun.com"&gt;SparkFun.com&lt;/a&gt;.
+&lt;br&gt;
+&lt;br&gt;
+&lt;b&gt;Licensing:&lt;/b&gt; Creative Commons ShareAlike 4.0 International - https://creativecommons.org/licenses/by-sa/4.0/ 
+&lt;br&gt;
+&lt;br&gt;
+You are welcome to use this library for commercial purposes. For attribution, we ask that when you begin to sell your device using our footprint, you email us with a link to the product being sold. We want bragging rights that we helped (in a very small part) to create your 8th world wonder. We would like the opportunity to feature your device on our homepage.</description>
+<packages>
+<package name="STAND-OFF">
+<description>&lt;h3&gt;Standoff (#4 Screw)&lt;/h3&gt;
+&lt;p&gt;This is the mechanical footprint for a #4 phillips button head screw. Use the keepout ring to avoid running the screw head into surrounding components.&lt;/p&gt;
+&lt;h4&gt;Devices Using&lt;/h4&gt;
+&lt;ul&gt;&lt;li&gt;STAND-OFF&lt;/li&gt;&lt;/ul&gt;</description>
+<wire x1="0" y1="1.8542" x2="0" y2="-1.8542" width="0.2032" layer="41" curve="-180"/>
+<wire x1="0" y1="-1.8542" x2="0" y2="1.8542" width="0.2032" layer="41" curve="-180"/>
+<wire x1="0" y1="-1.8542" x2="0" y2="1.8542" width="0.2032" layer="42" curve="180"/>
+<wire x1="0" y1="-1.8542" x2="0" y2="1.8542" width="0.2032" layer="42" curve="-180"/>
+<circle x="0" y="0" radius="2.794" width="0.127" layer="39"/>
+<hole x="0" y="0" drill="3.302"/>
+<text x="0" y="2.032" size="0.6096" layer="25" font="vector" ratio="20" align="bottom-center">&gt;NAME</text>
+<text x="0" y="-2.032" size="0.6096" layer="27" font="vector" ratio="20" align="top-center">&gt;VALUE</text>
+</package>
+<package name="STAND-OFF-TIGHT">
+<description>&lt;h3&gt;Standoff (#4 Screw) - Tight fit around screw body&lt;/h3&gt;
+&lt;p&gt;This is the mechanical footprint for a #4 phillips button head screw. Use the keepout ring to avoid running the screw head into surrounding components.&lt;/p&gt;
+&lt;h4&gt;Devices Using&lt;/h4&gt;
+&lt;ul&gt;&lt;li&gt;STAND-OFF&lt;/li&gt;&lt;/ul&gt;</description>
+<wire x1="0" y1="1.8542" x2="0" y2="-1.8542" width="0.2032" layer="41" curve="-180"/>
+<wire x1="0" y1="-1.8542" x2="0" y2="1.8542" width="0.2032" layer="41" curve="-180"/>
+<wire x1="0" y1="-1.8542" x2="0" y2="1.8542" width="0.2032" layer="42" curve="180"/>
+<wire x1="0" y1="-1.8542" x2="0" y2="1.8542" width="0.2032" layer="42" curve="-180"/>
+<circle x="0" y="0" radius="2.794" width="0.127" layer="39"/>
+<hole x="0" y="0" drill="3.048"/>
+<text x="0" y="1.651" size="0.6096" layer="25" font="vector" ratio="20" align="bottom-center">&gt;NAME</text>
+<text x="0" y="-1.651" size="0.6096" layer="27" font="vector" ratio="20" align="top-center">&gt;VALUE</text>
+</package>
+</packages>
+<symbols>
+<symbol name="STAND-OFF">
+<description>&lt;h3&gt;Stand-Off Drill Hole&lt;/h3&gt;</description>
+<circle x="0" y="0" radius="1.27" width="0.254" layer="94"/>
+</symbol>
+</symbols>
+<devicesets>
+<deviceset name="STAND-OFF" prefix="H">
+<description>&lt;h3&gt;Stand Off&lt;/h3&gt;
+&lt;p&gt;Drill holes for mechanically mounting via screws, standoffs, etc.&lt;/p&gt;
+&lt;p&gt;Note: Use the keepout ring to avoid running the screw head into surrounding components.
+&lt;h4&gt;Variant Overviews&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;b&gt;STAND-OFF&lt;/b&gt; - Mechanical footprint for a &lt;b&gt;#4 phillips button head&lt;/b&gt; screw.&lt;/li&gt;
+&lt;li&gt;&lt;b&gt;STAND-OFF-TIGHT&lt;/b&gt; - Mechanical footprint for a &lt;b&gt;#4 phillips button head&lt;/b&gt; screw, &lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;Example SparkFun Products&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://www.sparkfun.com/products/10453"&gt;Screw - Phillips Head (1/4", 4-40, 10 pack)&lt;/a&gt; (PRT-10453)&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.sparkfun.com/products/10452"&gt;Screw - Phillips Head (1/2", 4-40, 10 pack)&lt;/a&gt; (PRT-10452)&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.sparkfun.com/products/10451"&gt;Screw - Phillips Head (3/4", 4-40, 10 pack)&lt;/a&gt; (PRT-10451)&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.sparkfun.com/products/10450"&gt;Screw - Phillips Head (1", 4-40, 10 pack)&lt;/a&gt; (PRT-10450)&lt;/li&gt;</description>
+<gates>
+<gate name="G$1" symbol="STAND-OFF" x="0" y="0"/>
+</gates>
+<devices>
+<device name="" package="STAND-OFF">
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+<device name="TIGHT" package="STAND-OFF-TIGHT">
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
+</devicesets>
+</library>
 </libraries>
 <attributes>
 </attributes>
@@ -27546,7 +27677,7 @@ features two input/output terminals (nY and nZ) and an active HIGH enable input 
 <part name="GND15" library="SparkFun-PowerSymbols" deviceset="GND" device=""/>
 <part name="Q3" library="SparkFun-DiscreteSemi" deviceset="MOSFET_PCH" device="-DMG2305UX-7" value="20V/4.2A/52mΩ/1.4W"/>
 <part name="R9" library="SparkFun-Resistors" deviceset="100KOHM" device="-0402T-1/16W-1%" value="100k"/>
-<part name="J4" library="Thing_Plus" deviceset="THING_PLUS" device=""/>
+<part name="J4" library="SparkFun-Boards" deviceset="THING_PLUS" device=""/>
 <part name="GND17" library="SparkFun-PowerSymbols" deviceset="GND" device=""/>
 <part name="SUPPLY2" library="SparkFun-PowerSymbols" deviceset="3.3V" device=""/>
 <part name="JP1" library="SparkFun-Jumpers" deviceset="JUMPER-SMT_2_NC_TRACE" device="_SILK" package3d_urn="urn:adsk.eagle:package:39281/1"/>
@@ -27612,7 +27743,6 @@ features two input/output terminals (nY and nZ) and an active HIGH enable input 
 <part name="GND26" library="SparkFun-PowerSymbols" deviceset="GND" device=""/>
 <part name="GND32" library="SparkFun-PowerSymbols" deviceset="GND" device=""/>
 <part name="SDIO_VDD" library="SparkFun-Connectors" deviceset="TEST-POINT" device="3"/>
-<part name="GND" library="SparkFun-Connectors" deviceset="TEST-POINT" device="3X5" value="TEST-POINT3X5"/>
 <part name="RXD" library="SparkFun-Jumpers" deviceset="JUMPER-SMT_2_NO" device="_SILK" package3d_urn="urn:adsk.eagle:package:39279/1"/>
 <part name="TXD" library="SparkFun-Jumpers" deviceset="JUMPER-SMT_2_NO" device="_SILK" package3d_urn="urn:adsk.eagle:package:39279/1"/>
 <part name="C18" library="SparkFun-Capacitors" deviceset="2.2UF" device="-0402_TIGHT-10V-10%-X5R" value="2.2uF"/>
@@ -27647,9 +27777,6 @@ features two input/output terminals (nY and nZ) and an active HIGH enable input 
 <part name="R25" library="SparkFun-Resistors" deviceset="10KOHM" device="-0402T-1/16W-1%" value="10k"/>
 <part name="GND38" library="SparkFun-PowerSymbols" deviceset="GND" device=""/>
 <part name="GPIO10" library="SparkFun-Connectors" deviceset="TEST-POINT" device="3"/>
-<part name="D+" library="SparkFun-Connectors" deviceset="TEST-POINT" device="3X5" value="TEST-POINT3X5"/>
-<part name="D-" library="SparkFun-Connectors" deviceset="TEST-POINT" device="3X5" value="TEST-POINT3X5"/>
-<part name="V_USB" library="SparkFun-Connectors" deviceset="TEST-POINT" device="3X5" value="TEST-POINT3X5"/>
 <part name="SUPPLY9" library="SparkFun-PowerSymbols" deviceset="V_USB" device=""/>
 <part name="MICROSD_VCC" library="SparkFun-Connectors" deviceset="TEST-POINT" device="3"/>
 <part name="GND39" library="SparkFun-PowerSymbols" deviceset="GND" device=""/>
@@ -27659,12 +27786,17 @@ features two input/output terminals (nY and nZ) and an active HIGH enable input 
 <part name="R26" library="SparkFun-Resistors" deviceset="100OHM" device="-0402-TIGHT-1/16W-1%" value="100"/>
 <part name="R27" library="SparkFun-Resistors" deviceset="100OHM" device="-0402-TIGHT-1/16W-1%" value="100"/>
 <part name="R28" library="SparkFun-Resistors" deviceset="100OHM" device="-0402-TIGHT-1/16W-1%" value="100"/>
-<part name="SH" library="SparkFun-Jumpers" deviceset="JUMPER-SMT_2_NC_TRACE" device="_SILK" package3d_urn="urn:adsk.eagle:package:39281/1"/>
+<part name="SH" library="SparkFun-Jumpers" deviceset="JUMPER-SMT_2_NC_TRACE" device="_NO-SILK" package3d_urn="urn:adsk.eagle:package:39286/1"/>
 <part name="GND41" library="SparkFun-PowerSymbols" deviceset="GND" device=""/>
 <part name="R29" library="SparkFun-Resistors" deviceset="10KOHM" device="-0402T-1/16W-1%" value="10k"/>
 <part name="GND42" library="SparkFun-PowerSymbols" deviceset="GND" device=""/>
 <part name="R30" library="SparkFun-Resistors" deviceset="10KOHM" device="-0402T-1/16W-1%" value="10k"/>
 <part name="SUPPLY18" library="SparkFun-PowerSymbols" deviceset="3.3V" device=""/>
+<part name="H1" library="SparkFun-Hardware" deviceset="STAND-OFF" device=""/>
+<part name="H2" library="SparkFun-Hardware" deviceset="STAND-OFF" device=""/>
+<part name="H3" library="SparkFun-Hardware" deviceset="STAND-OFF" device=""/>
+<part name="H4" library="SparkFun-Hardware" deviceset="STAND-OFF" device=""/>
+<part name="JP4" library="SparkFun-Connectors" deviceset="USB_SOLDER_PADS" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -28167,9 +28299,6 @@ https://saturnpcb.com/saturn-pcb-toolkit/</text>
 <instance part="SDIO_VDD" gate="G$1" x="170.18" y="220.98" smashed="yes" rot="R90">
 <attribute name="NAME" x="171.45" y="226.06" size="1.778" layer="95" font="vector" rot="R90"/>
 </instance>
-<instance part="GND" gate="G$1" x="297.18" y="15.24" smashed="yes">
-<attribute name="NAME" x="302.26" y="13.97" size="1.778" layer="95" font="vector"/>
-</instance>
 <instance part="RXD" gate="G$1" x="60.96" y="48.26" smashed="yes">
 <attribute name="NAME" x="64.77" y="49.784" size="1.778" layer="95" font="vector" align="center"/>
 </instance>
@@ -28288,21 +28417,12 @@ https://saturnpcb.com/saturn-pcb-toolkit/</text>
 <instance part="GPIO10" gate="G$1" x="251.46" y="208.28" smashed="yes">
 <attribute name="NAME" x="256.54" y="208.28" size="1.778" layer="95" font="vector"/>
 </instance>
-<instance part="D+" gate="G$1" x="297.18" y="20.32" smashed="yes">
-<attribute name="NAME" x="302.26" y="19.05" size="1.778" layer="95" font="vector"/>
-</instance>
-<instance part="D-" gate="G$1" x="297.18" y="17.78" smashed="yes">
-<attribute name="NAME" x="302.26" y="16.51" size="1.778" layer="95" font="vector"/>
-</instance>
-<instance part="V_USB" gate="G$1" x="297.18" y="22.86" smashed="yes">
-<attribute name="NAME" x="302.26" y="21.59" size="1.778" layer="95" font="vector"/>
-</instance>
-<instance part="SUPPLY9" gate="G$1" x="294.64" y="25.4" smashed="yes">
-<attribute name="VALUE" x="294.64" y="28.194" size="1.778" layer="96" align="bottom-center"/>
+<instance part="SUPPLY9" gate="G$1" x="287.02" y="22.86" smashed="yes">
+<attribute name="VALUE" x="287.02" y="25.654" size="1.778" layer="96" align="bottom-center"/>
 </instance>
 <instance part="MICROSD_VCC" gate="G$1" x="60.96" y="104.14" smashed="yes" rot="R90"/>
-<instance part="GND39" gate="1" x="294.64" y="10.16" smashed="yes">
-<attribute name="VALUE" x="294.64" y="9.906" size="1.778" layer="96" align="top-center"/>
+<instance part="GND39" gate="1" x="287.02" y="7.62" smashed="yes">
+<attribute name="VALUE" x="287.02" y="7.366" size="1.778" layer="96" align="top-center"/>
 </instance>
 <instance part="D3" gate="D1" x="294.64" y="50.8" smashed="yes" rot="MR0">
 <attribute name="NAME" x="302.26" y="58.674" size="1.778" layer="95" rot="MR0"/>
@@ -28345,6 +28465,14 @@ https://saturnpcb.com/saturn-pcb-toolkit/</text>
 </instance>
 <instance part="SUPPLY18" gate="G$1" x="73.66" y="22.86" smashed="yes">
 <attribute name="VALUE" x="73.66" y="25.654" size="1.778" layer="96" align="bottom-center"/>
+</instance>
+<instance part="H1" gate="G$1" x="419.1" y="27.94" smashed="yes"/>
+<instance part="H2" gate="G$1" x="421.64" y="27.94" smashed="yes"/>
+<instance part="H3" gate="G$1" x="421.64" y="25.4" smashed="yes"/>
+<instance part="H4" gate="G$1" x="419.1" y="25.4" smashed="yes"/>
+<instance part="JP4" gate="JP1" x="297.18" y="17.78" smashed="yes" rot="R180">
+<attribute name="VALUE" x="312.42" y="9.906" size="1.778" layer="96" font="vector" rot="R180"/>
+<attribute name="NAME" x="302.26" y="24.892" size="1.778" layer="95" font="vector" rot="R180"/>
 </instance>
 </instances>
 <busses>
@@ -28623,10 +28751,10 @@ https://saturnpcb.com/saturn-pcb-toolkit/</text>
 <wire x1="276.86" y1="213.36" x2="274.32" y2="213.36" width="0.1524" layer="91"/>
 </segment>
 <segment>
-<pinref part="GND" gate="G$1" pin="1"/>
-<wire x1="297.18" y1="15.24" x2="294.64" y2="15.24" width="0.1524" layer="91"/>
 <pinref part="GND39" gate="1" pin="GND"/>
-<wire x1="294.64" y1="15.24" x2="294.64" y2="12.7" width="0.1524" layer="91"/>
+<wire x1="287.02" y1="12.7" x2="287.02" y2="10.16" width="0.1524" layer="91"/>
+<pinref part="JP4" gate="JP1" pin="4"/>
+<wire x1="292.1" y1="12.7" x2="287.02" y2="12.7" width="0.1524" layer="91"/>
 </segment>
 <segment>
 <pinref part="D3" gate="D1" pin="2"/>
@@ -28797,10 +28925,10 @@ https://saturnpcb.com/saturn-pcb-toolkit/</text>
 <junction x="363.22" y="99.06"/>
 </segment>
 <segment>
-<pinref part="V_USB" gate="G$1" pin="1"/>
-<wire x1="297.18" y1="22.86" x2="294.64" y2="22.86" width="0.1524" layer="91"/>
 <pinref part="SUPPLY9" gate="G$1" pin="V_USB"/>
-<wire x1="294.64" y1="22.86" x2="294.64" y2="25.4" width="0.1524" layer="91"/>
+<wire x1="287.02" y1="20.32" x2="287.02" y2="22.86" width="0.1524" layer="91"/>
+<pinref part="JP4" gate="JP1" pin="1"/>
+<wire x1="292.1" y1="20.32" x2="287.02" y2="20.32" width="0.1524" layer="91"/>
 </segment>
 <segment>
 <pinref part="D3" gate="D1" pin="5"/>
@@ -29691,9 +29819,9 @@ https://saturnpcb.com/saturn-pcb-toolkit/</text>
 <label x="241.3" y="55.88" size="1.27" layer="95" xref="yes"/>
 </segment>
 <segment>
-<pinref part="D+" gate="G$1" pin="1"/>
-<wire x1="297.18" y1="20.32" x2="294.64" y2="20.32" width="0.1524" layer="91"/>
-<label x="294.64" y="20.32" size="1.27" layer="95" font="vector" rot="R180" xref="yes"/>
+<label x="289.56" y="15.24" size="1.27" layer="95" font="vector" rot="R180" xref="yes"/>
+<pinref part="JP4" gate="JP1" pin="3"/>
+<wire x1="292.1" y1="15.24" x2="289.56" y2="15.24" width="0.1524" layer="91"/>
 </segment>
 <segment>
 <pinref part="D3" gate="D1" pin="6"/>
@@ -29708,9 +29836,9 @@ https://saturnpcb.com/saturn-pcb-toolkit/</text>
 <label x="241.3" y="53.34" size="1.27" layer="95" xref="yes"/>
 </segment>
 <segment>
-<pinref part="D-" gate="G$1" pin="1"/>
-<wire x1="297.18" y1="17.78" x2="294.64" y2="17.78" width="0.1524" layer="91"/>
-<label x="294.64" y="17.78" size="1.27" layer="95" font="vector" rot="R180" xref="yes"/>
+<label x="289.56" y="17.78" size="1.27" layer="95" font="vector" rot="R180" xref="yes"/>
+<pinref part="JP4" gate="JP1" pin="2"/>
+<wire x1="292.1" y1="17.78" x2="289.56" y2="17.78" width="0.1524" layer="91"/>
 </segment>
 <segment>
 <pinref part="D3" gate="D1" pin="4"/>

@@ -15,7 +15,8 @@
 #define SFE_DUAL_SD_REGISTER_FIRMWARE_VERSION   0x01 // byte     Read only
 #define SFE_DUAL_SD_REGISTER_DEFAULT_MODE       0x02 // byte     Read/Write: Stored in EEPROM
 #define SFE_DUAL_SD_REGISTER_SLEEP              0x03 // Virtual write-only register: Go into deep sleep
-#define SFE_DUAL_SD_REGISTER_WAKE               0x04 // Virtual write-only register: Wake from deep sleep and go into defaultMode
+#define SFE_DUAL_SD_REGISTER_SPI_MODE           0x04 // Virtual write-only register: Wake from deep sleep (if required) and go into Thing Plus / Arduino (SPI) mode
+#define SFE_DUAL_SD_REGISTER_SDIO_MODE          0x05 // Virtual write-only register: Wake from deep sleep (if required) and go into "thumb drive" (SDIO) mode
 #define SFE_DUAL_SD_REGISTER_UNKNOWN            0xFF
 
 //ADC Reference (with AREF disconnected)

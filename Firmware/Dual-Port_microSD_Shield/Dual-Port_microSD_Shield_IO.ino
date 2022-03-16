@@ -41,9 +41,10 @@ void requestEvent()
       receiveEventData.receiveEventRegister = SFE_DUAL_SD_REGISTER_UNKNOWN; // Clear the event
       Wire.write(eeprom_settings.defaultMode);
       break;
+    case SFE_DUAL_SD_REGISTER_SLEEP:
+    case SFE_DUAL_SD_REGISTER_SPI_MODE:
+    case SFE_DUAL_SD_REGISTER_SDIO_MODE:
     case SFE_DUAL_SD_REGISTER_UNKNOWN:
-      // Nothing to do here - maybe debug?
-      break;
     default:
       receiveEventData.receiveEventRegister = SFE_DUAL_SD_REGISTER_UNKNOWN; // Clear the event
       break;

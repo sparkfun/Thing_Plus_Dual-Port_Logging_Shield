@@ -58,10 +58,11 @@
 
   The user can command the ATtiny to power off the microSD card and go into deep sleep by sending command 0x03
 
-  When in deep sleep:
-  The ATtiny can be woken again by sending command 0x04
-  The microSD card will be powered on again
-  The ATtiny will go into defaultMode
+  The user can change modes by sending command 0x04 or 0x05
+  Command 0x04 will select Thing Plus / Arduino (SPI) mode
+  Command 0x05 will select "thumb drive" (SDIO) mode
+
+  Commands 0x04 and 0x05 can also be used to wake the ATtiny from deep sleep
 
   Simple diagnostics are output on the Serial TX pin at power up. (9600 baud)
 
@@ -73,7 +74,8 @@
   0x01 : Get the Firmware Version
   0x02 : Set / Get the defaultMode: 0x00 = Thing Plus / Arduino (SPI) mode; 0x01 = "thumb drive" (SDIO) mode
   0x03 : Go into deep sleep (power down the microSD card too)
-  0x04 : Wake from deep sleep and go into defaultMode
+  0x04 : Wake from deep sleep (if required). Go into Thing Plus / Arduino (SPI) mode
+  0x05 : Wake from deep sleep (if required). Go into "thumb drive" (SDIO) mode
 
 */
 
@@ -147,8 +149,10 @@ void setup()
 
   disableWDT(); // Make sure the WatchDog Timer is disabled
 
+  bool eepromReInit = false;
   if (!loadEepromSettings()) // Load the settings from eeprom
   {
+    eepromReInit = true;
     initializeEepromSettings(); // Initialize them if required
   }
 
@@ -156,10 +160,12 @@ void setup()
   // Send diagnostics over serial
   Serial.begin(9600);
   Serial.println(F("Dual-Port microSD Shield"));
-  Serial.print(F("EEPROM checksum is "));
-  if (!checkEepromSettingsCRC())
-    Serial.print(F("NOT "));
-  Serial.println(F("valid"));
+  if (eepromReInit)
+    Serial.println(F("Bad EEPROM data was detected on start-up. EEPROM reinitialized"));
+  Serial.print(F("Firmware version "));
+  Serial.print(eeprom_settings.firmwareVersion >> 4);
+  Serial.print(F("."));
+  Serial.println(eeprom_settings.firmwareVersion & 0x0F);
   Serial.print(F("I2C Address 0x"));
   Serial.println(eeprom_settings.i2cAddress, HEX);
   Serial.print(F("Default Mode "));
@@ -177,6 +183,7 @@ void setup()
   float voltage3V3 = read3V3voltage();
 
 #ifdef SERIAL_DIAGNOSTICS
+  Serial.print(F("Voltages: "));
   Serial.print(voltageUSB);
   Serial.print(F(","));
   Serial.println(voltage3V3);
@@ -255,15 +262,34 @@ void loop()
           receiveEventData.receiveEventLength = 0; // Clear the event - ready for the next event
         }
         break;
-      case SFE_DUAL_SD_REGISTER_WAKE: // Does the user want to wake?
+      case SFE_DUAL_SD_REGISTER_SPI_MODE: // Does the user want to wake (if required) and change mode?
         receiveEventData.receiveEventRegister = SFE_DUAL_SD_REGISTER_UNKNOWN; // Clear the receive event register - this one is write only
         if (receiveEventData.receiveEventLength == 1) // Should be a single byte
         {
           receiveEventData.receiveEventLength = 0; // Clear the event - ready for the next event
-          if (eeprom_settings.defaultMode == SFE_DUAL_SD_MODE_SPI)
-            spiMode();
-          else
-            sdioMode();      
+
+          powerOffSD(); // Turn off the buffers and microSD card. They will already be off if the ATtiny was asleep
+
+          delay(500);
+          
+          spiMode(); // Go into SPI mode
+        }
+        else
+        {
+          receiveEventData.receiveEventLength = 0; // Clear the event - ready for the next event
+        }
+        break;
+      case SFE_DUAL_SD_REGISTER_SDIO_MODE: // Does the user want to wake (if required) and change mode?
+        receiveEventData.receiveEventRegister = SFE_DUAL_SD_REGISTER_UNKNOWN; // Clear the receive event register - this one is write only
+        if (receiveEventData.receiveEventLength == 1) // Should be a single byte
+        {
+          receiveEventData.receiveEventLength = 0; // Clear the event - ready for the next event
+
+          powerOffSD(); // Turn off the buffers and microSD card. They will already be off if the ATtiny was asleep
+
+          delay(500);
+          
+          sdioMode(); // Go into SDIO mode 
         }
         else
         {
@@ -280,12 +306,7 @@ void loop()
   // Sleep
   if (sleepNow)
   {
-    digitalWrite(SDIO_EN, SDIO_EN__OFF); // Disable the USB2241 and the SDIO buffers
-    delay(50);
-    digitalWrite(SPI_EN, SPI_EN__OFF); // Disable the SPI buffer
-    delay(50);
-    digitalWrite(MICROSD_PWR_EN, MICROSD_PWR_EN__OFF); // Disable power for the microSD card
-    delay(50);
+    powerOffSD(); // Turn off the buffers and microSD card
 
     byte adcsra = ADCSRA; //save ADCSRA (ADC control and status register A)
     ADCSRA &= ~_BV(ADEN); //disable ADC by clearing the ADEN bit
@@ -400,6 +421,17 @@ void sdioMode()
   delay(100);
   digitalWrite(SDIO_EN, SDIO_EN__ON); // Enable the USB2241 and the SDIO buffers
   delay(100);
+}
+
+//Turn off the buffers and microSD card
+void powerOffSD()
+{
+  digitalWrite(SDIO_EN, SDIO_EN__OFF); // Disable the USB2241 and the SDIO buffers
+  delay(50);
+  digitalWrite(SPI_EN, SPI_EN__OFF); // Disable the SPI buffer
+  delay(50);
+  digitalWrite(MICROSD_PWR_EN, MICROSD_PWR_EN__OFF); // Disable power for the microSD card
+  delay(50);
 }
 
 // Disable the WDT

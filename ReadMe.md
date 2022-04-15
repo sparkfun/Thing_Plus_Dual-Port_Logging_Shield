@@ -1,9 +1,9 @@
 SparkFun <PRODUCT NAME>
 ========================================
 
-[![SparkFun Part Name](URL for picture of part)](URL for product on Sparkfun.com)
-
-[*SparkFun Part Name (SKU)*](URL for product on Sparkfun.com)
+[![SparkFun Thing Plus Dual-Port Logging Shield](URL for picture of part)](https://www.sparkfun.com/products/19217)
+  
+[*SparkFun Thing Plus Dual-Port Logging Shield (19217)*](https://www.sparkfun.com/products/19217)
 
 <Basic description of the part.>
 

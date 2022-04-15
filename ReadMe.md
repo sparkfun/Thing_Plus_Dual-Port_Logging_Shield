@@ -5,7 +5,8 @@ SparkFun <PRODUCT NAME>
   
 [*SparkFun Thing Plus Dual-Port Logging Shield (19217)*](https://www.sparkfun.com/products/19217)
 
-<Basic description of the part.>
+The SparkFun Thing Plus Dual-Port Logging Shield is a Thing Plus / Feather compatible board which let's you access your microSD card over **_both_** SPI and USB-C! It is designed to be mounted on or under one of our [Thing Plus boards](https://www.sparkfun.com/thing_plus). You can log data to and read data from your microSD card over SPI as usual, using your favorite Arduino SD library. But you can also connect it to your computer via USB-C and read and write files at **_up to 35 MBytes/second_**! The write speed is card-dependent but, in our tests, we've routinely seen write speeds around 20MB/s.
+
 
 Repository Contents
 -------------------

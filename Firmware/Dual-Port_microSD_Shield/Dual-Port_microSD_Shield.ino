@@ -1,8 +1,8 @@
 /*
   Dual-Port microSD Shield Firmware
   By: Paul Clark
-  Date: December 22nd 2021
-  Version: 1.0
+  Date: May 6th 2022
+  Version: 1.1
 
   This firmware runs on the ATtiny841 on the Dual-Port microSD Shield.
 
@@ -23,14 +23,14 @@
   Set Wire Mode to Slave Only
   Set millis()/micros() to Enabled
   Set Save EEPROM to EEPROM Not Retained
-  Set BOD Level to BOD Enabled 2.7V
-  Set BOD Mode (Active) to BOD Sampled Mode
-  Set BOD Mode (Sleep) to BOD Sampled Mode
+  Set BOD Level to BOD Enabled 1.8V
+  Set BOD Mode (Active) to BOD Enabled
+  Set BOD Mode (Sleep) to BOD Enabled
 
   Fuse byte settings (default to a 1MHz clock, the code will increase the clock to 4MHz):
   Low:  0b01000010 = 0x42 : divide clock by 8, no clock out, slowly rising power, 8MHz internal oscillator
-  High: 0b11011101 = 0xDD : reset not disabled, no debug wire, SPI programming enabled, WDT not always on, EEPROM not preserved, BOD 2.7V
-  Ext:  0b11101011 = 0xEB : ULP Osc 32kHz, BOD (Sleep) sampled, BOD (Active) sampled, no self-programming
+  High: 0b11011110 = 0xDE : reset not disabled, no debug wire, SPI programming enabled, WDT not always on, EEPROM not preserved, BOD 1.8V
+  Ext:  0b11110101 = 0xF5 : ULP Osc 32kHz, BOD (Sleep) enabled, BOD (Active) enabled, no self-programming
 
   Pin Allocation (Physical pins are for the QFN package):
   D0:  Physical Pin 5  (PA0 / A0)          : microSD Power Enable
@@ -92,6 +92,7 @@
 
 //Diagnostics
 #define SERIAL_DIAGNOSTICS // Uncomment this line to enable diagnostics on serial at 9600 baud
+//#define HEARTBEAT // Uncomment this line to output a heartbeat on serial
 
 //Digital pins
 const byte SPI_EN = 10; // SPI Enable: pull high to enable SPI buffer, pull low to disable
@@ -116,11 +117,12 @@ const byte V_3V3_DIV_2 = 7; // A7
 //Global variables
 #define TINY_BUFFER_LENGTH 16
 struct {
-  volatile byte receiveEventRegister = SFE_DUAL_SD_REGISTER_UNKNOWN; // Most recent receive event register address
+  volatile byte receiveEventRegister = (volatile byte)SFE_DUAL_SD_REGISTER_UNKNOWN; // Most recent receive event register address
   volatile byte receiveEventBuffer[TINY_BUFFER_LENGTH]; // byte array to store the data from the receive event
-  volatile byte receiveEventLength = 0; // Indicates how many data bytes were received
+  volatile byte receiveEventLength = (volatile byte)0; // Indicates how many data bytes were received
 } receiveEventData;
-volatile bool sleepNow = false;
+volatile bool sleepNow = (volatile bool)false;
+volatile bool wdtSeen = (volatile bool)false; // Used for the heartbeat
 
 void setup()
 {
@@ -134,6 +136,9 @@ void setup()
   // This seems critical!? Without this, badness happens when the USB2241 starts up in SDIO mode.
   pinMode(MICROSD_CLK, INPUT);
 
+  // Make sure INT0 is disabled
+  GIMSK = 0;
+
   // Disable the buffers, microSD card and the USB2241
   digitalWrite(SPI_EN, SPI_EN__OFF);
   pinMode(SPI_EN, OUTPUT);
@@ -142,12 +147,17 @@ void setup()
   digitalWrite(SDIO_EN, SDIO_EN__OFF);
   pinMode(SDIO_EN, OUTPUT);
   digitalWrite(SDIO_EN, SDIO_EN__OFF);
-  
+
   digitalWrite(MICROSD_PWR_EN, MICROSD_PWR_EN__OFF);
   pinMode(MICROSD_PWR_EN, OUTPUT);
   digitalWrite(MICROSD_PWR_EN, MICROSD_PWR_EN__OFF);
 
-  disableWDT(); // Make sure the WatchDog Timer is disabled
+#ifdef SERIAL_DIAGNOSTICS
+  // Send diagnostics over serial
+  Serial.begin(9600);
+#endif
+
+  enableWDT(); // Enable the WatchDog Timer (after Serial.begin)
 
   bool eepromReInit = false;
   if (!loadEepromSettings()) // Load the settings from eeprom
@@ -158,7 +168,6 @@ void setup()
 
 #ifdef SERIAL_DIAGNOSTICS
   // Send diagnostics over serial
-  Serial.begin(9600);
   Serial.println(F("Dual-Port microSD Shield"));
   if (eepromReInit)
     Serial.println(F("Bad EEPROM data was detected on start-up. EEPROM reinitialized"));
@@ -208,6 +217,11 @@ void setup()
       sdioMode();
   }
 
+  //Re-initialize the I2C register. Just in case...
+  receiveEventData.receiveEventRegister = (volatile byte)SFE_DUAL_SD_REGISTER_UNKNOWN;
+  receiveEventData.receiveEventLength = (volatile byte)0;
+  sleepNow = (volatile bool)false;
+
   //Begin listening on I2C
   startI2C(true); // Skip Wire.end the first time around
 }
@@ -224,49 +238,49 @@ void loop()
         // receiveEventLength will be 1 if the user just wants to read the address
         if (receiveEventData.receiveEventLength == 2) // Data should be: register; new address
         {
-          receiveEventData.receiveEventLength = 0; // Clear the event - ready for the next event
           eeprom_settings.i2cAddress = receiveEventData.receiveEventBuffer[0] & 0x7F; // Update the I2C address in eeprom. Limit to 7 bits
+          receiveEventData.receiveEventLength = (volatile byte)0; // Clear the event - ready for the next event
           saveEepromSettings(); // Update the address in eeprom
           startI2C(false); // Restart I2C comms
         }
         else
         {
-          receiveEventData.receiveEventLength = 0; // Clear the event - ready for the next event
+          receiveEventData.receiveEventLength = (volatile byte)0; // Clear the event - ready for the next event
         }
         break;
       case SFE_DUAL_SD_REGISTER_FIRMWARE_VERSION: // Does the user want to read the firmware version?
-        receiveEventData.receiveEventLength = 0; // Clear the event - ready for the next event
+        receiveEventData.receiveEventLength = (volatile byte)0; // Clear the event - ready for the next event
         break;
       case SFE_DUAL_SD_REGISTER_DEFAULT_MODE: // Does the user want to change the defaultMode?
         // receiveEventLength will be 1 if the user just wants to read the default mode
         if (receiveEventData.receiveEventLength == 2) // Data should be: register; new address
         {
-          receiveEventData.receiveEventLength = 0; // Clear the event - ready for the next event
           eeprom_settings.defaultMode = receiveEventData.receiveEventBuffer[0] & 0x01; // Update the defaultMode in eeprom. Limit to 1 bit
+          receiveEventData.receiveEventLength = (volatile byte)0; // Clear the event - ready for the next event
           saveEepromSettings(); // Update the defaultMode in eeprom
         }
         else
         {
-          receiveEventData.receiveEventLength = 0; // Clear the event - ready for the next event
+          receiveEventData.receiveEventLength = (volatile byte)0; // Clear the event - ready for the next event
         }
         break;
       case SFE_DUAL_SD_REGISTER_SLEEP: // Does the user want to sleep?
-        receiveEventData.receiveEventRegister = SFE_DUAL_SD_REGISTER_UNKNOWN; // Clear the receive event register - this one is write only
+        receiveEventData.receiveEventRegister = (volatile byte)SFE_DUAL_SD_REGISTER_UNKNOWN; // Clear the receive event register - this one is write only
         if (receiveEventData.receiveEventLength == 1) // Should be a single byte
         {
-          receiveEventData.receiveEventLength = 0; // Clear the event - ready for the next event
+          receiveEventData.receiveEventLength = (volatile byte)0; // Clear the event - ready for the next event
           sleepNow = true; // Go to sleep
         }
         else
         {
-          receiveEventData.receiveEventLength = 0; // Clear the event - ready for the next event
+          receiveEventData.receiveEventLength = (volatile byte)0; // Clear the event - ready for the next event
         }
         break;
       case SFE_DUAL_SD_REGISTER_SPI_MODE: // Does the user want to wake (if required) and change mode?
-        receiveEventData.receiveEventRegister = SFE_DUAL_SD_REGISTER_UNKNOWN; // Clear the receive event register - this one is write only
+        receiveEventData.receiveEventRegister = (volatile byte)SFE_DUAL_SD_REGISTER_UNKNOWN; // Clear the receive event register - this one is write only
         if (receiveEventData.receiveEventLength == 1) // Should be a single byte
         {
-          receiveEventData.receiveEventLength = 0; // Clear the event - ready for the next event
+          receiveEventData.receiveEventLength = (volatile byte)0; // Clear the event - ready for the next event
 
           powerOffSD(); // Turn off the buffers and microSD card. They will already be off if the ATtiny was asleep
 
@@ -276,29 +290,29 @@ void loop()
         }
         else
         {
-          receiveEventData.receiveEventLength = 0; // Clear the event - ready for the next event
+          receiveEventData.receiveEventLength = (volatile byte)0; // Clear the event - ready for the next event
         }
         break;
       case SFE_DUAL_SD_REGISTER_SDIO_MODE: // Does the user want to wake (if required) and change mode?
-        receiveEventData.receiveEventRegister = SFE_DUAL_SD_REGISTER_UNKNOWN; // Clear the receive event register - this one is write only
+        receiveEventData.receiveEventRegister = (volatile byte)SFE_DUAL_SD_REGISTER_UNKNOWN; // Clear the receive event register - this one is write only
         if (receiveEventData.receiveEventLength == 1) // Should be a single byte
         {
-          receiveEventData.receiveEventLength = 0; // Clear the event - ready for the next event
+          receiveEventData.receiveEventLength = (volatile byte)0; // Clear the event - ready for the next event
 
           powerOffSD(); // Turn off the buffers and microSD card. They will already be off if the ATtiny was asleep
 
           delay(500);
           
-          sdioMode(); // Go into SDIO mode 
+          sdioMode(); // Go into SDIO mode
         }
         else
         {
-          receiveEventData.receiveEventLength = 0; // Clear the event - ready for the next event
+          receiveEventData.receiveEventLength = (volatile byte)0; // Clear the event - ready for the next event
         }
         break;
       case SFE_DUAL_SD_REGISTER_UNKNOWN:
       default:
-        receiveEventData.receiveEventLength = 0; // Clear the event - ready for the next event
+        receiveEventData.receiveEventLength = (volatile byte)0; // Clear the event - ready for the next event
         break;
     }    
   }
@@ -307,6 +321,8 @@ void loop()
   if (sleepNow)
   {
     powerOffSD(); // Turn off the buffers and microSD card
+
+    disableWDT(); // Disable the WatchDog Timer so it does not wake the MCU
 
     byte adcsra = ADCSRA; //save ADCSRA (ADC control and status register A)
     ADCSRA &= ~_BV(ADEN); //disable ADC by clearing the ADEN bit
@@ -336,8 +352,20 @@ void loop()
     ACSR0A = acsr0a; // Restore ACSR0A    
     ADCSRA = adcsra; //Restore ADCSRA
 
-    sleepNow = false; // Clear sleepNow
+    enableWDT(); // Enable the WatchDog Timer
+
+    sleepNow = (volatile bool)false; // Clear sleepNow
+
+    //startI2C(false); // Restart I2C comms. Just in case
   }
+
+#if defined(SERIAL_DIAGNOSTICS) && defined(HEARTBEAT)
+  if (wdtSeen)
+  {
+    Serial.print(F("."));
+    wdtSeen = (volatile bool)false;
+  }
+#endif
 }
 
 //Begin listening on I2C bus as I2C peripheral using the global I2C_ADDRESS
@@ -430,8 +458,20 @@ void powerOffSD()
   delay(50);
   digitalWrite(SPI_EN, SPI_EN__OFF); // Disable the SPI buffer
   delay(50);
-  digitalWrite(MICROSD_PWR_EN, MICROSD_PWR_EN__OFF); // Disable power for the microSD card
-  delay(50);
+  // Disable power for the microSD card
+  pinMode(MICROSD_PWR_EN, INPUT_PULLUP); // Charge the FET Gate capacitance
+  delay(10);
+  digitalWrite(MICROSD_PWR_EN, MICROSD_PWR_EN__OFF); // Now drive the Gate high
+  pinMode(MICROSD_PWR_EN, OUTPUT);
+  digitalWrite(MICROSD_PWR_EN, MICROSD_PWR_EN__OFF);
+  delay(40);
+}
+
+// ISR for watchdog timer
+ISR(WDT_vect) {
+  // To avoid the Watchdog Reset, WDIE must be set after each interrupt.
+  WDTCSR |= (1 << WDIE); // Re-enable the WDT interrupt. Don't disable the WDT. Don't change the prescaler.
+  wdtSeen = (volatile bool)true;
 }
 
 // Disable the WDT
@@ -441,6 +481,22 @@ void disableWDT()
   CCP = 0xD8; // Write signature (0xD8) to the Configuration Change Register
   // Within the next four clock cycles, write a logic 0 to WDE.
   WDTCSR = 0x00; // Disable the Watchdog and the interrupt and clear the prescaler.
+  sei(); // Enable interrupts
+}
+
+// Enable the WDT:
+// Enable both the Watchdog Timeout Interrupt (WDIE) _and_ the Watchdog itself (WDE)
+// The WDT will generate an interrupt after a time-out of prescaler cycles
+// The WDIE bit needs to be (re)set by the ISR to prevent the WDT from resetting the CPU at the next time-out
+// Setting the prescaler to 0x05 produces a 500ms timeout
+void enableWDT()
+{
+  cli(); // Disable interrupts
+  // Make wdtBits volatile to avoid the compiled code for the "WDTCSR = wdtBits"
+  //  being too slow and not meeting the "within four clock cycles" requirement.
+  volatile byte wdtBits = (1 << WDIE) | (1 << WDE) | 0x05; // WDT Interrupt Enable OR'd with WDE and the prescaler bits
+  CCP = 0xD8; // Write signature (0xD8) to the Configuration Change Register
+  WDTCSR = wdtBits; // Enable the WDT interrupt, WDT and set the prescaler
   sei(); // Enable interrupts
 }
 

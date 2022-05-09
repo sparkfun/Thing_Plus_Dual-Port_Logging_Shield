@@ -4,22 +4,35 @@
 // ================
 void receiveEvent(int numberOfBytesReceived)
 {
-  if (numberOfBytesReceived > 0) // Check that we received some data (!) (hopefully redundant!)
+  if (receiveEventData.receiveEventLength == 0) // Check if we have finished processing the previous event
   {
-    receiveEventData.receiveEventRegister = Wire.read(); // Store the first byte so we know what to do during the next requestEvent
-
-    if (numberOfBytesReceived > 1) // Did we receive more than one byte?
+    if (numberOfBytesReceived > 0) // Check that we received some data (!) (hopefully redundant!)
     {
-      int i;
-      for (i = 1; (i < numberOfBytesReceived) && (i < TINY_BUFFER_LENGTH); i++) // If we did, store it
+      receiveEventData.receiveEventRegister = (volatile byte)Wire.read(); // Store the first byte so we know what to do during the next requestEvent
+  
+      if (numberOfBytesReceived > 1) // Did we receive more than one byte?
       {
-        receiveEventData.receiveEventBuffer[i - 1] = Wire.read();
+        int i;
+        for (i = 1; (i < numberOfBytesReceived) && (i < TINY_BUFFER_LENGTH); i++) // If we did, store it
+        {
+          receiveEventData.receiveEventBuffer[i - 1] = (volatile byte)Wire.read();
+        }
+        i--;
+        receiveEventData.receiveEventBuffer[i] = (volatile byte)0; // NULL-terminate the data
       }
-      i--;
-      receiveEventData.receiveEventBuffer[i] = 0; // NULL-terminate the data
+      
+      receiveEventData.receiveEventLength = (volatile byte)numberOfBytesReceived;
     }
-    
-    receiveEventData.receiveEventLength = (volatile byte)numberOfBytesReceived;
+  }
+  else
+  {
+    if (numberOfBytesReceived > 0) // Check that we received some data (!) (hopefully redundant!)
+    {
+      for (int i = 0; (i < numberOfBytesReceived) && (i < TINY_BUFFER_LENGTH); i++) // If we did, read and discard
+      {
+        Wire.read();
+      }
+    }
   }
 }
 
@@ -30,15 +43,15 @@ void requestEvent()
   switch (receiveEventData.receiveEventRegister)
   {
     case SFE_DUAL_SD_REGISTER_I2C_ADDRESS: // Does the user want to read the I2C address?
-      receiveEventData.receiveEventRegister = SFE_DUAL_SD_REGISTER_UNKNOWN; // Clear the event
+      receiveEventData.receiveEventRegister = (volatile byte)SFE_DUAL_SD_REGISTER_UNKNOWN; // Clear the event
       Wire.write(eeprom_settings.i2cAddress);
       break;
     case SFE_DUAL_SD_REGISTER_FIRMWARE_VERSION: // Does the user want to read the firmware version?
-      receiveEventData.receiveEventRegister = SFE_DUAL_SD_REGISTER_UNKNOWN; // Clear the event
+      receiveEventData.receiveEventRegister = (volatile byte)SFE_DUAL_SD_REGISTER_UNKNOWN; // Clear the event
       Wire.write(SFE_DUAL_SD_FIRMWARE_VERSION);
       break;
     case SFE_DUAL_SD_REGISTER_DEFAULT_MODE: // Does the user want to read the defaultMode?
-      receiveEventData.receiveEventRegister = SFE_DUAL_SD_REGISTER_UNKNOWN; // Clear the event
+      receiveEventData.receiveEventRegister = (volatile byte)SFE_DUAL_SD_REGISTER_UNKNOWN; // Clear the event
       Wire.write(eeprom_settings.defaultMode);
       break;
     case SFE_DUAL_SD_REGISTER_SLEEP:
@@ -46,7 +59,7 @@ void requestEvent()
     case SFE_DUAL_SD_REGISTER_SDIO_MODE:
     case SFE_DUAL_SD_REGISTER_UNKNOWN:
     default:
-      receiveEventData.receiveEventRegister = SFE_DUAL_SD_REGISTER_UNKNOWN; // Clear the event
+      receiveEventData.receiveEventRegister = (volatile byte)SFE_DUAL_SD_REGISTER_UNKNOWN; // Clear the event
       break;
   }
 }

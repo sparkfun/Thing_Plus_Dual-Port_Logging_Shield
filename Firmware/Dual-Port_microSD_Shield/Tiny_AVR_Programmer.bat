@@ -2,7 +2,7 @@
 @pause
 :loop
 @echo Flashing bootloader and firmware...
-@avrdude -C avrdude.conf -pattiny841 -cusbtiny -e -Uefuse:w:0xEB:m -Uhfuse:w:0xDD:m -Ulfuse:w:0x42:m -Uflash:w:Dual_mSD.hex:i
+@avrdude -C avrdude.conf -pattiny841 -cusbtiny -e -Uefuse:w:0xF5:m -Uhfuse:w:0xDE:m -Ulfuse:w:0x42:m -Uflash:w:Dual_mSD.hex:i
 @echo Done programming! Move on to the next board.
 @pause
 goto loop

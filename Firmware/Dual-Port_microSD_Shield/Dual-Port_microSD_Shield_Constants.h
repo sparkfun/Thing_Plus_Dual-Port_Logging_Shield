@@ -1,7 +1,7 @@
 // Dual-Port microSD Shield EEPROM constants
 
 //Define the firmware version
-#define SFE_DUAL_SD_FIRMWARE_VERSION            0x10 // v1.0
+#define SFE_DUAL_SD_FIRMWARE_VERSION            0x11 // v1.1
 
 //Define the ATtiny841's default I2C address (unshifted)
 #define SFE_DUAL_SD_DEFAULT_I2C_ADDRESS         0x51

@@ -1,4 +1,4 @@
-SparkFun <PRODUCT NAME>
+SparkFun Thing Plus Dual-Port Logging Shield
 ========================================
 
 [![SparkFun Thing Plus Dual-Port Logging Shield (DEV-19217)](https://cdn.sparkfun.com/assets/parts/1/8/8/4/1/19217-SparkFun_Thing_Plus_Dual-Port_Logging_Shield-01.jpg)](https://www.sparkfun.com/products/19217)
@@ -21,22 +21,8 @@ Repository Contents
 
 Documentation
 --------------
-* **[Library](GitHub library URL)** - <LANGUAGE> library for the <PRODUCT NAME>.
-* **[Hookup Guide](Learn.SparkFun URL)** - Basic hookup guide for the <PRODUCT NAME>.
-* **[SparkFun Fritzing repo](https://github.com/sparkfun/Fritzing_Parts)** - Fritzing diagrams for SparkFun products.
-* **[SparkFun 3D Model repo](https://github.com/sparkfun/3D_Models)** - 3D models of SparkFun products. 
-* **[SparkFun Graphical Datasheets](https://github.com/sparkfun/Graphical_Datasheets)** -Graphical Datasheets for various SparkFun products.
-
-Product Versions
-----------------
-* [Part SKU](part URL)- Basic part and short description here
-* [Retail part SKU](retail URL)- Retail packaging of standard description here
-* [Any other parts this repo covers](any other URLs) - Description of said parts
-
-Version History
----------------
-* [vExxFxxZxxHxxLxxSxx](URL for tag specific to this version) - Description 
-* [vEyyFyyZyyHyyLyySyy](URL for tag specific to this version) - Description
+* **[Library](https://github.com/sparkfun/SparkFun_Dual-Port_Logging_Shield_Arduino_Library)** - Arduino library for the SparkFun Thing Plus Dual-Port Logging Shield.
+* **[Hookup Guide](https://learn.sparkfun.com/tutorials/thing-plus-dual-port-logging-shield-hookup-guide)** - Basic hookup guide for the SparkFun Thing Plus Dual-Port Logging Shield.
 
 License Information
 -------------------

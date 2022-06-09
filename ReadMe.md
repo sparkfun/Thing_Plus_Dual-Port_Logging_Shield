@@ -1,7 +1,7 @@
 SparkFun Thing Plus Dual-Port Logging Shield
 ========================================
 
-[![SparkFun Thing Plus Dual-Port Logging Shield (DEV-19217)](https://cdn.sparkfun.com/assets/parts/1/8/8/4/1/19217-SparkFun_Thing_Plus_Dual-Port_Logging_Shield-01.jpg)](https://www.sparkfun.com/products/19217)
+[![SparkFun Thing Plus Dual-Port Logging Shield (DEV-19217)](https://cdn.sparkfun.com/assets/parts/1/8/8/4/1/19217-SparkFun_Thing_Plus_Dual-Port_Logging_Shield-01a.jpg)](https://www.sparkfun.com/products/19217)
 
 [*SparkFun Thing Plus Dual-Port Logging Shield (DEV-19217)*](https://www.sparkfun.com/products/19217)
 
@@ -11,15 +11,12 @@ The SparkFun Thing Plus Dual-Port Logging Shield is a Thing Plus/Feather compati
 Repository Contents
 -------------------
 
-* **/Documentation** - Data sheets, additional product information
-* **/Enclosure** - Enclosure files 
-* **/Firmware** - Example code 
+* **/Documents** - Data sheets, additional product information
+* **/Firmware/Dual-Port_microSD_Shield** - Example code 
 * **/Hardware** - Eagle design files (.brd, .sch)
-* **/Libraries** - Libraries for use with the <PRODUCT NAME>
-* **/Production** - Production panel files (.brd)
-* **/Software** - Related software for the <PRODUCT NAME>
+* **/img** - 
 
-Documentation
+  Documentation
 --------------
 * **[Library](https://github.com/sparkfun/SparkFun_Dual-Port_Logging_Shield_Arduino_Library)** - Arduino library for the SparkFun Thing Plus Dual-Port Logging Shield.
 * **[Hookup Guide](https://learn.sparkfun.com/tutorials/thing-plus-dual-port-logging-shield-hookup-guide)** - Basic hookup guide for the SparkFun Thing Plus Dual-Port Logging Shield.

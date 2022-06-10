@@ -12,11 +12,11 @@ Repository Contents
 -------------------
 
 * **/Documents** - Data sheets, additional product information
-* **/Firmware/Dual-Port_microSD_Shield** - Example code 
+* **/Firmware/Dual-Port_microSD_Shield** - Firmware for the ATtiny 
 * **/Hardware** - Eagle design files (.brd, .sch)
-* **/img** - 
+* **/img** - Final production files.
 
-  Documentation
+Documentation
 --------------
 * **[Library](https://github.com/sparkfun/SparkFun_Dual-Port_Logging_Shield_Arduino_Library)** - Arduino library for the SparkFun Thing Plus Dual-Port Logging Shield.
 * **[Hookup Guide](https://learn.sparkfun.com/tutorials/thing-plus-dual-port-logging-shield-hookup-guide)** - Basic hookup guide for the SparkFun Thing Plus Dual-Port Logging Shield.
